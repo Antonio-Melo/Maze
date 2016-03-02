@@ -1,14 +1,17 @@
+package cli;
 
 public class Hero {
 	
 	int x, y;
 	boolean sword;
+	boolean dead;
 	char c;
 	
 	public Hero(int x, int y){
 		this.x = x;
 		this.y = y;
 		this.c = 'H';
+		this.dead = false;
 	}
 	
 	public int getX(){
@@ -30,6 +33,10 @@ public class Hero {
 	
 	public char getChar(){
 		return c;
+	}
+	
+	public boolean isDead(){
+		return dead;
 	}
 	
 	public void moveHero(int x, int y){
