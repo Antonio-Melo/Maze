@@ -184,7 +184,7 @@ public class Maze {
 			}
 		}
 		if(myHero.asEscaped()){
-			System.out.println("WINNER!!");
+			System.out.println("HERO ESCAPED!!");
 		}
 
 	}
