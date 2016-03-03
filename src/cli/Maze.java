@@ -127,6 +127,28 @@ public class Maze {
 		if (grid[myHero.getX()+x][myHero.getY() + y] == 'X') {
 			return false;
 		}
+		if (grid[myHero.getX()+x][myHero.getY() + y] == 'S') {
+			if (myDragon.isDead()) {
+				removeHero(myHero);
+				myHero.escape();
+				return true;
+			}
+		}
+		if(grid[myHero.getX()+x+x][myHero.getY() +y+y] == 'D'){
+			if(myHero.hasSword()){
+				myDragon.killDragon();
+				removeDragon(myDragon);
+				removeHero(myHero);
+				myHero.moveHero(myHero.getX()+x, myHero.getY() + y);
+				placeHero(myHero);
+				return true;
+			}else{
+				removeHero(myHero);
+				myHero.isKilled();
+				return true;
+			}
+		}
+		
 		if (grid[myHero.getX()+x][myHero.getY() + y] == ' ') {
 			removeHero(myHero);
 			myHero.moveHero(myHero.getX()+x, myHero.getY() +y);
@@ -140,43 +162,7 @@ public class Maze {
 			placeHero(myHero);
 			return true;
 		}
-		
-		if(grid[myHero.getX()+x][myHero.getY() +y] == 'D'){
-			if(myHero.hasSword()){
-				myDragon.killDragon();
-				removeDragon(myDragon);
-				removeHero(myHero);
-				myHero.moveHero(myHero.getX()+x, myHero.getY() + y);
-				placeHero(myHero);
-				return true;
-			}
-		}
-
-		if (grid[myHero.getX()+x][myHero.getY() + y] == 'S') {
-			if (myDragon.isDead()) {
-
-			}
-		}
-			
-		/*else if(m == 'e' || m == 'E'){
-			
-			if(){
-				
-			}
-			if(){
-				
-			}
-			if(){
-				
-			}
-		}else if(m == 'c
-		' || m == 'C'){
-
-		}else if(m == 'b' || m == 'B'){
-
-		}*/
-		return true;
-		
+		return false;
 	}
 
 
@@ -189,13 +175,16 @@ public class Maze {
 		placeSword(sword);
 		printMaze();
 
-		while(!myHero.isDead()){
+		while(!myHero.isDead() && !myHero.asEscaped()){
 			System.out.println("Direita - d Esquerda -e Cima -c Baixo-b");
 			char m = getInput();
 			boolean x =move(m);
 			if(x == true){
 				printMaze();
 			}
+		}
+		if(myHero.asEscaped()){
+			System.out.println("WINNER!!");
 		}
 
 	}

@@ -5,6 +5,7 @@ public class Hero {
 	int x, y;
 	boolean sword;
 	boolean dead;
+	boolean escape;
 	char c;
 	
 	public Hero(int x, int y){
@@ -12,6 +13,7 @@ public class Hero {
 		this.y = y;
 		this.c = 'H';
 		this.dead = false;
+		this.escape = false;
 	}
 	
 	public int getX(){
@@ -37,6 +39,18 @@ public class Hero {
 	
 	public boolean isDead(){
 		return dead;
+	}
+	
+	public void isKilled(){
+		dead = true;
+	}
+	
+	public boolean asEscaped(){
+		return escape;
+	}
+	
+	public void escape(){
+		escape = true;
 	}
 	
 	public void moveHero(int x, int y){
