@@ -17,9 +17,9 @@ public class UserInterface {
 		//NEW GAME
 		Game game = new Game();
 		
-		game.myMaze.placeActor(game.myDragon);
-		game.myMaze.placeActor(game.myHero);
-		game.myMaze.placeActor(game.sword);
+		game.myMaze.placeDragon(game.myDragon);
+		game.myMaze.placeHero(game.myHero);
+		game.myMaze.placeSword(game.sword);
 		game.myMaze.printMaze();
 		
 		//UNTIL WINS OR DIES

@@ -1,9 +1,19 @@
 package cli;
 
-public class Sword extends Actor {
+public class Sword {
 
-	public Sword(int x, int y){
-		super(x,y);
-		this.c = 'E';
+	int x,y;
+	//Constructor
+	public Sword(int x,int y){
+		this.x = x;
+		this.y = y;
+	}
+	//Get Coord x
+	public int getX(){
+		return x;
+	}
+	//Get Coord y
+	public int getY(){
+		return y;
 	}
 }
