@@ -2,7 +2,8 @@ package cli;
 
 public class Maze {
 	char grid[][];
-
+	
+	//Constructor
 	public Maze() {
 		grid = new char[10][10];
 
@@ -65,7 +66,7 @@ public class Maze {
 		}
 		grid[5][9] = 'S';
 	}
-
+	//Prints Maze
 	public void printMaze() {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -74,82 +75,26 @@ public class Maze {
 			System.out.println();
 		}
 	}
-
+	
+	//Places Dragon in the maze
 	public void placeDragon(Dragon d) {
 		grid[d.getX()][d.getY()] = 'D';
 	}
+	//Removes Dragon from the maze
 	public void removeDragon(Dragon d){
 		grid[d.getX()][d.getY()] = ' ';
 	}
-
+	//Places Hero in the maze
 	public void placeHero(Hero h) {
 		grid[h.getX()][h.getY()] = h.getChar();
 	}
-	
+	//Removes Hero in the maze
 	public void removeHero(Hero h){
 		grid[h.getX()][h.getY()] = ' ';
 	}
-
+	//Places sword in the maze
 	public void placeSword(Sword s) {
 		grid[s.getX()][s.getY()] = 'E';
-	}
-
-	public boolean move(char m, Hero myHero,Dragon myDragon) {
-		int x=0, y=0;
-
-		if (m == 'd' || m == 'D') {
-			y = 1;
-			x = 0;
-		} else if (m == 'e' || m == 'E') {
-			y = -1;
-			x = 0;
-		} else if (m == 'c' || m == 'C') {
-			x = -1;
-			y = 0;
-		} else if (m == 'b' || m == 'B') {
-			x = 1;
-			y = 0;
-		}
-
-		if (grid[myHero.getX()+x][myHero.getY() + y] == 'X') {
-			return false;
-		}
-		if (grid[myHero.getX()+x][myHero.getY() + y] == 'S') {
-			if (myDragon.isDead()) {
-				removeHero(myHero);
-				myHero.escape();
-				return true;
-			}
-		}
-		if(grid[myHero.getX()+x+x][myHero.getY() +y+y] == 'D'){
-			if(myHero.hasSword()){
-				myDragon.killDragon();
-				removeDragon(myDragon);
-				removeHero(myHero);
-				myHero.moveHero(myHero.getX()+x, myHero.getY() + y);
-				placeHero(myHero);
-				return true;
-			}else{
-				removeHero(myHero);
-				myHero.isKilled();
-				return true;
-			}
-		}
-		
-		if (grid[myHero.getX()+x][myHero.getY() + y] == ' ') {
-			removeHero(myHero);
-			myHero.moveHero(myHero.getX()+x, myHero.getY() +y);
-			placeHero(myHero);
-			return true;
-		}
-		if (grid[myHero.getX()+x][myHero.getY() +y] == 'E') {
-			removeHero(myHero);
-			myHero.pickUpSword();
-			myHero.moveHero(myHero.getX()+x, myHero.getY() + y);
-			placeHero(myHero);
-			return true;
-		}
-		return false;
-	}
+	}		
 }
 

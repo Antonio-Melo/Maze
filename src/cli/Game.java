@@ -11,6 +11,7 @@ public class Game {
 	public Sword sword;
 	public Dragon myDragon;
 	
+	//Constructor
 	public Game() {
 		myMaze = new Maze();
 		myHero = new Hero(1,1);
@@ -18,8 +19,8 @@ public class Game {
 		myDragon = new Dragon(3, 1);
 	}
 	
-	
+	//Starts Game
 	public boolean play(char m){
-		return myMaze.move(m, myHero, myDragon);
+		return myHero.moveHero(m,myDragon,myMaze);
 	}
 }
