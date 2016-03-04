@@ -3,12 +3,14 @@ package cli;
 public class Hero extends Actor {
 	
 	boolean sword;
-	boolean escape;S
+	boolean dead;
+	boolean escape;
 	
 	//Constructor
 	public Hero(int x, int y){
 		super(x,y);
 		this.c = 'H';
+		this.dead = false;
 		this.escape = false;
 	}
 	
@@ -25,7 +27,14 @@ public class Hero extends Actor {
 	public char getChar(){
 		return c;
 	}
-	
+	//Checks is Hero is dead
+	public boolean isDead(){
+		return dead;
+	}
+	//When Dragon kills Hero
+	public void isKilled(){
+		dead = true;
+	}
 	//Checks if the Hero as already escaped the maze
 	public boolean asEscaped(){
 		return escape;
