@@ -1,16 +1,9 @@
 package cli;
+
 public class Maze {
-	
-	private Hero myHero;
-	private Sword sword;
-	private Dragon myDragon;
 	char grid[][];
 
-	public Maze(Hero h, Sword s, Dragon d) {
-		
-		this.myHero = h;
-		this.sword = s;
-		this.myDragon = d;
+	public Maze() {
 		grid = new char[10][10];
 
 		// Linha 0
@@ -101,13 +94,7 @@ public class Maze {
 		grid[s.getX()][s.getY()] = 'E';
 	}
 
-	public static char getInput(){
-		java.util.Scanner s = new java.util.Scanner(System.in);
-		char c = s.next().charAt(0);
-		return c;
-	}
-
-	public boolean move(char m) {
+	public boolean move(char m, Hero myHero,Dragon myDragon) {
 		int x=0, y=0;
 
 		if (m == 'd' || m == 'D') {
@@ -164,36 +151,5 @@ public class Maze {
 		}
 		return false;
 	}
-
-
-
-	public void game(){		
-
-		//Inicial 
-		placeDragon(myDragon);
-		placeHero(myHero);
-		placeSword(sword);
-		printMaze();
-
-		while(!myHero.isDead() && !myHero.asEscaped()){
-			System.out.println("Direita - d Esquerda -e Cima -c Baixo-b");
-			char m = getInput();
-			boolean x =move(m);
-			if(x == true){
-				printMaze();
-			}
-		}
-		if(myHero.asEscaped()){
-			System.out.println("HERO ESCAPED!!");
-		}
-
-	}
-
-	public static void main(String[] args) {
-		Maze myMaze = new Maze(new Hero(1,1), new Sword(8,1), new Dragon(3, 1));
-		myMaze.game();
-	}
-
-
 }
 

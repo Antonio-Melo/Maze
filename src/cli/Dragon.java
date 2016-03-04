@@ -25,9 +25,5 @@ public class Dragon {
 	public void killDragon(){
 		dead = true;
 	}
-	
-	public static void main(String[] args) {
-
-	}
 
 }
