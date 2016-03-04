@@ -1,24 +1,16 @@
 package cli;
 
-public class Dragon {
+public class Dragon extends Actor {
 
-	int x, y;
 	boolean dead;
 	
 	//Constructor
 	public Dragon(int x, int y){
-		this.x = x;
-		this.y = y;
+		super(x,y);
+		this.c = 'D';
 		this.dead = false;
 	}
-	//Coord X
-	public int getX(){
-		return x;
-	}
-	//Coord Y
-	public int getY(){
-		return y;
-	}
+	
 	//Checks if Dragon is dead
 	public boolean isDead(){
 		return dead;

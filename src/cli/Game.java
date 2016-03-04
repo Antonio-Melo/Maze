@@ -1,10 +1,5 @@
 package cli;
 
-import cli.Maze;
-import cli.Dragon;
-import cli.Hero;
-import cli.Sword;
-
 public class Game {
 	public Maze myMaze;
 	public Hero myHero;
