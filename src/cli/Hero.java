@@ -1,33 +1,24 @@
 package cli;
 
-public class Hero {
+public class Hero extends Actor {
 	
-	int x, y;
 	boolean sword;
 	boolean dead;
 	boolean escape;
-	char c;
+	
 	//Constructor
 	public Hero(int x, int y){
-		this.x = x;
-		this.y = y;
+		super(x,y);
 		this.c = 'H';
 		this.dead = false;
 		this.escape = false;
 	}
-	//Coord X
-	public int getX(){
-		return x;
-	}
-	//Coord Y
-	public int getY(){
-		return y;
-	}
+	
 	//Checks if has Sword
 	public boolean hasSword(){
 		return sword;
 	}
-	//Picks sword 
+	//Picks up sword 
 	public void pickUpSword(){
 		sword = true;
 		c = 'A';
@@ -83,39 +74,41 @@ public class Hero {
 		//Exit
 		if (myMaze.grid[getX()+x][getY() + y] == 'S') {
 			if (myDragon.isDead()) {
-				myMaze.removeHero(this);
+				myMaze.removeActor(this);
 				escape();
 				return true;
 			}
+			
+			return false;
 		}
 		//Fights Dragon
 		if(myMaze.grid[getX()+x+x][getY() +y+y] == 'D'){
 			if(hasSword()){
 				myDragon.killDragon();
-				myMaze.removeDragon(myDragon);
-				myMaze.removeHero(this);
+				myMaze.removeActor(myDragon);
+				myMaze.removeActor(this);
 				cmoveHero(getX()+x, getY() + y);
-				myMaze.placeHero(this);
+				myMaze.placeActor(this);
 				return true;
 			}else{
-				myMaze.removeHero(this);
+				myMaze.removeActor(this);
 				isKilled();
 				return true;
 			}
 		}
 		//Space clear
 		if (myMaze.grid[getX()+x][getY() + y] == ' ') {
-			myMaze.removeHero(this);
+			myMaze.removeActor(this);
 			cmoveHero(getX()+x, getY() +y);
-			myMaze.placeHero(this);
+			myMaze.placeActor(this);
 			return true;
 		}
 		//Picks up the sword
 		if (myMaze.grid[getX()+x][getY() +y] == 'E') {
-			myMaze.removeHero(this);
+			myMaze.removeActor(this);
 			pickUpSword();
 			cmoveHero(getX()+x,getY() + y);
-			myMaze.placeHero(this);
+			myMaze.placeActor(this);
 			return true;
 		}
 		//Default

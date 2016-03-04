@@ -3,26 +3,28 @@ package cli;
 public class Maze {
 	char grid[][];
 	
-	//Constructor
+	/**
+	 * Constructor for Maze class
+	 */
 	public Maze() {
 		grid = new char[10][10];
 
-		// Linha 0
+		// Line 0
 
 		for (int i = 0; i < 10; i++)
 			grid[0][i] = 'X';
 
-		// Linha 9
+		// Line 9
 		for (int i = 0; i < 10; i++)
 			grid[9][i] = 'X';
 
-		// Coluna 1
+		// Column 1
 
 		for (int i = 0; i < 10; i++) {
 			grid[i][0] = 'X';
 		}
 
-		// Coluna 9
+		// Column 9
 
 		for (int i = 0; i < 10; i++) {
 			grid[i][9] = 'X';
@@ -76,25 +78,20 @@ public class Maze {
 		}
 	}
 	
-	//Places Dragon in the maze
-	public void placeDragon(Dragon d) {
-		grid[d.getX()][d.getY()] = 'D';
+	/** 
+	 *Places an Actor in the Maze
+	 *@param a Actor to place
+	 */
+	public void placeActor(Actor a){
+		grid[a.getX()] [a.getY()] = a.c;
 	}
-	//Removes Dragon from the maze
-	public void removeDragon(Dragon d){
-		grid[d.getX()][d.getY()] = ' ';
+	
+	/**
+	 * Clears a space occupied by an Actor
+	 * @param a Actor to clear
+	 */
+	public void removeActor(Actor a){
+		grid[a.getX()][a.getY()] = ' ';
 	}
-	//Places Hero in the maze
-	public void placeHero(Hero h) {
-		grid[h.getX()][h.getY()] = h.getChar();
-	}
-	//Removes Hero in the maze
-	public void removeHero(Hero h){
-		grid[h.getX()][h.getY()] = ' ';
-	}
-	//Places sword in the maze
-	public void placeSword(Sword s) {
-		grid[s.getX()][s.getY()] = 'E';
-	}		
 }
 
