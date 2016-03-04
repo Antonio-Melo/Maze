@@ -50,6 +50,9 @@ public class Game {
 				myDragon.moveDragon('b',myHero,myMaze);
 				break;
 			}
+			
+			
+			
 		}
 		myMaze.placeDragon(myDragon);
 	}
