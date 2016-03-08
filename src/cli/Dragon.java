@@ -1,45 +1,52 @@
 package cli;
 
-public class Dragon {
+import java.util.Random;
 
-	int x, y;
-	boolean dead;
+public class Dragon extends Actor {
+
+	boolean sleep;
+	Random rng;
 
 	// Constructor
-	public Dragon(int x, int y) {
+	public Dragon(int x, int y, char c) {
+		super(x, y, c);
+		sleep = false;
+	}
+
+	public boolean isAsleep() {
+		return sleep;
+	}
+
+	public void fallAsleep() {
+		sleep = true;
+		c = 'd';
+	}
+
+	public void wakeUp() {
+		sleep = false;
+		c = 'D';
+	}
+
+	public void cmoveDragon(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.dead = false;
-	}
-
-	// Coord X
-	public int getX() {
-		return x;
-	}
-
-	// Coord Y
-	public int getY() {
-		return y;
-	}
-
-	// Checks if Dragon is dead
-	public boolean isDead() {
-		return dead;
-	}
-
-	// Kills Dragon
-	public void killDragon() {
-		dead = true;
-	}
-	
-	public void cmoveDragon(int x, int y){
-		this.x = x;
-		this.y =y;
 	}
 
 	// From input m,calculates if the Dragon can me moved
-	public void moveDragon(char m, Hero myHero, Maze myMaze) {
+	public void moveDragon(char m, Hero myHero, Maze myMaze, boolean enableSleep) {
 		int x = 0, y = 0;
+		this.rng = new Random(System.currentTimeMillis());
+
+		if (enableSleep) {
+
+			int sleepChance = rng.nextInt() % 10 + 1;
+
+			if (sleepChance == 1) {
+				this.fallAsleep();
+				return;
+			} else
+				wakeUp();
+		}
 
 		if (m == 'd' || m == 'D') {
 			y = 1;
@@ -65,26 +72,27 @@ public class Dragon {
 		}
 		// Fights Hero with sword
 		if (myMaze.grid[getX() + x + x][getY() + y + y] == 'A') {
-			killDragon();
+			this.isKilled();
 			return;
 		}
 
 		// Fights Hero without sword
 		if (myMaze.grid[getX() + x + x][getY() + y + y] == 'H') {
 			myHero.isKilled();
-			myMaze.removeHero(myHero);
-			
-			cmoveDragon(getX()+x,getY()+y);
+			myMaze.removeActor(myHero);
+
+			cmoveDragon(getX() + x, getY() + y);
 			return;
 		}
 		// Space clear
 		if (myMaze.grid[getX() + x][getY() + y] == ' ') {
-			cmoveDragon(getX()+x,getY()+y);
+			cmoveDragon(getX() + x, getY() + y);
 			return;
 		}
+
 		// Picks up the sword
 		if (myMaze.grid[getX() + x][getY() + y] == 'E') {
-			cmoveDragon(getX()+x,getY()+y);
+			cmoveDragon(getX() + x, getY() + y);
 			return;
 		}
 		// Default

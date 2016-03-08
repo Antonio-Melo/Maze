@@ -79,30 +79,19 @@ public class Maze {
 		}	
 		return maze;
 	}
+
 	
-	//Places Dragon in the maze
-	public void placeDragon(Dragon d) {
-		if(!d.isDead()){
-			grid[d.getX()][d.getY()] = 'D';
-		}
+	/**
+	 * Places any actor in the maze
+	 * @param a Actor to place
+	 */
+	public void placeActor(Actor a){
+		if(!a.isDead())
+			grid[a.getX()][a.getY()] = a.getC();
 	}
-	//Removes Dragon from the maze
-	public void removeDragon(Dragon d){
-		grid[d.getX()][d.getY()] = ' ';
+	
+	public void removeActor(Actor a){
+		grid[a.getX()][a.getY()]=' ';
 	}
-	//Places Hero in the maze
-	public void placeHero(Hero h) {
-		if(!h.isDead() && !h.asEscaped()){
-		grid[h.getX()][h.getY()] = h.getChar();
-		}
-	}
-	//Removes Hero in the maze
-	public void removeHero(Hero h){
-		grid[h.getX()][h.getY()] = ' ';
-	}
-	//Places sword in the maze
-	public void placeSword(Sword s) {
-		grid[s.getX()][s.getY()] = 'E';
-	}		
 }
 
