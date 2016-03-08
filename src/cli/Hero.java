@@ -1,28 +1,18 @@
 package cli;
 
-public class Hero {
+public class Hero extends Actor {
 	
-	int x, y;
-	boolean sword;
-	boolean dead;
-	boolean escape;
-	char c;
+	
+	boolean escape, sword;
+	
+	
 	//Constructor
-	public Hero(int x, int y){
-		this.x = x;
-		this.y = y;
-		this.c = 'H';
-		this.dead = false;
+	public Hero(int x, int y, char c){
+		super(x,y,c);
 		this.escape = false;
+		this.sword = false;
 	}
-	//Coord X
-	public int getX(){
-		return x;
-	}
-	//Coord Y
-	public int getY(){
-		return y;
-	}
+	
 	//Checks if has Sword
 	public boolean hasSword(){
 		return sword;
@@ -32,20 +22,9 @@ public class Hero {
 		sword = true;
 		c = 'A';
 	}
-	//Gets Hero char
-	public char getChar(){
-		return c;
-	}
-	//Checks is Hero is dead
-	public boolean isDead(){
-		return dead;
-	}
-	//When Dragon kills Hero
-	public void isKilled(){
-		dead = true;
-	}
+	
 	//Checks if the Hero as already escaped the maze
-	public boolean asEscaped(){
+	public boolean hasEscaped(){
 		return escape;
 	}
 	//When the hero finds the exit
@@ -92,8 +71,7 @@ public class Hero {
 		//Fights Dragon
 		if(myMaze.grid[getX()+x+x][getY() +y+y] == 'D'){
 			if(hasSword()){
-				myDragon.killDragon();
-				myMaze.removeDragon(myDragon);
+				myDragon.isKilled();
 				cmoveHero(getX()+x, getY() + y);
 				return;
 			}else{
