@@ -1,4 +1,4 @@
-package cli;
+package logic;
 
 public class Sword extends Actor {
 

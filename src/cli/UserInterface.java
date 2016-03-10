@@ -1,7 +1,8 @@
-package logic;
+package cli;
 
-import cli.Game;
 import java.util.Scanner;
+
+import logic.Game;
 
 public class UserInterface {
 	public static void main(String[] args){
