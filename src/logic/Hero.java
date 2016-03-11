@@ -1,4 +1,4 @@
-package cli;
+package logic;
 
 public class Hero extends Actor {
 	
@@ -69,7 +69,8 @@ public class Hero extends Actor {
 			}
 		}
 		//Fights Dragon
-		if(myMaze.grid[getX()+x+x][getY() +y+y] == 'D'){
+		if(myMaze.grid[getX()+x+1][getY()+y] == 'D' || myMaze.grid[getX()+x-1][getY()+y] == 'D' || 
+				myMaze.grid[getX()+x][getY()+y+1] == 'D' || myMaze.grid[getX()+x][getY()+y-1] == 'D'){
 			if(hasSword()){
 				myDragon.isKilled();
 				cmoveHero(getX()+x, getY() + y);
@@ -79,16 +80,19 @@ public class Hero extends Actor {
 				return;
 			}
 		}
-		//Space clear
-		if (myMaze.grid[getX()+x][getY() + y] == ' ') {
-			cmoveHero(getX()+x, getY() +y);
-			return;
-		}
+		
 		//Picks up the sword
-		if (myMaze.grid[getX()+x][getY() +y] == 'E') {
+		if (myMaze.grid[getX()+x][getY()+y] == 'E') {
 			pickUpSword();
 			cmoveHero(getX()+x,getY() + y);
 			return;
+		}
+		
+		
+		//Space is clear
+		else{
+		cmoveHero(getX()+x, getY() +y);
+		return;
 		}
 	}
 		
