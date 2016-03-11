@@ -1,5 +1,7 @@
 package cli;
 
+import java.awt.Point;
+
 public class Actor {
 
 	int x,y;
@@ -16,6 +18,10 @@ public class Actor {
 	
 	public char getC(){
 		return c;
+	}
+	
+	public Point getHeroPosition(){
+		return  (new Point(y, x));
 	}
 	
 	public boolean isDead(){

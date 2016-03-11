@@ -66,6 +66,13 @@ public class Maze {
 		}
 		grid[5][9] = 'S';
 	}
+	
+	//Constructor 2
+	public Maze(char [][] grid) {
+		this.grid = grid;
+	}
+	
+	
 	//Transforms grid in String
 	public String toString(Dragon myDragon, Sword mySword){
 		String maze="";
