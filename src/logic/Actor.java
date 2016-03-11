@@ -1,4 +1,6 @@
 package logic;
+import java.awt.Point;
+
 
 public class Actor {
 
@@ -16,6 +18,10 @@ public class Actor {
 	
 	public char getC(){
 		return c;
+	}
+	
+	public Point getHeroPosition(){
+		return  (new Point(y, x));
 	}
 	
 	public boolean isDead(){

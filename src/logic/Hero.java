@@ -1,3 +1,4 @@
+
 package logic;
 
 public class Hero extends Actor {
@@ -98,5 +99,4 @@ public class Hero extends Actor {
 		
 		
 }
-
 

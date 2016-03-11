@@ -1,8 +1,8 @@
 package cli;
 
 import java.util.Scanner;
+import logic.*;
 
-import logic.Game;
 
 public class UserInterface {
 	public static void main(String[] args){
@@ -41,3 +41,5 @@ public class UserInterface {
 		s.close();
 	}
 }
+
+
