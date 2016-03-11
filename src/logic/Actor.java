@@ -1,4 +1,4 @@
-package cli;
+package logic;
 
 import java.awt.Point;
 
