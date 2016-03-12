@@ -31,6 +31,9 @@ public class TestMazeWithStaticDragon {
 
 	@Test
 	public void testMoveHeroToFreeCell() {
+		Game myGame = new Game('1');
+		
+		//Starts here
 		Maze myMaze = new Maze(m1);
 		Hero myHero = new Hero(1, 3, 'H');
 		myMaze.placeActor(myHero);
@@ -108,7 +111,7 @@ public class TestMazeWithStaticDragon {
 		myMaze.placeActor(myHero);
 		assertEquals(true, myHero.isDead());
 	}
-
+	// e)
 	@Test
 	public void testKillDragon() {
 		Maze maze = new Maze(testKill);
@@ -125,7 +128,7 @@ public class TestMazeWithStaticDragon {
 		assertEquals(2, hero.getY());
 		assertTrue(dragon.isDead());
 	}
-
+    // f)
 	@Test
 	public void testEscape() {
 		Maze maze = new Maze(testKill);
@@ -143,7 +146,7 @@ public class TestMazeWithStaticDragon {
 		assertTrue(hero.hasEscaped());
 
 	}
-
+	// g)
 	@Test
 	public void testEscapeNoSword() {
 		Maze maze = new Maze(test);
@@ -162,7 +165,7 @@ public class TestMazeWithStaticDragon {
 		assertEquals(3, hero.getY());
 
 	}
-
+	// h)
 	@Test
 	public void testEscapeSwordDragonAlive(){
 		Maze maze = new Maze(test);

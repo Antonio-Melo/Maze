@@ -17,6 +17,14 @@ public class Game {
 		myDragon = new Dragon(3,1,'D');
 		this.type = type;
 	}
+	//Construtor 2
+	public Game(char type, char [][] grid) {
+		myMaze = new Maze(grid);
+		myHero = new Hero(1,1,'H');
+		mySword = new Sword(8,1,'E');
+		myDragon = new Dragon(3,1,'D');
+		this.type = type;
+	}
 	
 	//Starts Game
 	public void play(char m){

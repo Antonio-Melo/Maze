@@ -23,7 +23,6 @@ public class Hero extends Actor {
 		sword = true;
 		c = 'A';
 	}
-	
 	//Checks if the Hero as already escaped the maze
 	public boolean hasEscaped(){
 		return escape;
