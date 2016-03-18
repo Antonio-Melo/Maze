@@ -1,17 +1,19 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Game {
 	public Maze myMaze;
 	public Hero myHero;
 	public Sword mySword;
-	public Dragon myDragon;
 	char type;
-	
-	//Constructor
-	public Game(char type) {
-		char [][] grid;
+	public ArrayList<Dragon> dragons;
+
+	// Constructor
+	public Game(char type, int nDragons) {
+		char[][] grid;
+		Random rng = new Random(System.currentTimeMillis());
 		grid = new char[10][10];
 
 		// Linha 0
@@ -72,51 +74,68 @@ public class Game {
 			}
 		}
 		grid[5][9] = 'S';
-	
-		
+
 		myMaze = new Maze(grid);
-		myHero = new Hero(1,1,'H');
-		mySword = new Sword(8,1,'E');
-		myDragon = new Dragon(3,1,'D');
+		myHero = new Hero(1, 1, 'H');
+		mySword = new Sword(8, 1, 'E');
 		this.type = type;
+		dragons = new ArrayList<Dragon>();
+		for(int i = 0; i < nDragons; i++){
+			
+			int x = rng.nextInt(9);			//TODO support for differently sized grids
+			int y = rng.nextInt(9);
+			
+			System.out.println(x);
+			System.out.println(y);
+			
+			while(grid[x][y] != ' '){
+				x = rng.nextInt(9);
+				y = rng.nextInt(9);
+			}
+
+			Dragon newDragon = new Dragon(x,y,'D');
+			dragons.add(newDragon);
+		}
 	}
-	
-	//Starts Game
-	public void play(char m){
-		
-		
+
+	// Starts Game
+	public void play(char m) {
+
 		boolean enableSleep;
 		myMaze.removeActor(myHero);
-		myHero.moveHero(m,myDragon,myMaze);
+		myHero.moveHero(m, dragons, myMaze);
 		myMaze.placeActor(myHero);
-		
-		myMaze.removeActor(myDragon);
-		if(type == '1' || type == '2'){
-			
-			if(type == '1')
+
+		for (int i = 0; i < dragons.size(); i++)
+			myMaze.removeActor(dragons.get(i));
+
+		if (type == '1' || type == '2') {
+
+			if (type == '1')
 				enableSleep = false;
 			else
 				enableSleep = true;
-			
+
 			Random r = new Random();
-			int moveDragon = r.nextInt() % 4 + 1;
-			switch(moveDragon){
-			case 1:
-				myDragon.moveDragon('d',myHero,myMaze,enableSleep);
-				break;
-			case 2:
-				myDragon.moveDragon('e',myHero,myMaze,enableSleep);
-				break;
-			case 3:
-				myDragon.moveDragon('c',myHero,myMaze,enableSleep);
-				break;
-			case 4:
-				myDragon.moveDragon('b',myHero,myMaze,enableSleep);
-				break;
+			for (int i = 0; i < dragons.size(); i++) {
+				Dragon myDragon = dragons.get(i);
+				int moveDragon = r.nextInt() % 4 + 1;
+				switch (moveDragon) {
+				case 1:
+					myDragon.moveDragon('d', myHero, myMaze, enableSleep);
+					break;
+				case 2:
+					myDragon.moveDragon('e', myHero, myMaze, enableSleep);
+					break;
+				case 3:
+					myDragon.moveDragon('c', myHero, myMaze, enableSleep);
+					break;
+				case 4:
+					myDragon.moveDragon('b', myHero, myMaze, enableSleep);
+					break;
+				}
 			}
 		}
-
-		myMaze.placeActor(myDragon);
 		myMaze.placeActor(myHero);
 	}
 }
