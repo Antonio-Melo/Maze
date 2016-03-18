@@ -3,18 +3,19 @@ package logic;
 import java.awt.Point;
 import java.util.Random;
 import java.util.Stack;
+import java.util.Vector;
 
 public class MazeBuilder implements IMazeBuilder{
 	
 	protected char grid[][];
-	protected char visited[][];
 	protected Stack<Point> s;
+	protected int msize;
 	
 	
 	//Constructor
 	public MazeBuilder(int size){
+		msize = size;
 		grid = new char [size][size];
-		visited = new char [size][size];
 		s = new Stack<Point>();
 		
 		//Fills grid with 'X's
@@ -23,34 +24,10 @@ public class MazeBuilder implements IMazeBuilder{
 				grid[i][j] = 'X';	
 			}
 		}
-		//Fills the visited array with '1'(visited) or '0'(not visited) 
-		for(int i =0; i < size;i++){
-			//Fills the first and last line with '1'(visited)
-			if(i == 0 || i == size -1){
-				for(int j = 0;j < visited[i].length;j++){
-					visited[i][j] = '1';
-				}
-			}
-			//Fills the rest of the lines
-			//First the first and last with '1'(visited)
-			//and the rest with '0'(not visited)
-			else{
-				visited[i][0] = '1';
-				visited[i][visited[i].length-1] ='1';
-				for(int j = 1; j < visited[i].length-1;j++){
-					visited[i][j] = '0';
-				}
-			}
-		}
-		
 	}
 	//Get function grid
 	public char[][] getGrid(){
 		return grid;
-	}
-	//Get function visited
-	public char[][] getVisited(){
-		return visited;
 	}
 	//Get's stack s
 	public Stack<Point> getStack(){
@@ -71,12 +48,12 @@ public class MazeBuilder implements IMazeBuilder{
 	public char[][] buildMaze(int size) throws IllegalArgumentException {
 		Random r = new Random();
 		//Random position for exit
-		int start = r.nextInt(4) +1;
+		int exit = r.nextInt(4) +1;
 		Point exitpos = new Point();
 		
 		
 		//Generates random exit in the borders
-		switch(start){
+		switch(exit){
 			//First line
 			case 1:
 				exitpos.x =0;
@@ -102,9 +79,119 @@ public class MazeBuilder implements IMazeBuilder{
 		
 		//Creates exit in the grid
 		grid[(int)exitpos.getX()][(int)exitpos.getY()]= 'S';
+		
 		//First position in the stack, next to the exit
+		Point start = new Point();
 		
+		//Creating start
 		
-		return null;
+		//First line
+		if(exitpos.getX() ==0){
+			start.x = 1;
+			start.y = (int)exitpos.getY();
+		}
+		//Last line
+		else if(exitpos.getX() ==(size-1)){
+			start.x = (int)exitpos.getX()-1;
+			start.y = (int)exitpos.getY();
+		}
+		//First Column
+		else if(exitpos.getY() == 0){
+			start.x =(int)exitpos.getX();
+			start.y =(int)exitpos.getY()+1;
+		}
+		//Last Column
+		else if(exitpos.getY() == (size-1)){
+			start.x =(int)exitpos.getX();
+			start.y =(int)exitpos.getY()-1;
+		}
+		//Pushing start to stack
+		s.push(start);
+		//Changing start in the grid
+		grid[(int)start.getX()][(int)start.getY()]= ' ';
+		
+		//
+		while(!s.empty()){
+			Point nextpos = getNextPos(s.peek());
+			
+			if(nextpos.x == -1 && nextpos.y == -1){
+				s.pop();
+			}else{
+				grid[nextpos.x][nextpos.y] = ' ';
+				printMaze(grid);
+				System.out.println();
+				s.push(nextpos);
+			}
+		}
+		return grid;
+	}
+	
+	
+	public Point getNextPos(Point p){
+		Random r = new Random();
+		
+		//Ads all options to the vector
+		Vector<Point> op = new Vector<Point>();
+		op.addElement(new Point((int)p.getX()+1,(int)p.getY()));//Up
+		op.addElement(new Point((int)p.getX()-1,(int)p.getY()));//Down
+		op.addElement(new Point((int)p.getX(),(int)p.getY()+1));//Right
+		op.addElement(new Point((int)p.getX(),(int)p.getY()-1));//Left
+		
+		//Checks all the options
+		for(int i=4; i >=1;i--){
+			int next = r.nextInt(i);
+			
+			int nextx = op.elementAt(next).x;
+			int nexty = op.elementAt(next).y;
+			
+			
+			//Walls/spaces/exit
+			if(grid[nextx][nexty] == ' ' || grid[nextx][nexty] =='S' ||
+			   (nextx==0)||(nextx == msize-1) ||(nexty ==0) ||(nexty == msize-1)){
+				op.removeElementAt(next);
+				continue;
+			}
+			
+			//Diagonals
+			Point d1 = new Point();
+			Point d2 = new Point();
+			//Vertical
+			if(nexty == (int)p.getY()){
+				d1.x = nextx+(nextx -p.x);
+				d1.y = nexty+1;
+				d2.x = nextx+(nextx -p.x);
+				d2.y = nexty-1;
+				//System.out.println("Aqui 1!");
+			}
+			//Horizontal
+			else if(nextx == (int)p.getX()){
+				d1.x = nextx-1;
+				d1.y = nexty+(nexty-p.y);
+				d2.x = nextx+1;
+				d2.y = nexty+(nexty-p.y);
+				//System.out.println("Aqui 2!");
+			}
+			
+			//Checks if there is 2x2 with spaces in the diagonal
+			if(grid[d1.x][d1.y]== ' ' || grid[d2.x][d2.y] == ' '){
+				op.removeElementAt(next);
+				//System.out.println("Aqui 3!");
+				continue;
+			}
+			
+			//Checks if there is 2x2 white spaces
+			if((grid[nextx][nexty+1] == ' ' && grid[nextx-1][nexty]== ' ' && grid[nextx-1][nexty+1]== ' ') ||
+			   (grid[nextx][nexty-1] == ' ' && grid[nextx-1][nexty]== ' ' && grid[nextx-1][nexty-1]== ' ') ||
+			   (grid[nextx][nexty+1] == ' ' && grid[nextx+1][nexty]== ' ' && grid[nextx+1][nexty+1]== ' ') ||
+			   (grid[nextx][nexty-1] == ' ' && grid[nextx+1][nexty]== ' ' && grid[nextx+1][nexty-1]== ' ') ){
+				//System.out.println("Aqui 4!");
+				op.removeElementAt(next);
+				continue;
+			}
+			
+			return op.elementAt(next);
+			
+		}
+		return new Point(-1,-1);
 	}
 }
