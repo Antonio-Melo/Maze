@@ -2,6 +2,9 @@ package test;
 import java.awt.Point;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
 import logic.*;
 import org.junit.Test;
 
@@ -30,26 +33,29 @@ public class TestMazeWithStaticDragon {
 	// a)
 
 	@Test
+	
 	public void testMoveHeroToFreeCell() {
-		Game myGame = new Game('1');
+
 		
 		//Starts here
 		Maze myMaze = new Maze(m1);
 		Hero myHero = new Hero(1, 3, 'H');
 		myMaze.placeActor(myHero);
 		Dragon myDragon = new Dragon(3, 3, 'D');
+		ArrayList<Dragon> dragons = new ArrayList<Dragon>();
+		dragons.add(myDragon);
 		myMaze.placeActor(myDragon);
 		assertEquals(new Point(3, 1), myHero.getHeroPosition());
 
 		// Moves to the left
 		myMaze.removeActor(myHero);
-		myHero.moveHero('e', myDragon, myMaze);
+		myHero.moveHero('e', dragons, myMaze);
 		myMaze.placeActor(myHero);
 		assertEquals(new Point(2, 1), myHero.getHeroPosition());
 
 		// Move to the right
 		myMaze.removeActor(myHero);
-		myHero.moveHero('d', myDragon, myMaze);
+		myHero.moveHero('d', dragons, myMaze);
 		myMaze.placeActor(myHero);
 		assertEquals(new Point(3, 1), myHero.getHeroPosition());
 	}
@@ -60,11 +66,13 @@ public class TestMazeWithStaticDragon {
 		Maze myMaze = new Maze(m1);
 		Hero myHero = new Hero(1, 3, 'H');
 		Dragon myDragon = new Dragon(3, 3, 'D');
+		ArrayList<Dragon> dragons = new ArrayList<Dragon>();
+		dragons.add(myDragon);
 
 		myMaze.placeActor(myHero);
 
 		assertEquals(new Point(3, 1), myHero.getHeroPosition());
-		myHero.moveHero('c', myDragon, myMaze);
+		myHero.moveHero('c', dragons, myMaze);
 		assertEquals(new Point(3, 1), myHero.getHeroPosition());
 	}
 
@@ -78,20 +86,22 @@ public class TestMazeWithStaticDragon {
 		myMaze.placeActor(myDragon);
 		Sword mySword = new Sword(3, 1, 'E');
 		myMaze.placeActor(mySword);
+		ArrayList<Dragon> dragons = new ArrayList<Dragon>();
+		dragons.add(myDragon);
 
 		// Checks if has sword in the beginning
 		assertEquals(false, myHero.hasSword());
 		myMaze.removeActor(myHero);
-		myHero.moveHero('e', myDragon, myMaze);
+		myHero.moveHero('e', dragons, myMaze);
 		myMaze.placeActor(myHero);
 		myMaze.removeActor(myHero);
-		myHero.moveHero('e', myDragon, myMaze);
+		myHero.moveHero('e', dragons, myMaze);
 		myMaze.placeActor(myHero);
 		myMaze.removeActor(myHero);
-		myHero.moveHero('b', myDragon, myMaze);
+		myHero.moveHero('b', dragons, myMaze);
 		myMaze.placeActor(myHero);
 		myMaze.removeActor(myHero);
-		myHero.moveHero('b', myDragon, myMaze);
+		myHero.moveHero('b', dragons, myMaze);
 		myMaze.placeActor(myHero);
 		assertEquals(true, myHero.hasSword());
 	}
@@ -104,10 +114,12 @@ public class TestMazeWithStaticDragon {
 		myMaze.placeActor(myHero);
 		Dragon myDragon = new Dragon(3, 3, 'D');
 		myMaze.placeActor(myDragon);
+		ArrayList<Dragon> dragons = new ArrayList<Dragon>();
+		dragons.add(myDragon);
 		// Checks if has sword in the beginning
 		assertEquals(false, myHero.hasSword());
 		myMaze.removeActor(myHero);
-		myHero.moveHero('b', myDragon, myMaze);
+		myHero.moveHero('b', dragons, myMaze);
 		myMaze.placeActor(myHero);
 		assertEquals(true, myHero.isDead());
 	}
@@ -118,30 +130,35 @@ public class TestMazeWithStaticDragon {
 		Hero hero = new Hero(2, 1, 'H');
 		Sword sword = new Sword(1, 1, 'E');
 		Dragon dragon = new Dragon(1, 3, 'D');
+		ArrayList<Dragon> dragons = new ArrayList<Dragon>();
+		dragons.add(dragon);
 
 		assertFalse(dragon.isDead());
-
-		hero.moveHero('c', dragon, maze);
-		hero.moveHero('d', dragon, maze);
-
-		assertEquals(1, hero.getX());
-		assertEquals(2, hero.getY());
+		
+		hero.moveHero('c', dragons, maze);
+		hero.moveHero('d', dragons, maze);
+		
+		assertEquals(1,hero.getX());
+		assertEquals(2,hero.getY());
 		assertTrue(dragon.isDead());
 	}
     // f)
 	@Test
 	public void testEscape() {
 		Maze maze = new Maze(testKill);
-		Hero hero = new Hero(2, 1, 'H');
-		Sword sword = new Sword(1, 1, 'E');
-		Dragon dragon = new Dragon(1, 3, 'D');
 
+		Hero hero = new Hero(2,1,'H');
+		Sword sword = new Sword(1,1,'E');
+		Dragon dragon = new Dragon(1,3,'D');
+		ArrayList<Dragon> dragons = new ArrayList<Dragon>();
+		dragons.add(dragon);
+		
 		assertFalse(hero.hasEscaped());
-
-		hero.moveHero('c', dragon, maze);
-		hero.moveHero('d', dragon, maze);
-		hero.moveHero('d', dragon, maze);
-		hero.moveHero('d', dragon, maze);
+		
+		hero.moveHero('c', dragons, maze);
+		hero.moveHero('d', dragons, maze);
+		hero.moveHero('d', dragons, maze);
+		hero.moveHero('d', dragons, maze);
 
 		assertTrue(hero.hasEscaped());
 
@@ -150,15 +167,18 @@ public class TestMazeWithStaticDragon {
 	@Test
 	public void testEscapeNoSword() {
 		Maze maze = new Maze(test);
-		Hero hero = new Hero(1, 1, 'H');
-		Sword sword = new Sword(2, 3, 'E');
-		Dragon dragon = new Dragon(3, 1, 'D');
 
+		Hero hero = new Hero(1,1,'H');
+		Sword sword = new Sword(2,3,'E');
+		Dragon dragon = new Dragon(3,1,'D');
+		ArrayList<Dragon> dragons = new ArrayList<Dragon>();
+		dragons.add(dragon);
+		
 		assertFalse(hero.hasEscaped());
-
-		hero.moveHero('d', dragon, maze);
-		hero.moveHero('d', dragon, maze);
-		hero.moveHero('d', dragon, maze);
+		
+		hero.moveHero('d', dragons, maze);
+		hero.moveHero('d', dragons, maze);
+		hero.moveHero('d', dragons, maze);
 
 		assertFalse(hero.hasEscaped());
 		assertEquals(1, hero.getX());
@@ -172,14 +192,16 @@ public class TestMazeWithStaticDragon {
 		Hero hero = new Hero(1,1,'H');
 		Sword sword = new Sword(2,3,'E');
 		Dragon dragon = new Dragon(3,1,'D');
+		ArrayList<Dragon> dragons = new ArrayList<Dragon>();
+		dragons.add(dragon);
 		
 		assertFalse(hero.hasEscaped());
 		
-		hero.moveHero('d', dragon, maze);
-		hero.moveHero('d', dragon, maze);
-		hero.moveHero('b', dragon, maze);
-		hero.moveHero('c', dragon, maze);
-		hero.moveHero('d', dragon, maze);
+		hero.moveHero('d', dragons, maze);
+		hero.moveHero('d', dragons, maze);
+		hero.moveHero('b', dragons, maze);
+		hero.moveHero('c', dragons, maze);
+		hero.moveHero('d', dragons, maze);
 		
 		assertFalse(hero.hasEscaped());
 		assertEquals(1,hero.getX());
