@@ -13,17 +13,8 @@ public class MazeBuilder implements IMazeBuilder{
 	
 	
 	//Constructor
-	public MazeBuilder(int size){
-		msize = size;
-		grid = new char [size][size];
+	public MazeBuilder(){
 		s = new Stack<Point>();
-		
-		//Fills grid with 'X's
-		for(int i =0; i < size;i++){
-			for(int j=0; j < size;j++){
-				grid[i][j] = 'X';	
-			}
-		}
 	}
 	//Get function grid
 	public char[][] getGrid(){
@@ -46,6 +37,18 @@ public class MazeBuilder implements IMazeBuilder{
 	
 	//Generates the random Maze
 	public char[][] buildMaze(int size) throws IllegalArgumentException {
+		msize = size;
+		grid = new char [size][size];
+		
+		//Fills grid with 'X's
+		for(int i =0; i < size;i++){
+			for(int j=0; j < size;j++){
+				grid[i][j] = 'X';	
+			}
+		}
+		
+		
+		//---------------------------------------------------------------s
 		Random r = new Random();
 		//Random position for exit
 		int exit = r.nextInt(4) +1;
@@ -118,8 +121,8 @@ public class MazeBuilder implements IMazeBuilder{
 				s.pop();
 			}else{
 				grid[nextpos.x][nextpos.y] = ' ';
-				printMaze(grid);
-				System.out.println();
+				//printMaze(grid);
+				//System.out.println();
 				s.push(nextpos);
 			}
 		}
