@@ -48,7 +48,7 @@ public class MazeBuilder implements IMazeBuilder{
 		}
 		
 		
-		//---------------------------------------------------------------s
+		//---------------------------------------------------------------
 		Random r = new Random();
 		//Random position for exit
 		int exit = r.nextInt(4) +1;
@@ -113,7 +113,7 @@ public class MazeBuilder implements IMazeBuilder{
 		//Changing start in the grid
 		grid[(int)start.getX()][(int)start.getY()]= ' ';
 		
-		//
+		//Generates the random maze
 		while(!s.empty()){
 			Point nextpos = getNextPos(s.peek());
 			
@@ -125,7 +125,10 @@ public class MazeBuilder implements IMazeBuilder{
 				//System.out.println();
 				s.push(nextpos);
 			}
-		}
+		}			
+		
+		Game g = new Game('0', grid, 5);
+		
 		return grid;
 	}
 	
@@ -135,8 +138,8 @@ public class MazeBuilder implements IMazeBuilder{
 		
 		//Ads all options to the vector
 		Vector<Point> op = new Vector<Point>();
-		op.addElement(new Point((int)p.getX()+1,(int)p.getY()));//Up
-		op.addElement(new Point((int)p.getX()-1,(int)p.getY()));//Down
+		op.addElement(new Point((int)p.getX()+1,(int)p.getY()));//Down
+		op.addElement(new Point((int)p.getX()-1,(int)p.getY()));//Up
 		op.addElement(new Point((int)p.getX(),(int)p.getY()+1));//Right
 		op.addElement(new Point((int)p.getX(),(int)p.getY()-1));//Left
 		

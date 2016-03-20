@@ -95,16 +95,15 @@ public class Game {
 		}
 	}
 
-	// Construtor 2
+	// Constructor 2
 	public Game(char type, char[][] grid,int nDragons) {
 		myMaze = new Maze(grid);
-		myHero = new Hero(1, 1, 'H');
-		mySword = new Sword(8, 1, 'E');
 		dragons = new ArrayList<Dragon>();
 		
 		Random rng = new Random(System.currentTimeMillis());
 		this.type = type;
 		
+		//Random Dragons position
 		for (int i = 0; i < nDragons; i++) {
 
 			int x = rng.nextInt(grid.length); // TODO support for differently sized grids
@@ -117,7 +116,29 @@ public class Game {
 
 			Dragon newDragon = new Dragon(x, y, 'D');
 			dragons.add(newDragon);
+			myMaze.placeActor(newDragon);
 		}
+		
+		//Random Hero position
+		int x = rng.nextInt(grid.length-2)+1; 
+		int y = rng.nextInt(grid.length-2)+1;
+		
+		while(grid[x][y] != ' ' || grid[x+1][y] =='D'|| grid[x-1][y] =='D'|| grid[x][y+1] =='D'|| grid[x][y-1] =='D'|| grid[x+1][y+1] =='D'|| grid[x+1][y-1] =='D'|| grid[x-1][y+1] =='D'|| grid[x-1][y-1] =='D' ){
+			 x = rng.nextInt(grid.length-2)+1; 
+			 y = rng.nextInt(grid.length-2)+1;
+		}
+		myHero = new Hero(x, y, 'H');
+		myMaze.placeActor(myHero);
+		
+		//Random sword position
+		x = rng.nextInt(grid.length-2)+1; 
+		y = rng.nextInt(grid.length-2)+1;
+		while(grid[x][y] != ' '){
+			 x = rng.nextInt(grid.length-2)+1; 
+			 y = rng.nextInt(grid.length-2)+1;
+		}
+		mySword = new Sword(x, y, 'E');
+		myMaze.placeActor(mySword);
 	}
 
 	

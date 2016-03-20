@@ -1,13 +1,14 @@
 package test;
 
-import logic.MazeBuilder;
+import logic.*;
 
 public class MyTestMazeBuilder {
 
 	public static void main(String[] args) {
 		MazeBuilder m = new MazeBuilder();
-		m.buildMaze(20);
 		
+		// Place hero/dragons and sword
+		Game g = new Game('0', m.buildMaze(70), 5);
 		m.printMaze(m.getGrid());
 	}
 
