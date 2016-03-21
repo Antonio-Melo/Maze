@@ -39,93 +39,110 @@ public class MazeBuilder implements IMazeBuilder{
 	public char[][] buildMaze(int size) throws IllegalArgumentException {
 		msize = size;
 		grid = new char [size][size];
+		boolean found = false;
 		
-		//Fills grid with 'X's
-		for(int i =0; i < size;i++){
-			for(int j=0; j < size;j++){
-				grid[i][j] = 'X';	
+		while (!found) {
+			// Fills grid with 'X's
+			for (int i = 0; i < size; i++) {
+				for (int j = 0; j < size; j++) {
+					grid[i][j] = 'X';
+				}
 			}
-		}
-		
-		
-		//---------------------------------------------------------------
-		Random r = new Random();
-		//Random position for exit
-		int exit = r.nextInt(4) +1;
-		Point exitpos = new Point();
-		
-		
-		//Generates random exit in the borders
-		switch(exit){
-			//First line
+
+			// ---------------------------------------------------------------
+			Random r = new Random();
+			// Random position for exit
+			int exit = r.nextInt(4) + 1;
+			Point exitpos = new Point();
+
+			// Generates random exit in the borders
+			switch (exit) {
+			// First line
 			case 1:
-				exitpos.x =0;
-				exitpos.y =r.nextInt(size-2) +1;
+				exitpos.x = 0;
+				exitpos.y = r.nextInt(size - 2) + 1;
 				break;
-			//Last line
+			// Last line
 			case 2:
-				exitpos.x =size-1;
-				exitpos.y =r.nextInt(size-2) +1;
+				exitpos.x = size - 1;
+				exitpos.y = r.nextInt(size - 2) + 1;
 				break;
-			//First column 
+			// First column
 			case 3:
 				exitpos.y = 0;
-				exitpos.x =r.nextInt(size-2) +1;
+				exitpos.x = r.nextInt(size - 2) + 1;
 				break;
-			//Last column
+			// Last column
 			case 4:
-				exitpos.y = size-1;
-				exitpos.x = r.nextInt(size-2) +1;
+				exitpos.y = size - 1;
+				exitpos.x = r.nextInt(size - 2) + 1;
 			default:
 				break;
-		}
-		
-		//Creates exit in the grid
-		grid[(int)exitpos.getX()][(int)exitpos.getY()]= 'S';
-		
-		//First position in the stack, next to the exit
-		Point start = new Point();
-		
-		//Creating start
-		
-		//First line
-		if(exitpos.getX() ==0){
-			start.x = 1;
-			start.y = (int)exitpos.getY();
-		}
-		//Last line
-		else if(exitpos.getX() ==(size-1)){
-			start.x = (int)exitpos.getX()-1;
-			start.y = (int)exitpos.getY();
-		}
-		//First Column
-		else if(exitpos.getY() == 0){
-			start.x =(int)exitpos.getX();
-			start.y =(int)exitpos.getY()+1;
-		}
-		//Last Column
-		else if(exitpos.getY() == (size-1)){
-			start.x =(int)exitpos.getX();
-			start.y =(int)exitpos.getY()-1;
-		}
-		//Pushing start to stack
-		s.push(start);
-		//Changing start in the grid
-		grid[(int)start.getX()][(int)start.getY()]= ' ';
-		
-		//Generates the random maze
-		while(!s.empty()){
-			Point nextpos = getNextPos(s.peek());
-			
-			if(nextpos.x == -1 && nextpos.y == -1){
-				s.pop();
-			}else{
-				grid[nextpos.x][nextpos.y] = ' ';
-				//printMaze(grid);
-				//System.out.println();
-				s.push(nextpos);
 			}
-		}			
+
+			// Creates exit in the grid
+			grid[(int) exitpos.getX()][(int) exitpos.getY()] = 'S';
+
+			// First position in the stack, next to the exit
+			Point start = new Point();
+
+			// Creating start
+
+			// First line
+			if (exitpos.getX() == 0) {
+				start.x = 1;
+				start.y = (int) exitpos.getY();
+			}
+			// Last line
+			else if (exitpos.getX() == (size - 1)) {
+				start.x = (int) exitpos.getX() - 1;
+				start.y = (int) exitpos.getY();
+			}
+			// First Column
+			else if (exitpos.getY() == 0) {
+				start.x = (int) exitpos.getX();
+				start.y = (int) exitpos.getY() + 1;
+			}
+			// Last Column
+			else if (exitpos.getY() == (size - 1)) {
+				start.x = (int) exitpos.getX();
+				start.y = (int) exitpos.getY() - 1;
+			}
+			// Pushing start to stack
+			s.push(start);
+			// Changing start in the grid
+			grid[(int) start.getX()][(int) start.getY()] = ' ';
+
+			// Generates the random maze
+			while (!s.empty()) {
+				Point nextpos = getNextPos(s.peek());
+
+				if (nextpos.x == -1 && nextpos.y == -1) {
+					s.pop();
+				} else {
+					grid[nextpos.x][nextpos.y] = ' ';
+					// printMaze(grid);
+					// System.out.println();
+					s.push(nextpos);
+				}
+			}
+
+			// Checks for badwalls
+			char[][] badWalls = { { 'X', 'X', 'X' }, { 'X', 'X', 'X' }, { 'X', 'X', 'X' } };
+
+			for (int i = 0; i < grid.length - badWalls.length; i++) {			
+				for (int j = 0; j < grid.length - badWalls.length; j++) {
+					boolean match = true;
+					for (int y = 0; y < badWalls.length; y++)
+						for (int x = 0; x < badWalls.length; x++) {
+							if (grid[i + y][j + x] != badWalls[y][x])
+								match = false;
+						}
+					if (match)
+						break;
+				}
+			}
+		}
 		
 		Game g = new Game('0', grid, 5);
 		
