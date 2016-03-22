@@ -121,26 +121,33 @@ public class MazeBuilder implements IMazeBuilder{
 					s.pop();
 				} else {
 					grid[nextpos.x][nextpos.y] = ' ';
-					// printMaze(grid);
-					// System.out.println();
+					 //printMaze(grid);
+					 //System.out.println();
 					s.push(nextpos);
 				}
 			}
 
 			// Checks for badwalls
 			char[][] badWalls = { { 'X', 'X', 'X' }, { 'X', 'X', 'X' }, { 'X', 'X', 'X' } };
-
-			for (int i = 0; i < grid.length - badWalls.length; i++) {			
+			boolean match=true;
+			for (int i = 0; i < grid.length - badWalls.length; i++) {
 				for (int j = 0; j < grid.length - badWalls.length; j++) {
-					boolean match = true;
-					for (int y = 0; y < badWalls.length; y++)
+					match = true;
+					for (int y = 0; y < badWalls.length; y++){
 						for (int x = 0; x < badWalls.length; x++) {
 							if (grid[i + y][j + x] != badWalls[y][x])
 								match = false;
 						}
+					}
 					if (match)
 						break;
 				}
+				if(match)
+					break;
+			}
+			
+			if(!match){
+				found =true;
 			}
 		}
 		
