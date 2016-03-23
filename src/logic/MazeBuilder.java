@@ -151,7 +151,7 @@ public class MazeBuilder implements IMazeBuilder{
 			}
 		}
 		
-		Game g = new Game('0', grid, 5);
+		//Game g = new Game('0', grid, 5);
 		
 		return grid;
 	}

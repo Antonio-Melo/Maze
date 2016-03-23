@@ -105,10 +105,11 @@ public class Window {
 		frame.getContentPane().add(lblNumberOfDragons);
 		
 		JTextArea MazeArea = new JTextArea();
+		MazeArea.setEditable(false);
 		MazeArea.setForeground(Color.BLACK);
 		MazeArea.setFont(new Font("Courier New", Font.PLAIN, 13));
 		MazeArea.setBackground(Color.WHITE);
-		MazeArea.setBounds(21, 128, 568, 374);
+		MazeArea.setBounds(21, 128, 552, 389);
 		frame.getContentPane().add(MazeArea);
 		
 		JButton btnLeft = new JButton("Left");
@@ -158,8 +159,8 @@ public class Window {
 				btnDown.setEnabled(true);
 				
 				MazeBuilder m = new MazeBuilder();
-				Game g = new Game('0',m.buildMaze(10), 2);
-				MazeArea.setText(g.myMaze.toString());
+				Game g = new Game('0',m.buildMaze(20), 4);
+				MazeArea.setText(g.myMaze.toString(g.dragons,g.mySword));
 			}
 		});
 		btnGenerateMaze.setBounds(700, 11, 127, 44);
