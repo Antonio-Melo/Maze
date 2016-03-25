@@ -12,6 +12,7 @@ public class Dragon extends Actor {
 	public Dragon(int x, int y, char c) {
 		super(x, y, c);
 		sleep = false;
+		this.sleepCount = 0;
 	}
 
 	public boolean isAsleep() {
