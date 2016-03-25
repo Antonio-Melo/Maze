@@ -149,10 +149,6 @@ public class Game {
 		boolean enableSleep;
 		myMaze.removeActor(myHero);
 		myHero.moveHero(m, dragons, myMaze);
-		myMaze.placeActor(myHero);
-
-		for (int i = 0; i < dragons.size(); i++)
-			myMaze.removeActor(dragons.get(i));
 
 		if (type == '1' || type == '2') {
 
@@ -163,6 +159,7 @@ public class Game {
 
 			Random r = new Random();
 			for (int i = 0; i < dragons.size(); i++) {
+				myMaze.removeActor(dragons.get(i));
 				Dragon myDragon = dragons.get(i);
 				int moveDragon = r.nextInt() % 4 + 1;
 				switch (moveDragon) {
@@ -179,6 +176,11 @@ public class Game {
 					myDragon.moveDragon('b', myHero, myMaze, enableSleep);
 					break;
 				}
+				
+				if(!myDragon.isDead()){
+					myMaze.placeActor(dragons.get(i));
+				}else
+					dragons.remove(i--);
 			}
 		}
 		myMaze.placeActor(myHero);

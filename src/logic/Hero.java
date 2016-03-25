@@ -82,6 +82,7 @@ public class Hero extends Actor {
 					|| ((getX() + x) == dragons.get(i).getX() && (getY() + y - 1) == dragons.get(i).getY())) {
 				if (hasSword()) {
 					dragons.get(i).isKilled();
+					myMaze.removeActor(dragons.get(i));
 					dragons.remove(i--);
 					cmoveHero(getX() + x, getY() + y);
 					return;

@@ -151,6 +151,8 @@ public class MazeBuilder implements IMazeBuilder{
 			}
 		}
 		
+		
+		//Descomentar para o TestMazeBuilder funcionar
 		//Game g = new Game('0', grid, 5);
 		
 		return grid;

@@ -22,8 +22,8 @@ public class Maze {
 			
 			else grid[myDragon.getX()][myDragon.getY()] = 'D';
 		}
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid.length; j++) {
 				maze = maze + grid[i][j] + " ";
 			}
 			maze = maze + "\n";

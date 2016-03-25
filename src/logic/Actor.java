@@ -33,7 +33,6 @@ public class Actor {
 		return dead;
 	}
 	
-	
 	public void isKilled(){
 		dead=true;
 	}

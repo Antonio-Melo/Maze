@@ -79,7 +79,6 @@ public class Dragon extends Actor {
 		// Fights Hero without sword
 		if (myMaze.grid[getX() + x + x][getY() + y + y] == 'H') {
 			myHero.isKilled();
-			myMaze.removeActor(myHero);
 
 			cmoveDragon(getX() + x, getY() + y);
 			return;
