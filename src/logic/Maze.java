@@ -20,7 +20,7 @@ public class Maze {
 			if (myDragon.getX() == mySword.getX() && myDragon.getY() == mySword.getY())
 				grid[myDragon.getX()][mySword.getY()] = 'F';
 			
-			else grid[myDragon.getX()][myDragon.getY()] = 'D';
+			else grid[myDragon.getX()][myDragon.getY()] = myDragon.getC();
 		}
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid.length; j++) {

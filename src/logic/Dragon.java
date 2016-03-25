@@ -6,6 +6,7 @@ public class Dragon extends Actor {
 
 	boolean sleep;
 	Random rng;
+	int sleepCount;
 
 	// Constructor
 	public Dragon(int x, int y, char c) {
@@ -19,6 +20,7 @@ public class Dragon extends Actor {
 
 	public void fallAsleep() {
 		sleep = true;
+		sleepCount = 5;		//Sleeps for 5 turns
 		c = 'd';
 	}
 
@@ -39,7 +41,11 @@ public class Dragon extends Actor {
 
 		if (enableSleep) {
 
-			int sleepChance = rng.nextInt() % 10 + 1;
+			sleepCount--;
+			if(sleepCount>0)
+				return;
+			
+			int sleepChance = rng.nextInt(10) + 1;
 
 			if (sleepChance == 1) {
 				this.fallAsleep();
