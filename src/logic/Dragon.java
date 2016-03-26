@@ -78,17 +78,20 @@ public class Dragon extends Actor {
 			return;
 		}
 		// Fights Hero with sword
-		if (myMaze.grid[getX() + x + x][getY() + y + y] == 'A') {
-			this.isKilled();
-			return;
-		}
+		if (((getX() + x + 1) == myHero.getX() && (getY() + y) == myHero.getY())
+				|| ((getX() + x - 1) == myHero.getX() && (getY() + y) == myHero.getY())
+				|| ((getX() + x) == myHero.getX() && (getY() + y + 1) == myHero.getY())
+				|| ((getX() + x) == myHero.getX() && (getY() + y - 1) == myHero.getY())) {
+			
+			if(myHero.hasSword()){
+				this.isKilled();
+				return;
+			}else{
+				myHero.isKilled();
 
-		// Fights Hero without sword
-		if (myMaze.grid[getX() + x + x][getY() + y + y] == 'H') {
-			myHero.isKilled();
-
-			cmoveDragon(getX() + x, getY() + y);
-			return;
+				cmoveDragon(getX() + x, getY() + y);
+				return;
+			}
 		}
 		// Space clear
 		if (myMaze.grid[getX() + x][getY() + y] == ' ') {
@@ -96,7 +99,7 @@ public class Dragon extends Actor {
 			return;
 		}
 
-		// Picks up the sword
+		// Moves to sword
 		if (myMaze.grid[getX() + x][getY() + y] == 'E') {
 			cmoveDragon(getX() + x, getY() + y);
 			return;
