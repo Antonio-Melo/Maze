@@ -106,9 +106,10 @@ public class Window {
 		lblTypeOfDragons.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblTypeOfDragons.setBounds(21, 80, 127, 23);
 		frame.getContentPane().add(lblTypeOfDragons);
+		
 		//Type of Dragon ComboBox
-		JComboBox comboBoxTypeDragons = new JComboBox();
-		comboBoxTypeDragons.setModel(new DefaultComboBoxModel(new String[] {"", "Static", "Moving", "Moving/Sleeping"}));
+		JComboBox<String> comboBoxTypeDragons = new JComboBox<String>();
+		comboBoxTypeDragons.setModel(new DefaultComboBoxModel<String>(new String[] {"", "Static", "Moving", "Moving/Sleeping"}));
 		comboBoxTypeDragons.setBounds(164, 77, 104, 20);
 		frame.getContentPane().add(comboBoxTypeDragons);
 		
@@ -187,7 +188,7 @@ public class Window {
 				//Default numbers
 				int size =10;
 				int ndragons = 1;
-				
+				String dragonType;	
 				//Size of Maze
 				try{
 					size = Integer.parseInt(MazeDimension.getText());
@@ -201,6 +202,27 @@ public class Window {
 				}catch(NumberFormatException e){
 					JOptionPane.showMessageDialog(MazeDimension, "Invalid number of dragons!\nInsert a valid integer or 1 will be used as default.");
 				}
+				
+				//type of Dragons
+				dragonType = (String) comboBoxTypeDragons.getSelectedItem();
+				switch (dragonType){
+				case "":
+					dragonType = "0";
+					break;
+				case "Static":
+					dragonType = "0";
+					break;
+					
+				case "Moving":
+					dragonType = "1";
+					break;
+					
+				case "Moving/Sleeping":
+					dragonType = "2";
+					break;
+				}
+				
+				
 				//Enable buttons
 				btnLeft.setEnabled(true);
 				btnRight.setEnabled(true);
@@ -208,7 +230,7 @@ public class Window {
 				btnDown.setEnabled(true);
 				//Starting game
 				MazeBuilder m = new MazeBuilder();
-				g = new Game('0',m.buildMaze(size), ndragons);
+				g = new Game(dragonType.toCharArray()[0],m.buildMaze(size), ndragons);
 				MazeArea.setText(g.myMaze.toString(g.dragons,g.mySword));
 				GameState.setBackground(Color.GREEN);
 				GameState.setValue(10);
@@ -221,7 +243,7 @@ public class Window {
 	private void move(char d){
 		g.play(d);
 		MazeArea.setText(g.myMaze.toString(g.dragons,g.mySword));
-		if(g.myHero.hasEscaped()){
+		if(g.myHero.hasEscaped() || g.myHero.isDead()){
 			btnLeft.setEnabled(false);
 			btnRight.setEnabled(false);
 			btnUp.setEnabled(false);
