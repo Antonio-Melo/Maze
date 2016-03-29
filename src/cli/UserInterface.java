@@ -20,26 +20,26 @@ public class UserInterface {
 		int nDragons = s.nextInt();
 		Game game = new Game(type, nDragons);
 
-		for (int i = 0; i < game.dragons.size(); i++)
-			if (!game.dragons.get(i).isDead())
-				game.myMaze.placeActor(game.dragons.get(i));
-		game.myMaze.placeActor(game.myHero);
-		game.myMaze.placeActor(game.mySword);
+		for (int i = 0; i < game.getDragons().size(); i++)
+			if (!game.getDragons().get(i).isDead())
+				game.getMyMaze().placeActor(game.getDragons().get(i));
+		game.getMyMaze().placeActor(game.getMyHero());
+		game.getMyMaze().placeActor(game.getMySword());
 
-		System.out.print(game.myMaze.toString(game.dragons, game.mySword));
+		System.out.print(game.getMyMaze().toString(game.getDragons(), game.getMySword()));
 
 		// UNTIL WINS OR DIES
-		while (!game.myHero.isDead() && !game.myHero.hasEscaped()) {
+		while (!game.getMyHero().isDead() && !game.getMyHero().hasEscaped()) {
 			System.out.println("Direita - d Esquerda -e Cima -c Baixo-b");
 			char m = s.next().charAt(0);
 			game.play(m);
-			System.out.print(game.myMaze.toString(game.dragons, game.mySword));
+			System.out.print(game.getMyMaze().toString(game.getDragons(), game.getMySword()));
 
 		}
 		// WINS
-		if (game.myHero.hasEscaped()) {
-			game.myMaze.removeActor(game.myHero);
-			System.out.print(game.myMaze.toString(game.dragons, game.mySword));
+		if (game.getMyHero().hasEscaped()) {
+			game.getMyMaze().removeActor(game.getMyHero());
+			System.out.print(game.getMyMaze().toString(game.getDragons(), game.getMySword()));
 			System.out.println("HERO ESCAPED!!");
 		}
 		s.close();

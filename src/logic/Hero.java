@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Hero extends Actor {
 
-	boolean escape, sword;
+	private boolean escape, sword;
 
 	// Constructor
 	public Hero(int x, int y, char c) {
@@ -59,12 +59,12 @@ public class Hero extends Actor {
 		}
 
 		// Wall
-		if (myMaze.grid[getX() + x][getY() + y] == 'X') {
+		if (myMaze.getGrid()[getX() + x][getY() + y] == 'X') {
 			return;
 		}
 
 		// Exit
-		if (myMaze.grid[getX() + x][getY() + y] == 'S') {
+		if (myMaze.getGrid()[getX() + x][getY() + y] == 'S') {
 
 			for (int i = 0; i < dragons.size(); i++) {
 				if (!dragons.get(i).isDead())
@@ -98,7 +98,7 @@ public class Hero extends Actor {
 		}
 
 		// Picks up the sword
-		if (myMaze.grid[getX() + x][getY() + y] == 'E') {
+		if (myMaze.getGrid()[getX() + x][getY() + y] == 'E') {
 			pickUpSword();
 			cmoveHero(getX() + x, getY() + y);
 			return;

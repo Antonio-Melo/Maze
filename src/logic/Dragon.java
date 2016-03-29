@@ -4,9 +4,9 @@ import java.util.Random;
 
 public class Dragon extends Actor {
 
-	boolean sleep;
-	Random rng;
-	int sleepCount;
+	private boolean sleep;
+	private Random rng;
+	private int sleepCount;
 
 	// Constructor
 	public Dragon(int x, int y, char c) {
@@ -70,11 +70,11 @@ public class Dragon extends Actor {
 		}
 
 		// Wall
-		if (myMaze.grid[getX() + x][getY() + y] == 'X') {
+		if (myMaze.getGrid()[getX() + x][getY() + y] == 'X') {
 			return;
 		}
 		// Exit
-		if (myMaze.grid[getX() + x][getY() + y] == 'S') {
+		if (myMaze.getGrid()[getX() + x][getY() + y] == 'S') {
 			return;
 		}
 		// Fights Hero with sword
@@ -94,13 +94,13 @@ public class Dragon extends Actor {
 			}
 		}
 		// Space clear
-		if (myMaze.grid[getX() + x][getY() + y] == ' ') {
+		if (myMaze.getGrid()[getX() + x][getY() + y] == ' ') {
 			cmoveDragon(getX() + x, getY() + y);
 			return;
 		}
 
 		// Moves to sword
-		if (myMaze.grid[getX() + x][getY() + y] == 'E') {
+		if (myMaze.getGrid()[getX() + x][getY() + y] == 'E') {
 			cmoveDragon(getX() + x, getY() + y);
 			return;
 		}

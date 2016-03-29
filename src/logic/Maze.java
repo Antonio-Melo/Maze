@@ -4,7 +4,7 @@ package logic;
 import java.util.ArrayList;
 
 public class Maze {
-	char grid[][];
+	private char grid[][];
 
 	// Constructor
 	public Maze(char[][] m) {
@@ -44,5 +44,9 @@ public class Maze {
 
 	public void removeActor(Actor a) {
 		grid[a.getX()][a.getY()] = ' ';
+	}
+	
+	public char[][] getGrid(){
+		return grid;
 	}
 }

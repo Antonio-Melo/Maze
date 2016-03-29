@@ -126,12 +126,12 @@ public class Window {
 		
 		//Game State label
 		JLabel lblState = new JLabel("State ");
-		lblState.setBounds(353, 11, 48, 23);
+		lblState.setBounds(387, 10, 48, 23);
 		lblState.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		frame.getContentPane().add(lblState);
 		//Game progress bar
 		GameState = new JProgressBar();
-		GameState.setBounds(409, 11, 164, 20);
+		GameState.setBounds(445, 11, 164, 20);
 		GameState.setStringPainted(true);
 		GameState.setBackground(Color.RED);
 		GameState.setForeground(Color.WHITE);
@@ -178,7 +178,7 @@ public class Window {
 			}});
 		//Authors
 		JLabel lblAntnioMelo = new JLabel("Ant\u00F3nio Melo & Edgar Passos");
-		lblAntnioMelo.setBounds(10, 547, 195, 14);
+		lblAntnioMelo.setBounds(92, 531, 195, 14);
 		frame.getContentPane().add(lblAntnioMelo);
 		
 		//Start button
@@ -243,7 +243,7 @@ public class Window {
 				
 				MazeBuilder m = new MazeBuilder();
 				g = new Game(dragonType.toCharArray()[0],m.buildMaze(size), ndragons);
-				MazeArea.setText(g.myMaze.toString(g.dragons,g.mySword));
+				MazeArea.setText(g.getMyMaze().toString(g.getDragons(),g.getMySword()));
 				GameState.setBackground(Color.GREEN);
 				GameState.setValue(10);
 			}
@@ -253,8 +253,8 @@ public class Window {
 	}
 	private void move(char d){
 		g.play(d);
-		MazeArea.setText(g.myMaze.toString(g.dragons,g.mySword));
-		if(g.myHero.hasEscaped() || g.myHero.isDead()){
+		MazeArea.setText(g.getMyMaze().toString(g.getDragons(),g.getMySword()));
+		if(g.getMyHero().hasEscaped() || g.getMyHero().isDead()){
 			btnLeft.setEnabled(false);
 			btnRight.setEnabled(false);
 			btnUp.setEnabled(false);

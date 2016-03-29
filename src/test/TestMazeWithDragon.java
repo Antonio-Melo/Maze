@@ -14,8 +14,8 @@ public class TestMazeWithDragon {
 	public void testDragonMoves() {
 		Game myGame = new Game('1', m1, 1);
 		
-		myGame.dragons.get(0).setX(2);
-		myGame.dragons.get(0).setY(2);
+		myGame.getDragons().get(0).setX(2);
+		myGame.getDragons().get(0).setY(2);
 
 		boolean move_left = false;
 		boolean move_right = false;
@@ -23,33 +23,33 @@ public class TestMazeWithDragon {
 		boolean move_up = false;
 
 		while (!move_left || !move_right || !move_down || !move_up) {
-			int tmp_x = myGame.dragons.get(0).getX();
-			int tmp_y = myGame.dragons.get(0).getY();
+			int tmp_x = myGame.getDragons().get(0).getX();
+			int tmp_y = myGame.getDragons().get(0).getY();
 
 			Random r = new Random();
 			int moveDragon = r.nextInt() % 4 + 1;
 			switch (moveDragon) {
 			case 1:
-				myGame.dragons.get(0).moveDragon('d', myGame.myHero, myGame.myMaze, false);
+				myGame.getDragons().get(0).moveDragon('d', myGame.getMyHero(), myGame.getMyMaze(), false);
 				break;
 			case 2:
-				myGame.dragons.get(0).moveDragon('e', myGame.myHero, myGame.myMaze, false);
+				myGame.getDragons().get(0).moveDragon('e', myGame.getMyHero(), myGame.getMyMaze(), false);
 				break;
 			case 3:
-				myGame.dragons.get(0).moveDragon('c', myGame.myHero, myGame.myMaze, false);
+				myGame.getDragons().get(0).moveDragon('c', myGame.getMyHero(), myGame.getMyMaze(), false);
 				break;
 			case 4:
-				myGame.dragons.get(0).moveDragon('b', myGame.myHero, myGame.myMaze, false);
+				myGame.getDragons().get(0).moveDragon('b', myGame.getMyHero(), myGame.getMyMaze(), false);
 				break;
 			}
 
-			if (myGame.dragons.get(0).getX() - tmp_x == 1) {
+			if (myGame.getDragons().get(0).getX() - tmp_x == 1) {
 				move_right = true;
-			} else if (myGame.dragons.get(0).getX() - tmp_x == -1) {
+			} else if (myGame.getDragons().get(0).getX() - tmp_x == -1) {
 				move_left = true;
-			} else if (myGame.dragons.get(0).getY() - tmp_y == 1) {
+			} else if (myGame.getDragons().get(0).getY() - tmp_y == 1) {
 				move_down = true;
-			} else if (myGame.dragons.get(0).getY() - tmp_y == -1) {
+			} else if (myGame.getDragons().get(0).getY() - tmp_y == -1) {
 				move_up = true;
 			}
 		}
@@ -58,8 +58,8 @@ public class TestMazeWithDragon {
 	@Test(timeout = 1000)
 	public void testDragonSleep() {
 		Game myGame = new Game('2', m1, 1);
-		myGame.dragons.get(0).setX(2);
-		myGame.dragons.get(0).setY(2);
+		myGame.getDragons().get(0).setX(2);
+		myGame.getDragons().get(0).setY(2);
 
 		boolean sleeping = false;
 		boolean awake = false;
@@ -70,24 +70,24 @@ public class TestMazeWithDragon {
 
 			switch (moveDragon) {
 			case 1:
-				myGame.dragons.get(0).moveDragon('d', myGame.myHero, myGame.myMaze, true);
+				myGame.getDragons().get(0).moveDragon('d', myGame.getMyHero(), myGame.getMyMaze(), true);
 				break;
 			case 2:
-				myGame.dragons.get(0).moveDragon('e', myGame.myHero, myGame.myMaze, true);
+				myGame.getDragons().get(0).moveDragon('e', myGame.getMyHero(), myGame.getMyMaze(), true);
 				break;
 			case 3:
-				myGame.dragons.get(0).moveDragon('c', myGame.myHero, myGame.myMaze, true);
+				myGame.getDragons().get(0).moveDragon('c', myGame.getMyHero(), myGame.getMyMaze(), true);
 				break;
 			case 4:
-				myGame.dragons.get(0).moveDragon('b', myGame.myHero, myGame.myMaze, true);
+				myGame.getDragons().get(0).moveDragon('b', myGame.getMyHero(), myGame.getMyMaze(), true);
 				break;
 			}
 			
-			if (!myGame.dragons.get(0).isAsleep()) {
+			if (!myGame.getDragons().get(0).isAsleep()) {
 				awake = true;
 			}
 
-			if (myGame.dragons.get(0).isAsleep()) {
+			if (myGame.getDragons().get(0).isAsleep()) {
 				sleeping = true;
 			}
 		

@@ -4,9 +4,9 @@ import java.awt.Point;
 
 public class Actor {
 
-	int x,y;
-	char c;
-	boolean dead;
+	protected int x,y;
+	protected char c;
+	protected boolean dead;
 	
 	public int getX(){
 		return x;

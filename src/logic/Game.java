@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Game {
-	public Maze myMaze;
-	public Hero myHero;
-	public Sword mySword;
-	char type;
-	public ArrayList<Dragon> dragons;
+	private Maze myMaze;
+	private Hero myHero;
+	private Sword mySword;
+	private char type;
+	private ArrayList<Dragon> dragons;
 
 	// Constructor
 	public Game(char type, int nDragons) {
@@ -184,5 +184,18 @@ public class Game {
 			}
 		}
 		myMaze.placeActor(myHero);
+	}
+	
+	public  Maze getMyMaze(){
+		return myMaze;
+	}
+	public Hero getMyHero(){
+		return myHero;
+	}
+	public Sword getMySword(){
+		return mySword;
+	}
+	public ArrayList<Dragon> getDragons(){
+		return dragons;
 	}
 }
