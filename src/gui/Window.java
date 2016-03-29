@@ -198,6 +198,11 @@ public class Window {
 				catch (NumberFormatException e){
 					JOptionPane.showMessageDialog(MazeDimension, "Invalid maze dimension!\nInsert a valid integer or 10 will be used as default.");
 				}
+				
+				if(size > 43){
+					JOptionPane.showMessageDialog(MazeDimension, "Invalid maze dimension!\nThe maximum size is 43. Size 43 will be used.");
+					size = 43;
+				}
 				//Number of Dragons
 				try{
 					ndragons = Integer.parseInt(MazeNumberOfDragons.getText());
