@@ -45,19 +45,19 @@ public class TestMazeWithStaticDragon {
 		ArrayList<Dragon> dragons = new ArrayList<Dragon>();
 		dragons.add(myDragon);
 		myMaze.placeActor(myDragon);
-		assertEquals(new Point(3, 1), myHero.getHeroPosition());
+		assertEquals(new Point(3, 1), myHero.getActorPosition());
 
 		// Moves to the left
 		myMaze.removeActor(myHero);
 		myHero.moveHero('e', dragons, myMaze);
 		myMaze.placeActor(myHero);
-		assertEquals(new Point(2, 1), myHero.getHeroPosition());
+		assertEquals(new Point(2, 1), myHero.getActorPosition());
 
 		// Move to the right
 		myMaze.removeActor(myHero);
 		myHero.moveHero('d', dragons, myMaze);
 		myMaze.placeActor(myHero);
-		assertEquals(new Point(3, 1), myHero.getHeroPosition());
+		assertEquals(new Point(3, 1), myHero.getActorPosition());
 	}
 
 	// b)
@@ -71,9 +71,9 @@ public class TestMazeWithStaticDragon {
 
 		myMaze.placeActor(myHero);
 
-		assertEquals(new Point(3, 1), myHero.getHeroPosition());
+		assertEquals(new Point(3, 1), myHero.getActorPosition());
 		myHero.moveHero('c', dragons, myMaze);
-		assertEquals(new Point(3, 1), myHero.getHeroPosition());
+		assertEquals(new Point(3, 1), myHero.getActorPosition());
 	}
 
 	// c)

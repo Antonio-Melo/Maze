@@ -1,9 +1,15 @@
 package logic;
 
 import java.util.Random;
-
+/**
+ * Dragon.java
+ * Represents a Dragon in the game 
+ * @author António Melo & Edgar Passos
+ */
 public class Dragon extends Actor {
-
+	/**
+	 * 
+	 */
 	private boolean sleep;
 	private Random rng;
 	private int sleepCount;
