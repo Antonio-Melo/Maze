@@ -2,46 +2,79 @@ package logic;
 
 import java.util.Random;
 /**
- * Dragon.java
- * Represents a Dragon in the game 
- * @author António Melo & Edgar Passos
+ * Class that represents a Dragon in the game
+ * @author António Melo  Edgar Passos
+ * @version 1.0
+ * @see Actor
  */
 public class Dragon extends Actor {
 	/**
-	 * 
+	 * Boolean that tells us if the Dragon is sleeping
 	 */
 	private boolean sleep;
+	/**
+	 * Random seed associated with the Dragon
+	 * Important to generate random moves
+	 */
 	private Random rng;
+	/**
+	 * He though that was better if the dragon sleeps for 5 turns instead of having the chance to wake up/sleep every time
+	 */
 	private int sleepCount;
 
-	// Constructor
+	/**
+	 * Constructor
+	 * Creates a new dragon
+	 * @param x coordinate
+	 * @param y coordinate
+	 * @param c character
+	 */
 	public Dragon(int x, int y, char c) {
 		super(x, y, c);
 		sleep = false;
 		this.sleepCount = 0;
 	}
-
+	/** 
+	 * @return boolean showing if dragon is sleeping
+	 */
 	public boolean isAsleep() {
 		return sleep;
 	}
-
+	/**
+	 * Makes dragon fall a sleep for 5 turns
+	 * Changes is character to lower case
+	 */
 	public void fallAsleep() {
 		sleep = true;
-		sleepCount = 5;		//Sleeps for 5 turns
+		sleepCount = 5;
 		c = 'd';
 	}
-
+	/**
+	 * Makes dragon wake up
+	 * Changes is character to upper case
+	 */
 	public void wakeUp() {
 		sleep = false;
 		c = 'D';
 	}
-
+	/**
+	 * Moves the dragon to a position
+	 * @param x new coordinate
+	 * @param y new coordinate
+	 */
 	public void cmoveDragon(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
-	// From input m,calculates if the Dragon can me moved
+	/**
+	 * Moves the dragon based on one character
+	 * Checks if is possible
+	 * @param m character that represents the move
+	 * @param myHero Hero in the maze
+	 * @param myMaze The maze
+	 * @param enableSleep boolean that shows if dragons can sleep or not(modes)
+	 */
 	public void moveDragon(char m, Hero myHero, Maze myMaze, boolean enableSleep) {
 		int x = 0, y = 0;
 		this.rng = new Random(System.currentTimeMillis());

@@ -9,15 +9,15 @@ import java.awt.Point;
 
 public class Actor {
 	/**
-	 *  @param Actor coordinates 
+	 *  Actor coordinates 
 	 */
 	protected int x,y;
 	/**
-	 *  @param Actor character
+	 *   Actor character
 	 */
 	protected char c;
 	/**
-	 * @param Boolean that shows if actor is dead
+	 * Boolean that shows if actor is dead
 	 */
 	protected boolean dead;
 	
