@@ -2,36 +2,60 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.Random;
-
+/**
+ * Represents the Game
+ * @author António Melo Edgar Passos
+ * @see Maze MazeBuilder
+ */
 public class Game {
+	/**
+	 * The maze
+	 */
 	private Maze myMaze;
+	/**
+	 * Hero in the game
+	 */
 	private Hero myHero;
+	/**
+	 * Sword in the game
+	 */
 	private Sword mySword;
+	/**
+	 * Type of the game
+	 */
 	private char type;
+	/**
+	 * Dragons in the Maze
+	 */
 	private ArrayList<Dragon> dragons;
 
-	// Constructor
+	/**
+	 * Constructor
+	 * Creates a new game with size 10
+	 * @param type of game
+	 * @param nDragons number of dragons
+	 */
 	public Game(char type, int nDragons) {
 		char[][] grid;
 		Random rng = new Random(System.currentTimeMillis());
 		grid = new char[10][10];
 
-		// Linha 0
+		// Line 0
 
 		for (int i = 0; i < 10; i++)
 			grid[0][i] = 'X';
 
-		// Linha 9
+		// Line 9
 		for (int i = 0; i < 10; i++)
 			grid[9][i] = 'X';
 
-		// Coluna 1
+		// Column 1
 
 		for (int i = 0; i < 10; i++) {
 			grid[i][0] = 'X';
 		}
 
-		// Coluna 9
+		// Column 9
 
 		for (int i = 0; i < 10; i++) {
 			grid[i][9] = 'X';
@@ -82,7 +106,7 @@ public class Game {
 		dragons = new ArrayList<Dragon>();
 		for (int i = 0; i < nDragons; i++) {
 
-			int x = rng.nextInt(grid.length-1); // TODO support for differently sized grids
+			int x = rng.nextInt(grid.length-1); //Support for differently sized grids
 			int y = rng.nextInt(grid.length-1);
 
 			while (grid[x][y] != ' ') {
@@ -95,7 +119,13 @@ public class Game {
 		}
 	}
 
-	// Constructor 2
+	/**
+	 * Constructor 2
+	 * Creates a new game based on a grid made 
+	 * @param type of game
+	 * @param grid 
+	 * @param nDragons number of dragons
+	 */
 	public Game(char type, char[][] grid,int nDragons) {
 		myMaze = new Maze(grid);
 		dragons = new ArrayList<Dragon>();
@@ -143,7 +173,10 @@ public class Game {
 
 	
 	
-	// Starts Game
+	/**
+	 * Plays a turn
+	 * @param m character
+	 */
 	public void play(char m) {
 
 		boolean enableSleep;
@@ -185,16 +218,27 @@ public class Game {
 		}
 		myMaze.placeActor(myHero);
 	}
-	
+	/**
+	 * @return myMaze
+	 */
 	public  Maze getMyMaze(){
 		return myMaze;
 	}
+	/**
+	 * @return Hero
+	 */
 	public Hero getMyHero(){
 		return myHero;
 	}
+	/**
+	 * @return Sword
+	 */
 	public Sword getMySword(){
 		return mySword;
 	}
+	/**
+	 * @return dragons
+	 */
 	public ArrayList<Dragon> getDragons(){
 		return dragons;
 	}

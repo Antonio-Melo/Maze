@@ -24,7 +24,7 @@ public class Dragon extends Actor {
 
 	/**
 	 * Constructor
-	 * Creates a new dragon
+	 * Creates a dragon with a certain character in the Position(x,y)
 	 * @param x coordinate
 	 * @param y coordinate
 	 * @param c character

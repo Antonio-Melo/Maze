@@ -2,45 +2,81 @@
 package logic;
 
 import java.util.ArrayList;
-
+/**
+ * Class representing the hero in the maze
+ * @author António Melo Edgar Passos
+ * @see Actor
+ */
 public class Hero extends Actor {
+	/**
+	 * Boolean that shows if the hero has escaped from the maze
+	 */
+	private boolean escape;
+	/**
+	 * Boolean that shows if the hero has the sword
+	 */
+	private boolean sword;
 
-	private boolean escape, sword;
-
-	// Constructor
+	/**
+	 * Constructor
+	 * Creates a hero with a certain character in the Position(x,y)
+	 * @param x coordinate
+	 * @param y coordinate
+	 * @param c character
+	 */
 	public Hero(int x, int y, char c) {
 		super(x, y, c);
 		this.escape = false;
 		this.sword = false;
 	}
 
-	// Checks if has Sword
+	/**
+	 * Checks if hero as the sword
+	 * @return boolean
+	 */
 	public boolean hasSword() {
 		return sword;
 	}
 
-	// Picks sword
+	/**
+	 * Picks up the sword
+	 */
 	public void pickUpSword() {
 		sword = true;
 		c = 'A';
 	}
-	// Checks if the Hero as already escaped the maze
+	/**
+	 * Checks if the Hero as already escaped the maze
+	 * @return boolean
+	 */
 	public boolean hasEscaped() {
 		return escape;
 	}
 
-	// When the hero finds the exit
+	/**
+	 * When the hero finds the exit
+	 */
 	public void escape() {
 		escape = true;
 	}
 
-	// Change coord of Hero
+	/**
+	 * Moves hero to a certain Position(x,y)
+	 * @param x coordinate
+	 * @param y coordinate
+	 */
 	public void cmoveHero(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
-	// From input m,calculates if the Hero can me moved
+	/**
+	 * Moves the Hero based on one character
+	 * Checks if is possible
+	 * @param m character
+	 * @param dragons
+	 * @param myMaze
+	 */
 	public void moveHero(char m, ArrayList<Dragon> dragons, Maze myMaze) {
 		int x = 0, y = 0;
 

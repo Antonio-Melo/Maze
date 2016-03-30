@@ -74,8 +74,7 @@ public class Actor {
 		dead=true;
 	}
 	/**
-	 * Constructor
-	 * Creates a Actor 
+	 * Creates a actor with a certain character in the Position(x,y)
 	 * @param x coordinate
 	 * @param y coordinate
 	 * @param c character
