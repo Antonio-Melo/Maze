@@ -164,16 +164,16 @@ public class Game {
 				int moveDragon = r.nextInt() % 4 + 1;
 				switch (moveDragon) {
 				case 1:
-					myDragon.moveDragon('d', myHero, myMaze, enableSleep);
+					myDragon.moveDragon('r', myHero, myMaze, enableSleep);
 					break;
 				case 2:
-					myDragon.moveDragon('e', myHero, myMaze, enableSleep);
+					myDragon.moveDragon('l', myHero, myMaze, enableSleep);
 					break;
 				case 3:
-					myDragon.moveDragon('c', myHero, myMaze, enableSleep);
+					myDragon.moveDragon('u', myHero, myMaze, enableSleep);
 					break;
 				case 4:
-					myDragon.moveDragon('b', myHero, myMaze, enableSleep);
+					myDragon.moveDragon('d', myHero, myMaze, enableSleep);
 					break;
 				}
 				

@@ -30,7 +30,7 @@ public class UserInterface {
 
 		// UNTIL WINS OR DIES
 		while (!game.getMyHero().isDead() && !game.getMyHero().hasEscaped()) {
-			System.out.println("Direita - d Esquerda -e Cima -c Baixo-b");
+			System.out.println("Right -r Left -l Up -u Down -d");
 			char m = s.next().charAt(0);
 			game.play(m);
 			System.out.print(game.getMyMaze().toString(game.getDragons(), game.getMySword()));

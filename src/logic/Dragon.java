@@ -94,16 +94,16 @@ public class Dragon extends Actor {
 				wakeUp();
 		}
 
-		if (m == 'd' || m == 'D') {
+		if (m == 'r' || m == 'R') {
 			y = 1;
 			x = 0;
-		} else if (m == 'e' || m == 'E') {
+		} else if (m == 'l' || m == 'L') {
 			y = -1;
 			x = 0;
-		} else if (m == 'c' || m == 'C') {
+		} else if (m == 'u' || m == 'U') {
 			x = -1;
 			y = 0;
-		} else if (m == 'b' || m == 'B') {
+		} else if (m == 'd' || m == 'D') {
 			x = 1;
 			y = 0;
 		}
