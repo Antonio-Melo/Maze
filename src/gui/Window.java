@@ -37,6 +37,7 @@ public class Window {
 	private JProgressBar GameState;
 	private Game g;
 	private int perc;
+	private KeyListener gameKeys;
 
 	/**
 	 * Launch the application.
@@ -178,6 +179,40 @@ public class Window {
 			public void actionPerformed(ActionEvent arg0) {
 				move('d');
 			}});
+		
+		//Arrow keys
+		
+		gameKeys = new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				switch (e.getKeyCode()) {
+
+				case KeyEvent.VK_LEFT:
+					move('l');
+					break;
+
+				case KeyEvent.VK_RIGHT:
+					move('r');
+					break;
+
+				case KeyEvent.VK_UP:
+					move('u');
+					break;
+
+				case KeyEvent.VK_DOWN:
+					move('d');
+					break;
+				}
+				
+			}
+		};
 		//Authors
 		JLabel lblAntnioMelo = new JLabel("Ant\u00F3nio Melo & Edgar Passos");
 		lblAntnioMelo.setBounds(92, 531, 195, 14);
@@ -252,37 +287,7 @@ public class Window {
 				GameState.setValue(100-(perc*g.getDragons().size()));
 
 				
-				MazeArea.addKeyListener(new KeyListener() {
-					
-					@Override
-					public void keyTyped(KeyEvent e) {}
-					
-					@Override
-					public void keyReleased(KeyEvent e) {}
-					
-					@Override
-					public void keyPressed(KeyEvent e) {
-						switch (e.getKeyCode()) {
-
-						case KeyEvent.VK_LEFT:
-							move('l');
-							break;
-
-						case KeyEvent.VK_RIGHT:
-							move('r');
-							break;
-
-						case KeyEvent.VK_UP:
-							move('u');
-							break;
-
-						case KeyEvent.VK_DOWN:
-							move('d');
-							break;
-						}
-						
-					}
-				});
+				MazeArea.addKeyListener(gameKeys);
 				
 				MazeArea.requestFocus();
 			}
@@ -301,6 +306,7 @@ public class Window {
 			btnUp.setEnabled(false);
 			btnDown.setEnabled(false);
 			GameState.setValue(100);
+			MazeArea.removeKeyListener(gameKeys);
 		}
 	}
 
