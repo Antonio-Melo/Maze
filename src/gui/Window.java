@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JTable;
@@ -68,8 +70,8 @@ public class Window {
 		frame.setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 900, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		//Exit Button
+
+		// Exit Button
 		JButton btnEndGame = new JButton("Exit");
 		btnEndGame.setBounds(34, 476, 234, 44);
 		btnEndGame.addActionListener(new ActionListener() {
@@ -80,42 +82,43 @@ public class Window {
 		frame.getContentPane().setLayout(null);
 		btnEndGame.setFont(new Font("Arial", Font.PLAIN, 14));
 		frame.getContentPane().add(btnEndGame);
-		
-		//Dimension Maze Label
+
+		// Dimension Maze Label
 		JLabel lblDimension = new JLabel("Dimension");
 		lblDimension.setBounds(21, 11, 116, 23);
 		lblDimension.setFont(new Font("Arial", Font.PLAIN, 14));
 		frame.getContentPane().add(lblDimension);
-		//Dimension Maze TextField
+		// Dimension Maze TextField
 		MazeDimension = new JTextField();
 		MazeDimension.setBounds(164, 11, 104, 20);
 		frame.getContentPane().add(MazeDimension);
 		MazeDimension.setColumns(10);
-		
-		//Number of Dragons Label
+
+		// Number of Dragons Label
 		JLabel lblNumberOfDragons = new JLabel("Number of Dragons");
 		lblNumberOfDragons.setBounds(21, 39, 127, 24);
 		lblNumberOfDragons.setFont(new Font("Arial", Font.PLAIN, 14));
 		frame.getContentPane().add(lblNumberOfDragons);
-		//Number of Dragons TextField
+		// Number of Dragons TextField
 		MazeNumberOfDragons = new JTextField();
 		MazeNumberOfDragons.setBounds(164, 42, 104, 20);
 		frame.getContentPane().add(MazeNumberOfDragons);
 		MazeNumberOfDragons.setColumns(10);
-		
-		//Type of Dragons Label
+
+		// Type of Dragons Label
 		JLabel lblTypeOfDragons = new JLabel("Type of Dragons");
 		lblTypeOfDragons.setBounds(21, 74, 127, 23);
 		lblTypeOfDragons.setFont(new Font("Arial", Font.PLAIN, 14));
 		frame.getContentPane().add(lblTypeOfDragons);
-		
-		//Type of Dragon ComboBox
+
+		// Type of Dragon ComboBox
 		JComboBox<String> comboBoxTypeDragons = new JComboBox<String>();
 		comboBoxTypeDragons.setBounds(164, 73, 104, 20);
-		comboBoxTypeDragons.setModel(new DefaultComboBoxModel<String>(new String[] {"", "Static", "Moving", "Moving/Sleeping"}));
+		comboBoxTypeDragons
+				.setModel(new DefaultComboBoxModel<String>(new String[] { "", "Static", "Moving", "Moving/Sleeping" }));
 		frame.getContentPane().add(comboBoxTypeDragons);
-		
-		//Maze Area (print)
+
+		// Maze Area (print)
 		MazeArea = new JTextArea();
 		MazeArea.setBounds(387, 43, 451, 451);
 		MazeArea.setEditable(false);
@@ -123,25 +126,23 @@ public class Window {
 		MazeArea.setFont(new Font("Courier New", Font.PLAIN, 13));
 		MazeArea.setBackground(Color.WHITE);
 		frame.getContentPane().add(MazeArea);
-		
-		
-		//Game State label
+
+		// Game State label
 		JLabel lblState = new JLabel("State ");
 		lblState.setBounds(387, 10, 48, 23);
 		lblState.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		frame.getContentPane().add(lblState);
-		//Game progress bar
+		// Game progress bar
 		GameState = new JProgressBar();
 		GameState.setBounds(445, 11, 164, 20);
 		GameState.setStringPainted(true);
 		GameState.setBackground(Color.RED);
 		GameState.setForeground(Color.WHITE);
 		frame.getContentPane().add(GameState);
-		
-		
-		//Buttons
-		
-		//Left
+
+		// Buttons
+
+		// Left
 		btnLeft = new JButton("Left");
 		btnLeft.setBounds(39, 320, 109, 44);
 		btnLeft.setEnabled(false);
@@ -181,81 +182,116 @@ public class Window {
 		JLabel lblAntnioMelo = new JLabel("Ant\u00F3nio Melo & Edgar Passos");
 		lblAntnioMelo.setBounds(92, 531, 195, 14);
 		frame.getContentPane().add(lblAntnioMelo);
-		
-		//Start button
+
+		// Start button
 		JButton btnGenerateMaze = new JButton("Start");
 		btnGenerateMaze.setBounds(39, 156, 234, 44);
 		btnGenerateMaze.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnGenerateMaze.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//Default numbers
-				int size =10;
+				// Default numbers
+				int size = 10;
 				int ndragons = 1;
-				String dragonType;	
-				//Size of Maze
-				try{
+				String dragonType;
+				// Size of Maze
+				try {
 					size = Integer.parseInt(MazeDimension.getText());
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(MazeDimension,
+							"Invalid maze dimension!\nInsert a valid integer or 10 will be used as default.");
 				}
-				catch (NumberFormatException e){
-					JOptionPane.showMessageDialog(MazeDimension, "Invalid maze dimension!\nInsert a valid integer or 10 will be used as default.");
-				}
-				
-				if(size > 43){
-					JOptionPane.showMessageDialog(MazeDimension, "Invalid maze dimension!\nThe maximum size is 43. Size 43 will be used.");
+
+				if (size > 43) {
+					JOptionPane.showMessageDialog(MazeDimension,
+							"Invalid maze dimension!\nThe maximum size is 43. Size 43 will be used.");
 					size = 43;
 				}
-				//Number of Dragons
-				try{
+				// Number of Dragons
+				try {
 					ndragons = Integer.parseInt(MazeNumberOfDragons.getText());
-				}catch(NumberFormatException e){
-					JOptionPane.showMessageDialog(MazeDimension, "Invalid number of dragons!\nInsert a valid integer or 1 will be used as default.");
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(MazeDimension,
+							"Invalid number of dragons!\nInsert a valid integer or 1 will be used as default.");
 				}
-				
-				//type of Dragons
+
+				// type of Dragons
 				dragonType = (String) comboBoxTypeDragons.getSelectedItem();
-				switch (dragonType){
+				switch (dragonType) {
 				case "":
 					dragonType = "0";
 					break;
 				case "Static":
 					dragonType = "0";
 					break;
-					
+
 				case "Moving":
 					dragonType = "1";
 					break;
-					
+
 				case "Moving/Sleeping":
 					dragonType = "2";
 					break;
 				}
-				
-				
-				//Enable buttons
+
+				// Enable buttons
 				btnLeft.setEnabled(true);
 				btnRight.setEnabled(true);
 				btnUp.setEnabled(true);
 				btnDown.setEnabled(true);
-				
-				//Starting game
-				
-				
-				MazeArea.setBounds(MazeArea.getX(),MazeArea.getY(),16*size, 15*size);
-				
+
+				// Starting game
+
+				MazeArea.setBounds(MazeArea.getX(), MazeArea.getY(), 16 * size, 15 * size);
+
 				MazeBuilder m = new MazeBuilder();
-				g = new Game(dragonType.toCharArray()[0],m.buildMaze(size), ndragons);
-				MazeArea.setText(g.getMyMaze().toString(g.getDragons(),g.getMySword()));
+
+				g = new Game(dragonType.toCharArray()[0], m.buildMaze(size), ndragons);
+				MazeArea.setText(g.getMyMaze().toString(g.getDragons(), g.getMySword()));
 				GameState.setBackground(Color.GREEN);
-				perc = 100/(g.getDragons().size());
-				
+				perc = 100/(g.getDragons().size());	
 				GameState.setValue(100-(perc*g.getDragons().size()));
+
 				
+				MazeArea.addKeyListener(new KeyListener() {
+					
+					@Override
+					public void keyTyped(KeyEvent e) {}
+					
+					@Override
+					public void keyReleased(KeyEvent e) {}
+					
+					@Override
+					public void keyPressed(KeyEvent e) {
+						switch (e.getKeyCode()) {
+
+						case KeyEvent.VK_LEFT:
+							move('l');
+							break;
+
+						case KeyEvent.VK_RIGHT:
+							move('r');
+							break;
+
+						case KeyEvent.VK_UP:
+							move('u');
+							break;
+
+						case KeyEvent.VK_DOWN:
+							move('d');
+							break;
+						}
+						
+					}
+				});
+				
+				MazeArea.requestFocus();
 			}
 		});
 		frame.getContentPane().add(btnGenerateMaze);
-		
+
 	}
-	private void move(char d){
+
+	private void move(char d) {
 		g.play(d);
 		GameState.setValue(100-(perc*g.getDragons().size()));
 		MazeArea.setText(g.getMyMaze().toString(g.getDragons(),g.getMySword()));
@@ -267,4 +303,5 @@ public class Window {
 			GameState.setValue(100);
 		}
 	}
+
 }

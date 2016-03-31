@@ -46,7 +46,7 @@ public class Maze {
 		grid[a.getX()][a.getY()] = ' ';
 	}
 	
-	public char[][] getGrid(){
+	public char [][] getGrid(){
 		return grid;
 	}
 }
