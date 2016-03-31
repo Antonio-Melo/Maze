@@ -34,6 +34,7 @@ public class Window {
 	private JButton btnDown;
 	private JProgressBar GameState;
 	private Game g;
+	private int perc;
 
 	/**
 	 * Launch the application.
@@ -147,7 +148,7 @@ public class Window {
 		frame.getContentPane().add(btnLeft);
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				move('e');
+				move('l');
 			}});
 		//Right
 		btnRight = new JButton("Right");
@@ -156,7 +157,7 @@ public class Window {
 		frame.getContentPane().add(btnRight);
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				move('d');
+				move('r');
 			}});
 		//Up
 		btnUp = new JButton("Up");
@@ -165,7 +166,7 @@ public class Window {
 		frame.getContentPane().add(btnUp);
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				move('c');
+				move('u');
 			}});
 		//Down
 		btnDown = new JButton("Down");
@@ -174,7 +175,7 @@ public class Window {
 		frame.getContentPane().add(btnDown);
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				move('b');
+				move('d');
 			}});
 		//Authors
 		JLabel lblAntnioMelo = new JLabel("Ant\u00F3nio Melo & Edgar Passos");
@@ -245,7 +246,10 @@ public class Window {
 				g = new Game(dragonType.toCharArray()[0],m.buildMaze(size), ndragons);
 				MazeArea.setText(g.getMyMaze().toString(g.getDragons(),g.getMySword()));
 				GameState.setBackground(Color.GREEN);
-				GameState.setValue(10);
+				perc = 100/(g.getDragons().size());
+				
+				GameState.setValue(100-(perc*g.getDragons().size()));
+				
 			}
 		});
 		frame.getContentPane().add(btnGenerateMaze);
@@ -253,6 +257,7 @@ public class Window {
 	}
 	private void move(char d){
 		g.play(d);
+		GameState.setValue(100-(perc*g.getDragons().size()));
 		MazeArea.setText(g.getMyMaze().toString(g.getDragons(),g.getMySword()));
 		if(g.getMyHero().hasEscaped() || g.getMyHero().isDead()){
 			btnLeft.setEnabled(false);
