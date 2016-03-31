@@ -45,4 +45,8 @@ public class Maze {
 	public void removeActor(Actor a) {
 		grid[a.getX()][a.getY()] = ' ';
 	}
+	
+	public char [][] getGrid(){
+		return grid;
+	}
 }

@@ -1,5 +1,7 @@
 package logic;
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -103,15 +105,26 @@ public class Game {
 		Random rng = new Random(System.currentTimeMillis());
 		this.type = type;
 		
+		// Random Hero position
+		int x = rng.nextInt(grid.length - 1);
+		int y = rng.nextInt(grid.length - 1);
+
+		while (grid[x][y] != ' ') {
+			x = rng.nextInt(grid.length - 1);
+			y = rng.nextInt(grid.length - 1);
+		}
+		myHero = new Hero(x, y, 'H');
+		myMaze.placeActor(myHero);
+		
 		//Random Dragons position
 		for (int i = 0; i < nDragons; i++) {
 
-			int x = rng.nextInt(grid.length); // TODO support for differently sized grids
-			int y = rng.nextInt(grid.length);
+			 x = rng.nextInt(grid.length-1); 
+			 y = rng.nextInt(grid.length-1);
 
-			while (grid[x][y] != ' ') {
-				x = rng.nextInt(grid.length);
-				y = rng.nextInt(grid.length);
+			while (grid[x][y] != ' ' || (Math.abs(x - myHero.getX()) + Math.abs(y - myHero.getY())) == 1) {
+				x = rng.nextInt(grid.length-1);
+				y = rng.nextInt(grid.length-1);
 			}
 
 			Dragon newDragon = new Dragon(x, y, 'D');
@@ -119,23 +132,13 @@ public class Game {
 			myMaze.placeActor(newDragon);
 		}
 		
-		//Random Hero position
-		int x = rng.nextInt(grid.length-2)+1; 
-		int y = rng.nextInt(grid.length-2)+1;
-		
-		while(grid[x][y] != ' ' || grid[x+1][y] =='D'|| grid[x-1][y] =='D'|| grid[x][y+1] =='D'|| grid[x][y-1] =='D'|| grid[x+1][y+1] =='D'|| grid[x+1][y-1] =='D'|| grid[x-1][y+1] =='D'|| grid[x-1][y-1] =='D' ){
-			 x = rng.nextInt(grid.length-2)+1; 
-			 y = rng.nextInt(grid.length-2)+1;
-		}
-		myHero = new Hero(x, y, 'H');
-		myMaze.placeActor(myHero);
 		
 		//Random sword position
-		x = rng.nextInt(grid.length-2)+1; 
-		y = rng.nextInt(grid.length-2)+1;
+		x = rng.nextInt(grid.length-1); 
+		y = rng.nextInt(grid.length-1);
 		while(grid[x][y] != ' '){
-			 x = rng.nextInt(grid.length-2)+1; 
-			 y = rng.nextInt(grid.length-2)+1;
+			 x = rng.nextInt(grid.length-1); 
+			 y = rng.nextInt(grid.length-1);
 		}
 		mySword = new Sword(x, y, 'E');
 		myMaze.placeActor(mySword);

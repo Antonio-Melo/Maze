@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Random;
 
+import logic.Game;
 import logic.IMazeBuilder;
 import logic.MazeBuilder;
 
@@ -112,6 +113,8 @@ public class TestMazeBuilder {
 		int minMazeSize = 5;
 		
 		IMazeBuilder builder = new MazeBuilder();
+		
+		
 		char[][] badWalls = {
 				{'X', 'X', 'X'},
 				{'X', 'X', 'X'},
@@ -131,6 +134,8 @@ public class TestMazeBuilder {
 		for (int i = 0; i < numMazes; i++) {
 			int size = maxMazeSize == minMazeSize? minMazeSize : minMazeSize + 2 * rand.nextInt((maxMazeSize - minMazeSize)/2);
 			char[][]m = builder.buildMaze(size);
+			Game game = new Game('0',m,1);
+			game.toString();
 			assertTrue("Invalid maze boundaries in maze:\n" + m, checkBoundaries(m));			
 			assertTrue("Invalid walls in maze:\n" + m, ! hasSquare(m, badWalls));
 			assertTrue("Invalid spaces in maze:\n" + m, ! hasSquare(m, badSpaces));

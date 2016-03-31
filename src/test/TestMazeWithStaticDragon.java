@@ -208,6 +208,19 @@ public class TestMazeWithStaticDragon {
 		assertEquals(3,hero.getY());
 		
 	}
+	
+	@Test
+	public void testDragonSwordChar(){
+		Maze maze= new Maze(test);
+		Hero hero = new Hero(1,1,'H');
+		Sword sword = new Sword(2,3,'E');
+		Dragon dragon = new Dragon(2,3,'D');
+		ArrayList<Dragon> dragons = new ArrayList<Dragon>();
+		dragons.add(dragon);
+		
+		maze.toString(dragons, sword);
+		assertEquals('F',maze.getGrid()[2][3]);
+	}
 
 	
 }
