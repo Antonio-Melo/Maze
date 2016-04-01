@@ -38,6 +38,8 @@ public class Window {
 	private Game g;
 	private int perc;
 	private KeyListener gameKeys;
+	public static Window window;
+	public MazeGraphicsPanel gpanel;
 
 	/**
 	 * Launch the application.
@@ -46,7 +48,7 @@ public class Window {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Window window = new Window();
+					window = new Window();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -180,39 +182,6 @@ public class Window {
 				move('d');
 			}});
 		
-		//Arrow keys
-		
-		gameKeys = new KeyListener() {
-			
-			@Override
-			public void keyTyped(KeyEvent e) {}
-			
-			@Override
-			public void keyReleased(KeyEvent e) {}
-			
-			@Override
-			public void keyPressed(KeyEvent e) {
-				switch (e.getKeyCode()) {
-
-				case KeyEvent.VK_LEFT:
-					move('l');
-					break;
-
-				case KeyEvent.VK_RIGHT:
-					move('r');
-					break;
-
-				case KeyEvent.VK_UP:
-					move('u');
-					break;
-
-				case KeyEvent.VK_DOWN:
-					move('d');
-					break;
-				}
-				
-			}
-		};
 		//Authors
 		JLabel lblAntnioMelo = new JLabel("Ant\u00F3nio Melo & Edgar Passos");
 		lblAntnioMelo.setBounds(92, 531, 195, 14);
@@ -285,18 +254,18 @@ public class Window {
 				GameState.setBackground(Color.GREEN);
 				perc = 100/(g.getDragons().size());	
 				GameState.setValue(100-(perc*g.getDragons().size()));
-
 				
-				MazeArea.addKeyListener(gameKeys);
-				
-				MazeArea.requestFocus();
+				MazeArea.add(gpanel);
+				gpanel.requestFocus();
 			}
 		});
 		frame.getContentPane().add(btnGenerateMaze);
+		
+		gpanel = new MazeGraphicsPanel();
 
 	}
 
-	private void move(char d) {
+	public void move(char d) {
 		g.play(d);
 		GameState.setValue(100-(perc*g.getDragons().size()));
 		MazeArea.setText(g.getMyMaze().toString(g.getDragons(),g.getMySword()));
@@ -306,7 +275,7 @@ public class Window {
 			btnUp.setEnabled(false);
 			btnDown.setEnabled(false);
 			GameState.setValue(100);
-			MazeArea.removeKeyListener(gameKeys);
+			MazeArea.remove(gpanel);
 		}
 	}
 

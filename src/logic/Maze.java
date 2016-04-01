@@ -14,14 +14,21 @@ public class Maze {
 	// Transforms grid in String
 	public String toString(ArrayList<Dragon> dragons, Sword mySword) {
 		String maze = "";
+		
+		//mySword.sethidden(false);
 		for (int i = 0; i < dragons.size(); i++) {
 
 			Dragon myDragon = dragons.get(i);
-			if (myDragon.getX() == mySword.getX() && myDragon.getY() == mySword.getY())
+			if (myDragon.getX() == mySword.getX() && myDragon.getY() == mySword.getY()){
 				grid[myDragon.getX()][mySword.getY()] = 'F';
-			
-			else grid[myDragon.getX()][myDragon.getY()] = myDragon.getC();
+				mySword.sethidden(true);
+			}else grid[myDragon.getX()][myDragon.getY()] = myDragon.getC();
 		}
+		/*
+		if(!mySword.isHidden()){
+			grid[mySword.getX()][mySword.getY()] = 'E';
+		}*/
+		
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid.length; j++) {
 				maze = maze + grid[i][j] + " ";
