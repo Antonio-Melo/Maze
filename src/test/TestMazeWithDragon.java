@@ -12,7 +12,8 @@ public class TestMazeWithDragon {
 
 	@Test(timeout = 1000)
 	public void testDragonMoves() {
-		Game myGame = new Game('1', m1, 1);
+		Game myGame = new Game('1',1);
+	
 		
 		myGame.getDragons().get(0).setX(2);
 		myGame.getDragons().get(0).setY(2);
@@ -27,7 +28,7 @@ public class TestMazeWithDragon {
 			int tmp_y = myGame.getDragons().get(0).getY();
 
 			Random r = new Random();
-			int moveDragon = r.nextInt() % 4 + 1;
+			int moveDragon = r.nextInt(4)+1;
 			switch (moveDragon) {
 			case 1:
 				myGame.getDragons().get(0).moveDragon('r', myGame.getMyHero(), myGame.getMyMaze(), false);
