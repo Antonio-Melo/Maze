@@ -185,6 +185,8 @@ public class Game {
 		boolean enableSleep;
 		myMaze.removeActor(myHero);
 		myHero.moveHero(m, dragons, myMaze);
+		if(myHero.hasSword())
+			mySword.isKilled();
 
 		if (type == '1' || type == '2') {
 
@@ -220,6 +222,7 @@ public class Game {
 			}
 		}
 		myMaze.placeActor(myHero);
+		myMaze.placeActor(mySword);
 	}
 	/**
 	 * @return myMaze
