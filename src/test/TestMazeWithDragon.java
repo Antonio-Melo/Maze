@@ -30,16 +30,16 @@ public class TestMazeWithDragon {
 			int moveDragon = r.nextInt() % 4 + 1;
 			switch (moveDragon) {
 			case 1:
-				myGame.getDragons().get(0).moveDragon('d', myGame.getMyHero(), myGame.getMyMaze(), false);
+				myGame.getDragons().get(0).moveDragon('r', myGame.getMyHero(), myGame.getMyMaze(), false);
 				break;
 			case 2:
-				myGame.getDragons().get(0).moveDragon('e', myGame.getMyHero(), myGame.getMyMaze(), false);
+				myGame.getDragons().get(0).moveDragon('l', myGame.getMyHero(), myGame.getMyMaze(), false);
 				break;
 			case 3:
-				myGame.getDragons().get(0).moveDragon('c', myGame.getMyHero(), myGame.getMyMaze(), false);
+				myGame.getDragons().get(0).moveDragon('u', myGame.getMyHero(), myGame.getMyMaze(), false);
 				break;
 			case 4:
-				myGame.getDragons().get(0).moveDragon('b', myGame.getMyHero(), myGame.getMyMaze(), false);
+				myGame.getDragons().get(0).moveDragon('d', myGame.getMyHero(), myGame.getMyMaze(), false);
 				break;
 			}
 

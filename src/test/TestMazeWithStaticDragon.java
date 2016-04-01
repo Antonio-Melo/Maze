@@ -49,13 +49,13 @@ public class TestMazeWithStaticDragon {
 
 		// Moves to the left
 		myMaze.removeActor(myHero);
-		myHero.moveHero('e', dragons, myMaze);
+		myHero.moveHero('l', dragons, myMaze);
 		myMaze.placeActor(myHero);
 		assertEquals(new Point(2, 1), myHero.getActorPosition());
 
 		// Move to the right
 		myMaze.removeActor(myHero);
-		myHero.moveHero('d', dragons, myMaze);
+		myHero.moveHero('r', dragons, myMaze);
 		myMaze.placeActor(myHero);
 		assertEquals(new Point(3, 1), myHero.getActorPosition());
 	}
@@ -92,16 +92,16 @@ public class TestMazeWithStaticDragon {
 		// Checks if has sword in the beginning
 		assertEquals(false, myHero.hasSword());
 		myMaze.removeActor(myHero);
-		myHero.moveHero('e', dragons, myMaze);
+		myHero.moveHero('l', dragons, myMaze);
 		myMaze.placeActor(myHero);
 		myMaze.removeActor(myHero);
-		myHero.moveHero('e', dragons, myMaze);
+		myHero.moveHero('l', dragons, myMaze);
 		myMaze.placeActor(myHero);
 		myMaze.removeActor(myHero);
-		myHero.moveHero('b', dragons, myMaze);
+		myHero.moveHero('d', dragons, myMaze);
 		myMaze.placeActor(myHero);
 		myMaze.removeActor(myHero);
-		myHero.moveHero('b', dragons, myMaze);
+		myHero.moveHero('d', dragons, myMaze);
 		myMaze.placeActor(myHero);
 		assertEquals(true, myHero.hasSword());
 	}
@@ -119,7 +119,7 @@ public class TestMazeWithStaticDragon {
 		// Checks if has sword in the beginning
 		assertEquals(false, myHero.hasSword());
 		myMaze.removeActor(myHero);
-		myHero.moveHero('b', dragons, myMaze);
+		myHero.moveHero('d', dragons, myMaze);
 		myMaze.placeActor(myHero);
 		assertEquals(true, myHero.isDead());
 	}
@@ -135,8 +135,8 @@ public class TestMazeWithStaticDragon {
 
 		assertFalse(dragon.isDead());
 		
-		hero.moveHero('c', dragons, maze);
-		hero.moveHero('d', dragons, maze);
+		hero.moveHero('u', dragons, maze);
+		hero.moveHero('r', dragons, maze);
 		
 		assertEquals(1,hero.getX());
 		assertEquals(2,hero.getY());
@@ -155,10 +155,10 @@ public class TestMazeWithStaticDragon {
 		
 		assertFalse(hero.hasEscaped());
 		
-		hero.moveHero('c', dragons, maze);
-		hero.moveHero('d', dragons, maze);
-		hero.moveHero('d', dragons, maze);
-		hero.moveHero('d', dragons, maze);
+		hero.moveHero('u', dragons, maze);
+		hero.moveHero('r', dragons, maze);
+		hero.moveHero('r', dragons, maze);
+		hero.moveHero('r', dragons, maze);
 
 		assertTrue(hero.hasEscaped());
 
@@ -176,9 +176,9 @@ public class TestMazeWithStaticDragon {
 		
 		assertFalse(hero.hasEscaped());
 		
-		hero.moveHero('d', dragons, maze);
-		hero.moveHero('d', dragons, maze);
-		hero.moveHero('d', dragons, maze);
+		hero.moveHero('r', dragons, maze);
+		hero.moveHero('r', dragons, maze);
+		hero.moveHero('r', dragons, maze);
 
 		assertFalse(hero.hasEscaped());
 		assertEquals(1, hero.getX());
@@ -197,11 +197,11 @@ public class TestMazeWithStaticDragon {
 		
 		assertFalse(hero.hasEscaped());
 		
+		hero.moveHero('r', dragons, maze);
+		hero.moveHero('r', dragons, maze);
 		hero.moveHero('d', dragons, maze);
-		hero.moveHero('d', dragons, maze);
-		hero.moveHero('b', dragons, maze);
-		hero.moveHero('c', dragons, maze);
-		hero.moveHero('d', dragons, maze);
+		hero.moveHero('u', dragons, maze);
+		hero.moveHero('r', dragons, maze);
 		
 		assertFalse(hero.hasEscaped());
 		assertEquals(1,hero.getX());
