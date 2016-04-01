@@ -13,6 +13,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -37,8 +38,9 @@ public class Window {
 	private JProgressBar GameState;
 	private Game g;
 	private int perc;
-	private KeyListener gameKeys;
+	//private KeyListener gameKeys;
 	public static Window window;
+	public JPanel panel;
 	public MazeGraphicsPanel gpanel;
 
 	/**
@@ -120,7 +122,7 @@ public class Window {
 		comboBoxTypeDragons
 				.setModel(new DefaultComboBoxModel<String>(new String[] { "", "Static", "Moving", "Moving/Sleeping" }));
 		frame.getContentPane().add(comboBoxTypeDragons);
-
+		/*
 		// Maze Area (print)
 		MazeArea = new JTextArea();
 		MazeArea.setBounds(387, 43, 451, 451);
@@ -129,6 +131,7 @@ public class Window {
 		MazeArea.setFont(new Font("Courier New", Font.PLAIN, 13));
 		MazeArea.setBackground(Color.WHITE);
 		frame.getContentPane().add(MazeArea);
+		*/
 
 		// Game State label
 		JLabel lblState = new JLabel("State ");
@@ -245,30 +248,35 @@ public class Window {
 
 				// Starting game
 
-				MazeArea.setBounds(MazeArea.getX(), MazeArea.getY(), 16 * size, 15 * size);
+				//MazeArea.setBounds(MazeArea.getX(), MazeArea.getY(), 16 * size, 15 * size);
 
 				MazeBuilder m = new MazeBuilder();
-
 				g = new Game(dragonType.toCharArray()[0], m.buildMaze(size), ndragons);
-				MazeArea.setText(g.getMyMaze().toString(g.getDragons(), g.getMySword()));
+				
+				//MazeArea.setText(g.getMyMaze().toString(g.getDragons(), g.getMySword()));
+				
 				GameState.setBackground(Color.GREEN);
 				perc = 100/(g.getDragons().size());	
 				GameState.setValue(100-(perc*g.getDragons().size()));
 				
-				MazeArea.add(gpanel);
+				gpanel.repaint();
 				gpanel.requestFocus();
 			}
 		});
 		frame.getContentPane().add(btnGenerateMaze);
 		
+		panel = new JPanel();
+		panel.setBounds(385, 40, 453, 454);
 		gpanel = new MazeGraphicsPanel();
+		panel.add(gpanel);
+		frame.getContentPane().add(panel);
 
 	}
 
 	public void move(char d) {
 		g.play(d);
 		GameState.setValue(100-(perc*g.getDragons().size()));
-		MazeArea.setText(g.getMyMaze().toString(g.getDragons(),g.getMySword()));
+		//MazeArea.setText(g.getMyMaze().toString(g.getDragons(),g.getMySword()));
 		if(g.getMyHero().hasEscaped() || g.getMyHero().isDead()){
 			btnLeft.setEnabled(false);
 			btnRight.setEnabled(false);
@@ -278,5 +286,4 @@ public class Window {
 			MazeArea.remove(gpanel);
 		}
 	}
-
 }
