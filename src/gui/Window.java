@@ -40,8 +40,8 @@ public class Window {
 	private int perc;
 	//private KeyListener gameKeys;
 	public static Window window;
-	public JPanel panel;
-	public MazeGraphicsPanel gpanel;
+	//public JPanel panel;
+	public JPanel gpanel;
 
 	/**
 	 * Launch the application.
@@ -190,6 +190,9 @@ public class Window {
 		lblAntnioMelo.setBounds(92, 531, 195, 14);
 		frame.getContentPane().add(lblAntnioMelo);
 
+		
+		
+		
 		// Start button
 		JButton btnGenerateMaze = new JButton("Start");
 		btnGenerateMaze.setBounds(39, 156, 234, 44);
@@ -208,10 +211,10 @@ public class Window {
 							"Invalid maze dimension!\nInsert a valid integer or 10 will be used as default.");
 				}
 
-				if (size > 43) {
+				if (size > 23) {
 					JOptionPane.showMessageDialog(MazeDimension,
-							"Invalid maze dimension!\nThe maximum size is 43. Size 43 will be used.");
-					size = 43;
+							"Invalid maze dimension!\nThe maximum size is 23. Size 23 will be used.");
+					size = 23;
 				}
 				// Number of Dragons
 				try {
@@ -252,24 +255,25 @@ public class Window {
 
 				MazeBuilder m = new MazeBuilder();
 				g = new Game(dragonType.toCharArray()[0], m.buildMaze(size), ndragons);
-				
 				//MazeArea.setText(g.getMyMaze().toString(g.getDragons(), g.getMySword()));
 				
 				GameState.setBackground(Color.GREEN);
 				perc = 100/(g.getDragons().size());	
 				GameState.setValue(100-(perc*g.getDragons().size()));
 				
+				
+				gpanel = new MazeGraphicsPanel(g);
+				gpanel.setBounds(385, 40, 40*size,40*size);
+				frame.getContentPane().add(gpanel);
+				
+				//graf
 				gpanel.repaint();
+				//keys
 				gpanel.requestFocus();
 			}
 		});
 		frame.getContentPane().add(btnGenerateMaze);
 		
-		panel = new JPanel();
-		panel.setBounds(385, 40, 453, 454);
-		gpanel = new MazeGraphicsPanel();
-		panel.add(gpanel);
-		frame.getContentPane().add(panel);
 
 	}
 
@@ -283,7 +287,8 @@ public class Window {
 			btnUp.setEnabled(false);
 			btnDown.setEnabled(false);
 			GameState.setValue(100);
-			MazeArea.remove(gpanel);
+			//MazeArea.remove(gpanel);
 		}
+		gpanel.repaint();
 	}
 }
