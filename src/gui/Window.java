@@ -22,6 +22,7 @@ import javafx.scene.shape.Rectangle;
 import logic.*;
 
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JProgressBar;
 
@@ -40,7 +41,10 @@ public class Window {
 	private int perc;
 	public static Window window;
 	public JPanel gpanel;
-
+	public CustomMazeDialog customDialog;
+	private boolean customMaze = false;
+	private int size = 10;
+	private char[][] gameGrid;
 	/**
 	 * Launch the application.
 	 */
@@ -86,6 +90,19 @@ public class Window {
 		frame.getContentPane().setLayout(null);
 		btnEndGame.setFont(new Font("Arial", Font.PLAIN, 14));
 		frame.getContentPane().add(btnEndGame);
+		
+		//Custom Maze Button
+		JButton btnNewButton = new JButton("Custom Maze");
+		Window parent = this;
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				customDialog = new CustomMazeDialog();
+				customDialog.setParent(parent);
+				customDialog.setVisible(true);
+			}
+		});
+		btnNewButton.setBounds(21, 104, 252, 23);
+		frame.getContentPane().add(btnNewButton);
 
 		// Dimension Maze Label
 		JLabel lblDimension = new JLabel("Dimension");
@@ -192,7 +209,6 @@ public class Window {
 		btnGenerateMaze.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// Default numbers
-				int size = 10;
 				int ndragons = 1;
 				String dragonType;
 				
@@ -256,8 +272,15 @@ public class Window {
 				
 				frame.repaint();
 				
-				MazeBuilder m = new MazeBuilder();
-				g = new Game(dragonType.toCharArray()[0], m.buildMaze(size), ndragons);
+				if(!customMaze){
+					MazeBuilder m = new MazeBuilder();
+					gameGrid = m.buildMaze(size);
+					g = new Game(dragonType.toCharArray()[0],gameGrid, ndragons);
+				}
+				
+				else{
+					g = new Game(dragonType.toCharArray()[0],gameGrid, ndragons);
+				}
 				
 				GameState.setBackground(Color.GREEN);
 				perc = 100/(g.getDragons().size());	
