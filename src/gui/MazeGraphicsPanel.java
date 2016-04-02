@@ -80,24 +80,25 @@ public class MazeGraphicsPanel extends JPanel implements KeyListener{
 		@Override
 		public void keyPressed(KeyEvent e) {
 			switch (e.getKeyCode()) {
-
 			case KeyEvent.VK_LEFT:
+			case KeyEvent.VK_A:	
 				Window.window.move('l'); 
 				break;
-
+			case KeyEvent.VK_D:	
 			case KeyEvent.VK_RIGHT:
 				Window.window.move('r');
 				break;
 
 			case KeyEvent.VK_UP:
+			case KeyEvent.VK_W:		
 				Window.window.move('u');
 				break;
 
 			case KeyEvent.VK_DOWN:
+			case KeyEvent.VK_S:	
 				Window.window.move('d');
 				break;
 			}
-			
 		}
 		
 		@Override
@@ -107,22 +108,22 @@ public class MazeGraphicsPanel extends JPanel implements KeyListener{
 			for(int i =0;i < game.getMyMaze().getGrid().length;i++){
 				for(int j =0;j < game.getMyMaze().getGrid()[i].length;j++){
 					if(game.getMyMaze().getGrid()[i][j] == 'X'){
-						g.drawImage(box, i*40, j*40, x + width, y + height, null);
+						g.drawImage(box, j*40, i*40, x + width, y + height, null);
 					}
 					if(game.getMyMaze().getGrid()[i][j] == ' '){
-						g.drawImage(floor, i*40, j*40, x + width, y + height, null);
+						g.drawImage(floor, j*40, i*40, x + width, y + height, null);
 					}
 					if(game.getMyMaze().getGrid()[i][j] == 'H'){
-						g.drawImage(hero1, i*40, j*40, x + width, y + height, null);
+						g.drawImage(hero1, j*40, i*40, x + width, y + height, null);
 					}
 					if(game.getMyMaze().getGrid()[i][j] == 'D'){
-						g.drawImage(stormtropper, i*40, j*40, x + width, y + height, null);
+						g.drawImage(stormtropper, j*40, i*40, x + width, y + height, null);
 					}
 					if(game.getMyMaze().getGrid()[i][j] == 'E'){
-						g.drawImage(lightsaber, i*40, j*40, x + width, y + height, null);
+						g.drawImage(lightsaber, j*40, i*40, x + width, y + height, null);
 					}
 					if(game.getMyMaze().getGrid()[i][j] == 'A'){
-						g.drawImage(hero1l, i*40, j*40, x + width, y + height, null);
+						g.drawImage(hero1l, j*40, i*40, x + width, y + height, null);
 					}
 					
 					

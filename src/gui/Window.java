@@ -38,9 +38,7 @@ public class Window {
 	private JProgressBar GameState;
 	private Game g;
 	private int perc;
-	//private KeyListener gameKeys;
 	public static Window window;
-	//public JPanel panel;
 	public JPanel gpanel;
 
 	/**
@@ -122,22 +120,13 @@ public class Window {
 		comboBoxTypeDragons
 				.setModel(new DefaultComboBoxModel<String>(new String[] { "", "Static", "Moving", "Moving/Sleeping" }));
 		frame.getContentPane().add(comboBoxTypeDragons);
-		/*
-		// Maze Area (print)
-		MazeArea = new JTextArea();
-		MazeArea.setBounds(387, 43, 451, 451);
-		MazeArea.setEditable(false);
-		MazeArea.setForeground(Color.BLACK);
-		MazeArea.setFont(new Font("Courier New", Font.PLAIN, 13));
-		MazeArea.setBackground(Color.WHITE);
-		frame.getContentPane().add(MazeArea);
-		*/
 
 		// Game State label
 		JLabel lblState = new JLabel("State ");
 		lblState.setBounds(387, 10, 48, 23);
 		lblState.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		frame.getContentPane().add(lblState);
+		
 		// Game progress bar
 		GameState = new JProgressBar();
 		GameState.setBounds(445, 11, 164, 20);
@@ -156,6 +145,7 @@ public class Window {
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				move('l');
+				gpanel.requestFocus();
 			}});
 		//Right
 		btnRight = new JButton("Right");
@@ -165,6 +155,7 @@ public class Window {
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				move('r');
+				gpanel.requestFocus();
 			}});
 		//Up
 		btnUp = new JButton("Up");
@@ -174,6 +165,7 @@ public class Window {
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				move('u');
+				gpanel.requestFocus();
 			}});
 		//Down
 		btnDown = new JButton("Down");
@@ -183,6 +175,7 @@ public class Window {
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				move('d');
+				gpanel.requestFocus();
 			}});
 		
 		//Authors
@@ -190,8 +183,6 @@ public class Window {
 		lblAntnioMelo.setBounds(92, 531, 195, 14);
 		frame.getContentPane().add(lblAntnioMelo);
 
-		
-		
 		
 		// Start button
 		JButton btnGenerateMaze = new JButton("Start");
@@ -203,6 +194,7 @@ public class Window {
 				int size = 10;
 				int ndragons = 1;
 				String dragonType;
+				
 				// Size of Maze
 				try {
 					size = Integer.parseInt(MazeDimension.getText());
@@ -251,11 +243,8 @@ public class Window {
 
 				// Starting game
 
-				//MazeArea.setBounds(MazeArea.getX(), MazeArea.getY(), 16 * size, 15 * size);
-
 				MazeBuilder m = new MazeBuilder();
 				g = new Game(dragonType.toCharArray()[0], m.buildMaze(size), ndragons);
-				//MazeArea.setText(g.getMyMaze().toString(g.getDragons(), g.getMySword()));
 				
 				GameState.setBackground(Color.GREEN);
 				perc = 100/(g.getDragons().size());	
@@ -280,14 +269,14 @@ public class Window {
 	public void move(char d) {
 		g.play(d);
 		GameState.setValue(100-(perc*g.getDragons().size()));
-		//MazeArea.setText(g.getMyMaze().toString(g.getDragons(),g.getMySword()));
+		
 		if(g.getMyHero().hasEscaped() || g.getMyHero().isDead()){
 			btnLeft.setEnabled(false);
 			btnRight.setEnabled(false);
 			btnUp.setEnabled(false);
 			btnDown.setEnabled(false);
 			GameState.setValue(100);
-			//MazeArea.remove(gpanel);
+			frame.remove(gpanel);
 		}
 		gpanel.repaint();
 	}
