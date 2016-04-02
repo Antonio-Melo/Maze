@@ -73,6 +73,7 @@ public class Window {
 		frame.setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 900, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 
 		// Exit Button
 		JButton btnEndGame = new JButton("Exit");
@@ -98,7 +99,7 @@ public class Window {
 		MazeDimension.setColumns(10);
 
 		// Number of Dragons Label
-		JLabel lblNumberOfDragons = new JLabel("Number of Dragons");
+		JLabel lblNumberOfDragons = new JLabel("Number of Enemies");
 		lblNumberOfDragons.setBounds(21, 39, 127, 24);
 		lblNumberOfDragons.setFont(new Font("Arial", Font.PLAIN, 14));
 		frame.getContentPane().add(lblNumberOfDragons);
@@ -109,7 +110,7 @@ public class Window {
 		MazeNumberOfDragons.setColumns(10);
 
 		// Type of Dragons Label
-		JLabel lblTypeOfDragons = new JLabel("Type of Dragons");
+		JLabel lblTypeOfDragons = new JLabel("Type of Enemies");
 		lblTypeOfDragons.setBounds(21, 74, 127, 23);
 		lblTypeOfDragons.setFont(new Font("Arial", Font.PLAIN, 14));
 		frame.getContentPane().add(lblTypeOfDragons);
@@ -208,12 +209,19 @@ public class Window {
 							"Invalid maze dimension!\nThe maximum size is 23. Size 23 will be used.");
 					size = 23;
 				}
+				
+				else if(size < 4){
+					JOptionPane.showMessageDialog(MazeDimension,
+							"Invalid maze dimension!\nThe minimum size is 4. Size 4 will be used, with 1 dragon");
+					size = 4;
+					ndragons = 1;
+				}
 				// Number of Dragons
 				try {
 					ndragons = Integer.parseInt(MazeNumberOfDragons.getText());
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(MazeDimension,
-							"Invalid number of dragons!\nInsert a valid integer or 1 will be used as default.");
+							"Invalid number of enemies!\nInsert a valid integer or 1 will be used as default.");
 				}
 
 				// type of Dragons
@@ -243,6 +251,11 @@ public class Window {
 
 				// Starting game
 
+				if(gpanel != null)
+					frame.remove(gpanel);
+				
+				frame.repaint();
+				
 				MazeBuilder m = new MazeBuilder();
 				g = new Game(dragonType.toCharArray()[0], m.buildMaze(size), ndragons);
 				
@@ -278,7 +291,9 @@ public class Window {
 			btnDown.setEnabled(false);
 			GameState.setValue(100);
 			frame.remove(gpanel);
+			frame.repaint();
 		}
+		
 		gpanel.repaint();
 	}
 }
