@@ -22,6 +22,7 @@ public class MazeGraphicsPanel extends JPanel implements KeyListener{
 	private BufferedImage stormtropper;
 	private BufferedImage stormtroppers;
 	private BufferedImage door;
+	private BufferedImage stormtrooper_sword;
 	private int x=0, y=0, width=40, height=40;
 	private Game game;
 	
@@ -81,7 +82,12 @@ public class MazeGraphicsPanel extends JPanel implements KeyListener{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+			//Stormtropper with sword
+			try {
+				stormtrooper_sword =  ImageIO.read(new File("res\\stormtrooper_sword.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			game = g;
 			addKeyListener(this);
 		}
@@ -147,7 +153,9 @@ public class MazeGraphicsPanel extends JPanel implements KeyListener{
 					if(game.getMyMaze().getGrid()[i][j] == 'S'){
 						g.drawImage(door, j*40, i*40, x + width, y + height, null);
 					}
-					
+					if(game.getMyMaze().getGrid()[i][j] == 'F'){
+						g.drawImage(stormtrooper_sword, j*40, i*40, x + width, y + height, null);
+					}
 					
 					
 				}
