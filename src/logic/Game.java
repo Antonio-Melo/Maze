@@ -102,23 +102,47 @@ public class Game {
 		grid[5][9] = 'S';
 
 		myMaze = new Maze(grid);
-		myHero = new Hero(1, 1, 'H');
-		mySword = new Sword(8, 1, 'E');
+		//myHero = new Hero(1, 1, 'H');
+		//mySword = new Sword(8, 1, 'E');
 		this.type = type;
 		dragons = new ArrayList<Dragon>();
+		
+		// Random Hero position
+		int x = rng.nextInt(grid.length - 1);
+		int y = rng.nextInt(grid.length - 1);
+
+		while (grid[x][y] != ' ') {
+			x = rng.nextInt(grid.length - 1);
+			y = rng.nextInt(grid.length - 1);
+		}
+		myHero = new Hero(x, y, 'H');
+		myMaze.placeActor(myHero);
+
+		// Random Dragons position
 		for (int i = 0; i < nDragons; i++) {
 
-			int x = rng.nextInt(grid.length-1); //Support for differently sized grids
-			int y = rng.nextInt(grid.length-1);
+			x = rng.nextInt(grid.length - 1);
+			y = rng.nextInt(grid.length - 1);
 
-			while (grid[x][y] != ' ') {
-				x = rng.nextInt(grid.length-1);
-				y = rng.nextInt(grid.length-1);
+			while (grid[x][y] != ' ' || (Math.abs(x - myHero.getX()) + Math.abs(y - myHero.getY())) == 1) {
+				x = rng.nextInt(grid.length - 1);
+				y = rng.nextInt(grid.length - 1);
 			}
 
 			Dragon newDragon = new Dragon(x, y, 'D');
 			dragons.add(newDragon);
+			myMaze.placeActor(newDragon);
 		}
+
+		// Random sword position
+		x = rng.nextInt(grid.length - 1);
+		y = rng.nextInt(grid.length - 1);
+		while (grid[x][y] != ' ') {
+			x = rng.nextInt(grid.length - 1);
+			y = rng.nextInt(grid.length - 1);
+		}
+		mySword = new Sword(x, y, 'E');
+		myMaze.placeActor(mySword);
 	}
 
 	/**

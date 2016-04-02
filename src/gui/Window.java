@@ -271,6 +271,7 @@ public class Window {
 		GameState.setValue(100-(perc*g.getDragons().size()));
 		
 		if(g.getMyHero().hasEscaped() || g.getMyHero().isDead()){
+			gpanel.repaint();
 			btnLeft.setEnabled(false);
 			btnRight.setEnabled(false);
 			btnUp.setEnabled(false);
