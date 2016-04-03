@@ -110,6 +110,11 @@ public class Hero extends Actor {
 			escape();
 			return;
 		}
+		
+		if (myMaze.getGrid()[getX() + x][getY() + y] == 'd') {
+			return;
+		}
+		
 		// Fights Dragon
 		for (int i = 0; i < dragons.size(); i++) {
 			if (((getX() + x + 1) == dragons.get(i).getX() && (getY() + y) == dragons.get(i).getY())
@@ -132,6 +137,7 @@ public class Hero extends Actor {
 				}
 			}
 		}
+		
 
 		// Picks up the sword
 		if (myMaze.getGrid()[getX() + x][getY() + y] == 'E') {
