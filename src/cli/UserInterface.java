@@ -36,6 +36,10 @@ public class UserInterface {
 			System.out.print(game.getMyMaze().toString(game.getDragons(), game.getMySword()));
 
 		}
+		//DIES
+		if(game.getMyHero().isDead()){
+			System.out.println("HERO DEAD!!");
+		}
 		// WINS
 		if (game.getMyHero().hasEscaped()) {
 			game.getMyMaze().removeActor(game.getMyHero());
