@@ -89,7 +89,7 @@ public class Window {
 		frame.setResizable(false);
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		frame.setBackground(Color.WHITE);
-		frame.setBounds(100, 100, 1200, 800);
+		frame.setBounds(100, 100, 1200, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Exit Button
@@ -244,7 +244,7 @@ public class Window {
 		Instructions.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Instructions.setBackground(Color.LIGHT_GRAY);
 		Instructions.setEditable(false);
-		Instructions.setBounds(385, 748, 298, 23);
+		Instructions.setBounds(632, 11, 298, 23);
 		Instructions.setText("Fill the boxes and click Start to play !!");
 		frame.getContentPane().add(Instructions);
 		
@@ -372,7 +372,7 @@ public class Window {
 
 				gpanel = new MazeGraphicsPanel(g);
 				gpanel.setBackground(Color.LIGHT_GRAY);
-				gpanel.setBounds(385, 40, 700, 700);
+				gpanel.setBounds(385, 40, 600, 600);
 				frame.getContentPane().add(gpanel);
 
 				// graf
@@ -389,7 +389,7 @@ public class Window {
 	public void move(char d) {
 		g.play(d);
 		GameState.setValue(100 - (perc * g.getDragons().size()));
-
+		setInstructionText("You won!");
 		if (g.getMyHero().hasEscaped() ){
 			gpanel.repaint();
 			btnLeft.setEnabled(false);
@@ -400,7 +400,7 @@ public class Window {
 			frame.remove(gpanel);
 			frame.repaint();
 			setGrid(null);
-			//frame.getContentPane().getComponent(17).setVisible(true);
+			frame.getContentPane().getComponent(17).setVisible(true);
 		}
 		
 		if (g.getMyHero().isDead() ){
@@ -409,11 +409,10 @@ public class Window {
 			btnRight.setEnabled(false);
 			btnUp.setEnabled(false);
 			btnDown.setEnabled(false);
-			setInstructionText("You lost!");
 			frame.remove(gpanel);
 			frame.repaint();
 			setGrid(null);
-			//frame.getContentPane().getComponent(16).setVisible(true);
+			frame.getContentPane().getComponent(16).setVisible(true);
 		}
 
 		gpanel.repaint();
@@ -428,6 +427,15 @@ public class Window {
 	}
 	
 	public void setInstructionText(String s){
+		if (g.getMyHero().isDead() ){
+			Instructions.setText("You lost!");
+			return;
+		}
+		if (g.getMyHero().hasEscaped() ){
+			Instructions.setText("You won!");
+			return;
+		}
+		
 		Instructions.setText(s);
 	}
 }

@@ -91,8 +91,8 @@ public class MazeGraphicsPanel extends JPanel implements KeyListener {
 		}
 		
 		
-		width = 700/g.getMyMaze().getGrid().length;
-		height = 700/g.getMyMaze().getGrid().length;
+		width = 600/g.getMyMaze().getGrid().length;
+		height = 600/g.getMyMaze().getGrid().length;
 		
 		game = g;
 		addKeyListener(this);
