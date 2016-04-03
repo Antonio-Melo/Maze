@@ -20,8 +20,8 @@ public class Maze {
 
 	/**
 	 * Transforms grid in String
-	 * @param dragons
-	 * @param mySword
+	 * @param dragons ArrayList
+	 * @param mySword Sword
 	 * @return string
 	 */
 	public String toString(ArrayList<Dragon> dragons, Sword mySword) {
@@ -55,7 +55,7 @@ public class Maze {
 	}
 	/**
 	 * Removes a actor from the maze
-	 * @param a
+	 * @param a Actor to remove
 	 */
 	public void removeActor(Actor a) {
 		grid[a.getX()][a.getY()] = ' ';

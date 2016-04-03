@@ -71,11 +71,11 @@ public class Hero extends Actor {
 	}
 
 	/**
-	 * Moves the Hero based on one character
-	 * Checks if is possible
+	 * Moves the Hero based on one character and
+	 * checks if is possible
 	 * @param m character
-	 * @param dragons
-	 * @param myMaze
+	 * @param dragons ArrayList
+	 * @param myMaze Maze
 	 */
 	public void moveHero(char m, ArrayList<Dragon> dragons, Maze myMaze) {
 		int x = 0, y = 0;

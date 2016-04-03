@@ -7,9 +7,9 @@ package logic;
 public interface IMazeBuilder {
 	/**
 	 * Interface to TestMazeBuilder
-	 * @param size
-	 * @return
-	 * @throws IllegalArgumentException
+	 * @param size of Maze
+	 * @return Maze builded
+	 * @throws IllegalArgumentException Exception
 	 */
 	public char[][] buildMaze(int size) throws IllegalArgumentException;
 }

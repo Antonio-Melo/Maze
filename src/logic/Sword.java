@@ -7,9 +7,9 @@ package logic;
 public class Sword extends Actor {
 	/**
 	 * Creates a sword with a certain character in the Position(x,y)
-	 * @param x
-	 * @param y
-	 * @param c
+	 * @param x coordinate
+	 * @param y coordinate
+	 * @param c character
 	 */
 	public Sword(int x,int y, char c){
 		super(x,y,c);

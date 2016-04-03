@@ -160,7 +160,7 @@ public class MazeBuilder implements IMazeBuilder{
 	
 	/**
 	 * Founds the next position for the path.
-	 * @param p
+	 * @param p Point
 	 * @return New position or (-1,-1) if is not possible and the last position is popped
 	 */
 	public Point getNextPos(Point p){
