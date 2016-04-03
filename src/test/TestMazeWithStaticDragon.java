@@ -33,7 +33,6 @@ public class TestMazeWithStaticDragon {
 	// a)
 
 	@Test
-	
 	public void testMoveHeroToFreeCell() {
 
 		

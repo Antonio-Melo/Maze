@@ -35,7 +35,7 @@ public class Dragon extends Actor {
 		this.sleepCount = 0;
 	}
 	/** 
-	 * Boolena showing if dragon is sleeping
+	 * Boolean showing if dragon is sleeping
 	 * @return boolean 
 	 */
 	public boolean isAsleep() {

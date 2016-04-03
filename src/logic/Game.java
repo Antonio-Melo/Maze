@@ -200,7 +200,7 @@ public class Game {
 	
 	
 	/**
-	 * Plays a turn basead on a char
+	 * Plays a turn based on a char
 	 * @param m character
 	 */
 	public void play(char m) {

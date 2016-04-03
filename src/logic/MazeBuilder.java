@@ -6,7 +6,7 @@ import java.util.Stack;
 import java.util.Vector;
 /**
  * Represents a random maze creation in the game
- * @author Antonio
+ * @author António Melo Edgar Passos
  *
  */
 public class MazeBuilder implements IMazeBuilder{
@@ -197,7 +197,6 @@ public class MazeBuilder implements IMazeBuilder{
 				d1.y = nexty+1;
 				d2.x = nextx+(nextx -p.x);
 				d2.y = nexty-1;
-				//System.out.println("Aqui 1!");
 			}
 			//Horizontal
 			else if(nextx == (int)p.getX()){
@@ -205,13 +204,11 @@ public class MazeBuilder implements IMazeBuilder{
 				d1.y = nexty+(nexty-p.y);
 				d2.x = nextx+1;
 				d2.y = nexty+(nexty-p.y);
-				//System.out.println("Aqui 2!");
 			}
 			
 			//Checks if there is 2x2 with spaces in the diagonal
 			if(grid[d1.x][d1.y]== ' ' || grid[d2.x][d2.y] == ' '){
 				op.removeElementAt(next);
-				//System.out.println("Aqui 3!");
 				continue;
 			}
 			
@@ -220,7 +217,6 @@ public class MazeBuilder implements IMazeBuilder{
 			   (grid[nextx][nexty-1] == ' ' && grid[nextx-1][nexty]== ' ' && grid[nextx-1][nexty-1]== ' ') ||
 			   (grid[nextx][nexty+1] == ' ' && grid[nextx+1][nexty]== ' ' && grid[nextx+1][nexty+1]== ' ') ||
 			   (grid[nextx][nexty-1] == ' ' && grid[nextx+1][nexty]== ' ' && grid[nextx+1][nexty-1]== ' ') ){
-				//System.out.println("Aqui 4!");
 				op.removeElementAt(next);
 				continue;
 			}

@@ -127,7 +127,7 @@ public class MazeGraphicsPanel extends JPanel implements KeyListener {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+
 		for (int f = 0; f < game.getDragons().size(); f++) {
 
 			Dragon myDragon = game.getDragons().get(f);
@@ -139,37 +139,40 @@ public class MazeGraphicsPanel extends JPanel implements KeyListener {
 			}
 		}
 
-
 		for (int i = 0; i < game.getMyMaze().getGrid().length; i++) {
 			for (int j = 0; j < game.getMyMaze().getGrid()[i].length; j++) {
-				if (game.getMyMaze().getGrid()[i][j] == 'X') {
+				switch (game.getMyMaze().getGrid()[i][j]) {
+				case 'X':
 					g.drawImage(box, j * 40, i * 40, x + width, y + height, null);
-				}
-				if (game.getMyMaze().getGrid()[i][j] == ' ') {
+					break;
+				case ' ':
 					g.drawImage(floor, j * 40, i * 40, x + width, y + height, null);
-				}
-				if (game.getMyMaze().getGrid()[i][j] == 'H') {
+					break;
+				case 'H':
 					g.drawImage(hero1, j * 40, i * 40, x + width, y + height, null);
-				}
-				if (game.getMyMaze().getGrid()[i][j] == 'D') {
+					break;
+				case 'D':
 					g.drawImage(stormtropper, j * 40, i * 40, x + width, y + height, null);
-				}
-				if (game.getMyMaze().getGrid()[i][j] == 'E') {
+					break;
+				case 'E':
 					g.drawImage(lightsaber, j * 40, i * 40, x + width, y + height, null);
-				}
-				if (game.getMyMaze().getGrid()[i][j] == 'A') {
+					break;
+				case 'A':
 					g.drawImage(hero1l, j * 40, i * 40, x + width, y + height, null);
-				}
-				if (game.getMyMaze().getGrid()[i][j] == 'd') {
+					break;
+				case 'd':
 					g.drawImage(stormtroppers, j * 40, i * 40, x + width, y + height, null);
-				}
-				if (game.getMyMaze().getGrid()[i][j] == 'S') {
+					break;
+				case 'S':
 					g.drawImage(door, j * 40, i * 40, x + width, y + height, null);
-				}
-				if (game.getMyMaze().getGrid()[i][j] == 'F') {
+					break;
+				case 'F':
 					g.drawImage(stormtrooper_sword, j * 40, i * 40, x + width, y + height, null);
-				}
+					break;
+				default:
+					break;
 
+				}
 			}
 		}
 	}
