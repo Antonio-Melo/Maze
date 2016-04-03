@@ -23,7 +23,7 @@ public class MazeGraphicsPanel extends JPanel implements KeyListener {
 	private BufferedImage stormtroppers;
 	private BufferedImage door;
 	private BufferedImage stormtrooper_sword;
-	private int x = 0, y = 0, width = 40, height = 40;
+	private int x = 0, y = 0, width, height;
 	private Game game;
 
 	public MazeGraphicsPanel(Game g) {
@@ -88,6 +88,11 @@ public class MazeGraphicsPanel extends JPanel implements KeyListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		
+		width = 700/g.getMyMaze().getGrid().length;
+		height = 700/g.getMyMaze().getGrid().length;
+		
 		game = g;
 		addKeyListener(this);
 	}
@@ -143,31 +148,31 @@ public class MazeGraphicsPanel extends JPanel implements KeyListener {
 			for (int j = 0; j < game.getMyMaze().getGrid()[i].length; j++) {
 				switch (game.getMyMaze().getGrid()[i][j]) {
 				case 'X':
-					g.drawImage(box, j * 40, i * 40, x + width, y + height, null);
+					g.drawImage(box, j * width, i * width, x + width, y + height, null);
 					break;
 				case ' ':
-					g.drawImage(floor, j * 40, i * 40, x + width, y + height, null);
+					g.drawImage(floor, j * width, i * width, x + width, y + height, null);
 					break;
 				case 'H':
-					g.drawImage(hero1, j * 40, i * 40, x + width, y + height, null);
+					g.drawImage(hero1, j * width, i * width, x + width, y + height, null);
 					break;
 				case 'D':
-					g.drawImage(stormtropper, j * 40, i * 40, x + width, y + height, null);
+					g.drawImage(stormtropper, j * width, i * width, x + width, y + height, null);
 					break;
 				case 'E':
-					g.drawImage(lightsaber, j * 40, i * 40, x + width, y + height, null);
+					g.drawImage(lightsaber, j * width, i * width, x + width, y + height, null);
 					break;
 				case 'A':
-					g.drawImage(hero1l, j * 40, i * 40, x + width, y + height, null);
+					g.drawImage(hero1l, j * width, i * width, x + width, y + height, null);
 					break;
 				case 'd':
-					g.drawImage(stormtroppers, j * 40, i * 40, x + width, y + height, null);
+					g.drawImage(stormtroppers, j * width, i * width, x + width, y + height, null);
 					break;
 				case 'S':
-					g.drawImage(door, j * 40, i * 40, x + width, y + height, null);
+					g.drawImage(door, j * width, i * width, x + width, y + height, null);
 					break;
 				case 'F':
-					g.drawImage(stormtrooper_sword, j * 40, i * 40, x + width, y + height, null);
+					g.drawImage(stormtrooper_sword, j * width, i * width, x + width, y + height, null);
 					break;
 				default:
 					break;

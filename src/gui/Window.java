@@ -33,6 +33,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JProgressBar;
 import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class Window {
 
@@ -44,6 +45,7 @@ public class Window {
 	private JButton btnUp;
 	private JButton btnDown;
 	private JProgressBar GameState;
+	private JTextArea Instructions;
 	private Game g;
 	private int perc;
 	public static Window window;
@@ -83,9 +85,11 @@ public class Window {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Window.class.getResource("/javax/swing/plaf/basic/icons/JavaCup16.png")));
+		frame.setResizable(false);
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		frame.setBackground(Color.WHITE);
-		frame.setBounds(100, 100, 900, 600);
+		frame.setBounds(100, 100, 1200, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Exit Button
@@ -231,6 +235,15 @@ public class Window {
 			
 		});
 		
+		//Instructions area
+		Instructions = new JTextArea();
+		Instructions.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		Instructions.setBackground(Color.LIGHT_GRAY);
+		Instructions.setEditable(false);
+		Instructions.setBounds(629, 11, 298, 23);
+		Instructions.setText("Fill the boxes and click Start to play !!");
+		frame.getContentPane().add(Instructions);
+		
 		//Image shown when the player loses
 		JLabel loseImage = new JLabel("");
 		loseImage.setIcon(new ImageIcon("res\\LoseImage.png"));
@@ -274,12 +287,12 @@ public class Window {
 						JOptionPane.showMessageDialog(MazeDimension,
 								"Invalid maze dimension!\nInsert a valid integer or 10 will be used as default.");
 					}
-
+/*
 				if (size > 17 && !customMaze) {
 					JOptionPane.showMessageDialog(MazeDimension,
 							"Invalid maze dimension!\nThe maximum size is 17. Size 17 will be used.");
 					size = 17;
-				}
+				}*/
 
 				else if (size < 4 && !customMaze) {
 					JOptionPane.showMessageDialog(MazeDimension,
@@ -353,7 +366,8 @@ public class Window {
 				GameState.setValue(100 - (perc * g.getDragons().size()));
 
 				gpanel = new MazeGraphicsPanel(g);
-				gpanel.setBounds(385, 40, 40 * size, 40 * size);
+				gpanel.setBackground(Color.LIGHT_GRAY);
+				gpanel.setBounds(385, 40, 700, 700);
 				frame.getContentPane().add(gpanel);
 
 				// graf
@@ -381,7 +395,7 @@ public class Window {
 			frame.remove(gpanel);
 			frame.repaint();
 			setGrid(null);
-			frame.getContentPane().getComponent(16).setVisible(true);
+			frame.getContentPane().getComponent(17).setVisible(true);
 		}
 		
 		if (g.getMyHero().isDead() ){
@@ -394,7 +408,7 @@ public class Window {
 			frame.remove(gpanel);
 			frame.repaint();
 			setGrid(null);
-			frame.getContentPane().getComponent(15).setVisible(true);
+			frame.getContentPane().getComponent(16).setVisible(true);
 		}
 
 		gpanel.repaint();
