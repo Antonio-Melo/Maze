@@ -45,7 +45,7 @@ public class Window {
 	private JButton btnUp;
 	private JButton btnDown;
 	private JProgressBar GameState;
-	private static JTextArea Instructions;
+	private JTextArea Instructions;
 	private Game g;
 	private int perc;
 	public static Window window;
@@ -244,21 +244,21 @@ public class Window {
 		Instructions.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Instructions.setBackground(Color.LIGHT_GRAY);
 		Instructions.setEditable(false);
-		Instructions.setBounds(629, 11, 298, 23);
+		Instructions.setBounds(385, 748, 298, 23);
 		Instructions.setText("Fill the boxes and click Start to play !!");
 		frame.getContentPane().add(Instructions);
 		
 		//Image shown when the player loses
 		JLabel loseImage = new JLabel("");
 		loseImage.setIcon(new ImageIcon("res\\LoseImage.png"));
-		loseImage.setBounds(327, 219, 500, 200);
+		loseImage.setBounds(327, 250, 860, 300);
 		frame.getContentPane().add(loseImage);
 		loseImage.setVisible(false);
 		
 		//Image shown when the player wins
 		JLabel winImage = new JLabel("");
-		winImage.setIcon(new ImageIcon("res\\WinImage.png"));
-		winImage.setBounds(327, 219, 500, 200);
+		winImage.setIcon(new ImageIcon("res\\WinImage.jpeg"));
+		winImage.setBounds(327, 250, 860, 300);
 		frame.getContentPane().add(winImage);
 		winImage.setVisible(false);
 		
@@ -396,12 +396,11 @@ public class Window {
 			btnRight.setEnabled(false);
 			btnUp.setEnabled(false);
 			btnDown.setEnabled(false);
-			setInstructionText("You Won!");
 			GameState.setValue(100);
 			frame.remove(gpanel);
 			frame.repaint();
 			setGrid(null);
-			frame.getContentPane().getComponent(17).setVisible(true);
+			//frame.getContentPane().getComponent(17).setVisible(true);
 		}
 		
 		if (g.getMyHero().isDead() ){
@@ -411,11 +410,10 @@ public class Window {
 			btnUp.setEnabled(false);
 			btnDown.setEnabled(false);
 			setInstructionText("You lost!");
-			GameState.setValue(100);
 			frame.remove(gpanel);
 			frame.repaint();
 			setGrid(null);
-			frame.getContentPane().getComponent(16).setVisible(true);
+			//frame.getContentPane().getComponent(16).setVisible(true);
 		}
 
 		gpanel.repaint();
