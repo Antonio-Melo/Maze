@@ -2,7 +2,7 @@ package logic;
 
 import java.util.Random;
 /**
- * Class that represents a Dragon in the game
+ * Represents a dragon in the game
  * @author António Melo  Edgar Passos
  * @version 1.0
  * @see Actor
@@ -24,7 +24,7 @@ public class Dragon extends Actor {
 
 	/**
 	 * Constructor
-	 * Creates a dragon with a certain character in the Position(x,y)
+	 * creates a dragon with a certain character in the Position(x,y)
 	 * @param x coordinate
 	 * @param y coordinate
 	 * @param c character
@@ -35,14 +35,15 @@ public class Dragon extends Actor {
 		this.sleepCount = 0;
 	}
 	/** 
-	 * @return boolean showing if dragon is sleeping
+	 * Boolena showing if dragon is sleeping
+	 * @return boolean 
 	 */
 	public boolean isAsleep() {
 		return sleep;
 	}
 	/**
-	 * Makes dragon fall a sleep for 5 turns
-	 * Changes is character to lower case
+	 * Makes dragon fall a sleep for 5 turns and
+	 * changes is character to lower case.
 	 */
 	public void fallAsleep() {
 		sleep = true;
@@ -50,8 +51,8 @@ public class Dragon extends Actor {
 		c = 'd';
 	}
 	/**
-	 * Makes dragon wake up
-	 * Changes is character to upper case
+	 * Makes dragon wake up and
+	 * changes is character to upper case.
 	 */
 	public void wakeUp() {
 		sleep = false;
@@ -68,8 +69,8 @@ public class Dragon extends Actor {
 	}
 
 	/**
-	 * Moves the dragon based on one character
-	 * Checks if is possible
+	 * Moves the dragon based on one character and
+	 * checks if is possible
 	 * @param m character that represents the move
 	 * @param myHero Hero in the maze
 	 * @param myMaze The maze

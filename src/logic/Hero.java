@@ -3,7 +3,7 @@ package logic;
 
 import java.util.ArrayList;
 /**
- * Class representing the hero in the maze
+ * Representing the hero in the maze
  * @author António Melo Edgar Passos
  * @see Actor
  */
@@ -31,7 +31,7 @@ public class Hero extends Actor {
 	}
 
 	/**
-	 * Checks if hero as the sword
+	 * Checks if hero has the sword
 	 * @return boolean
 	 */
 	public boolean hasSword() {
@@ -46,7 +46,7 @@ public class Hero extends Actor {
 		c = 'A';
 	}
 	/**
-	 * Checks if the Hero as already escaped the maze
+	 * Checks if the Hero has already escaped the maze
 	 * @return boolean
 	 */
 	public boolean hasEscaped() {
@@ -54,7 +54,7 @@ public class Hero extends Actor {
 	}
 
 	/**
-	 * When the hero finds the exit
+	 * When the hero finds the exit after killing all the dragons
 	 */
 	public void escape() {
 		escape = true;

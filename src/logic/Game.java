@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Random;
 /**
- * Represents the Game
+ * Represents the game
  * @author António Melo Edgar Passos
  * @see Maze MazeBuilder
  */
@@ -102,8 +102,7 @@ public class Game {
 		grid[5][9] = 'S';
 
 		myMaze = new Maze(grid);
-		//myHero = new Hero(1, 1, 'H');
-		//mySword = new Sword(8, 1, 'E');
+
 		this.type = type;
 		dragons = new ArrayList<Dragon>();
 		
@@ -149,7 +148,7 @@ public class Game {
 	 * Constructor 2
 	 * Creates a new game based on a grid made 
 	 * @param type of game
-	 * @param grid 
+	 * @param grid to play with
 	 * @param nDragons number of dragons
 	 */
 	public Game(char type, char[][] grid,int nDragons) {
@@ -201,13 +200,14 @@ public class Game {
 	
 	
 	/**
-	 * Plays a turn
+	 * Plays a turn basead on a char
 	 * @param m character
 	 */
 	public void play(char m) {
 
 		boolean enableSleep;
 		myMaze.removeActor(myHero);
+		//Moves hero
 		myHero.moveHero(m, dragons, myMaze);
 		if(myHero.hasSword())
 			mySword.isKilled();
@@ -219,6 +219,7 @@ public class Game {
 			else
 				enableSleep = true;
 
+			//moves all dragons randomly
 			Random r = new Random();
 			for (int i = 0; i < dragons.size(); i++) {
 				myMaze.removeActor(dragons.get(i));

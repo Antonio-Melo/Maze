@@ -2,16 +2,28 @@
 package logic;
 
 import java.util.ArrayList;
-
+/**
+ * Represents the maze in the game
+ * @author António Melo Edgar Passos
+ * @see MazeBuilder IMazeBuilder
+ */
 public class Maze {
 	private char grid[][];
 
-	// Constructor
+	/**
+	 * Creates a Maze based on a given grid
+	 * @param m grid
+	 */
 	public Maze(char[][] m) {
 		this.grid = m;
 	}
 
-	// Transforms grid in String
+	/**
+	 * Transforms grid in String
+	 * @param dragons
+	 * @param mySword
+	 * @return string
+	 */
 	public String toString(ArrayList<Dragon> dragons, Sword mySword) {
 		String maze = "";
 	
@@ -34,19 +46,23 @@ public class Maze {
 	}
 
 	/**
-	 * Places any actor in the maze
-	 * 
+	 * Places a living actor in the maze
 	 * @param a Actor to place
 	 */
 	public void placeActor(Actor a) {
 		if (!a.isDead())
 			grid[a.getX()][a.getY()] = a.getC();
 	}
-
+	/**
+	 * Removes a actor from the maze
+	 * @param a
+	 */
 	public void removeActor(Actor a) {
 		grid[a.getX()][a.getY()] = ' ';
 	}
-	
+	/**
+	 * @return grid
+	 */
 	public char [][] getGrid(){
 		return grid;
 	}

@@ -5,5 +5,11 @@ package logic;
  * @see  Maze MazeBuilder
  */
 public interface IMazeBuilder {
+	/**
+	 * Interface to TestMazeBuilder
+	 * @param size
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
 	public char[][] buildMaze(int size) throws IllegalArgumentException;
 }

@@ -4,7 +4,11 @@ import java.awt.Point;
 import java.util.Random;
 import java.util.Stack;
 import java.util.Vector;
-
+/**
+ * Represents a random maze creation in the game
+ * @author Antonio
+ *
+ */
 public class MazeBuilder implements IMazeBuilder{
 	
 	protected char grid[][];
@@ -12,35 +16,35 @@ public class MazeBuilder implements IMazeBuilder{
 	protected int msize;
 	
 	
-	//Constructor
+	/**
+	 * Constructor
+	 */
 	public MazeBuilder(){
 		s = new Stack<Point>();
 	}
-	//Get function grid
+	/**
+	 * @return grid
+	 */
 	public char[][] getGrid(){
 		return grid;
 	}
-	//Get's stack s
+	/**
+	 * Get's stack s
+	 * @return stack
+	 */
 	public Stack<Point> getStack(){
 		return s;
 	}
-	//Print´s maze(test function)
-	public void printMaze(char [][] g){
-		for(char [] l: g){
-			for(char c : l){
-				System.out.print(c);
-				System.out.print(' ');
-			}
-			System.out.println();
-		}
-	}
 	
-	//Generates the random Maze
+	/**
+	 * Generates the random Maze based on a size given
+	 */
 	public char[][] buildMaze(int size) throws IllegalArgumentException {
 		msize = size;
 		grid = new char [size][size];
 		boolean found = false;
 		
+		//While not found a reasonable maze(that passes all the tests)
 		while (!found) {
 			// Fills grid with 'X's
 			for (int i = 0; i < size; i++) {
@@ -116,13 +120,14 @@ public class MazeBuilder implements IMazeBuilder{
 			// Generates the random maze
 			while (!s.empty()) {
 				Point nextpos = getNextPos(s.peek());
-
+				
+				//Not possible
 				if (nextpos.x == -1 && nextpos.y == -1) {
 					s.pop();
-				} else {
+				} 
+				//Found next position
+				else {
 					grid[nextpos.x][nextpos.y] = ' ';
-					 //printMaze(grid);
-					 //System.out.println();
 					s.push(nextpos);
 				}
 			}
@@ -153,7 +158,11 @@ public class MazeBuilder implements IMazeBuilder{
 		return grid;
 	}
 	
-	
+	/**
+	 * Founds the next position for the path.
+	 * @param p
+	 * @return New position or (-1,-1) if is not possible and the last position is popped
+	 */
 	public Point getNextPos(Point p){
 		Random r = new Random();
 		

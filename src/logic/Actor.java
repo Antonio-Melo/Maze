@@ -1,7 +1,7 @@
 package logic;
 import java.awt.Point;
 /**
- * Class that represents a actor in the game
+ * Represents a actor in the game
  * @author António Melo  Edgar Passos
  * @version 1.0
  * @see Hero Dragon Sword
