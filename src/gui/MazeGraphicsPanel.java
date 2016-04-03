@@ -131,10 +131,12 @@ public class MazeGraphicsPanel extends JPanel implements KeyListener {
 		for (int f = 0; f < game.getDragons().size(); f++) {
 
 			Dragon myDragon = game.getDragons().get(f);
-			if (myDragon.getX() == game.getMySword().getX() && myDragon.getY() == game.getMySword().getY()) {
-				game.getMyMaze().getGrid()[myDragon.getX()][game.getMySword().getY()] = 'F';
-			} else
-				game.getMyMaze().getGrid()[myDragon.getX()][myDragon.getY()] = myDragon.getC();
+			if (!game.getMySword().isDead()) {
+				if (myDragon.getX() == game.getMySword().getX() && myDragon.getY() == game.getMySword().getY()) {
+					game.getMyMaze().getGrid()[myDragon.getX()][game.getMySword().getY()] = 'F';
+				} else
+					game.getMyMaze().getGrid()[myDragon.getX()][myDragon.getY()] = myDragon.getC();
+			}
 		}
 
 

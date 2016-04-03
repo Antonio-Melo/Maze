@@ -247,6 +247,7 @@ public class Game {
 		}
 		myMaze.placeActor(myHero);
 		myMaze.placeActor(mySword);
+		
 	}
 	/**
 	 * @return myMaze
