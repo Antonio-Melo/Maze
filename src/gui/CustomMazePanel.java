@@ -10,14 +10,17 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class CustomMazePanel extends JPanel {
+public class CustomMazePanel extends JPanel implements MouseListener {
 	private BufferedImage door;
 	private BufferedImage floor;
 	private BufferedImage box;
 	private char[][] grid;
 	private int x = 0, y = 0, width = 40, height = 40;
+	private char currentChar;
+	private int nDoors;
 
 	public CustomMazePanel(char[][] grid) {
 
@@ -43,6 +46,9 @@ public class CustomMazePanel extends JPanel {
 			e.printStackTrace();
 
 		}
+
+		addMouseListener(this);
+		requestFocus();
 	}
 
 	@Override
@@ -64,5 +70,63 @@ public class CustomMazePanel extends JPanel {
 
 			}
 		}
+	}
+
+	public void setCurrentChar(char c) {
+		currentChar = c;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		Point mousePos = getMousePosition();
+		double x = mousePos.getX();
+		double y = mousePos.getY();
+		
+		int xToEdit = (int)y/height;
+		int yToEdit = (int)x/width;
+		
+		if(currentChar == 'S' && ( (xToEdit == 0 && yToEdit == 0) || (xToEdit == 0 && yToEdit == grid.length-1) ||
+				(xToEdit == grid.length-1 && yToEdit == 0) || (xToEdit == grid.length-1 && yToEdit == grid.length-1) )){
+			JOptionPane.showMessageDialog(this, "Doors cannot be placed at corners");
+			return;
+		}
+		
+		if(currentChar == 'S')
+			nDoors++; 
+		
+		if(currentChar != 'S' && grid[xToEdit][yToEdit]== 'S')
+			nDoors--;
+		
+		grid[xToEdit][yToEdit] = currentChar;
+		repaint();
+			
+	}
+
+	public int getnDoors() {
+		return nDoors;
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 }

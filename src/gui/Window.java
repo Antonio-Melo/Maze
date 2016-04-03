@@ -8,6 +8,9 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JTable;
@@ -16,6 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.Font;
+import java.awt.Graphics;
+
 import javax.swing.JTextField;
 
 import javafx.scene.shape.Rectangle;
@@ -23,8 +28,11 @@ import logic.*;
 
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JProgressBar;
+import javax.swing.JCheckBox;
+import javax.swing.ImageIcon;
 
 public class Window {
 
@@ -45,6 +53,9 @@ public class Window {
 	private boolean customMaze = false;
 	private int size = 10;
 	private char[][] gameGrid;
+	private BufferedImage winImg;
+	private BufferedImage loseImg;
+
 	/**
 	 * Launch the application.
 	 */
@@ -77,7 +88,6 @@ public class Window {
 		frame.setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 900, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 
 		// Exit Button
 		JButton btnEndGame = new JButton("Exit");
@@ -90,9 +100,9 @@ public class Window {
 		frame.getContentPane().setLayout(null);
 		btnEndGame.setFont(new Font("Arial", Font.PLAIN, 14));
 		frame.getContentPane().add(btnEndGame);
-		
-		//Custom Maze Button
-		JButton btnNewButton = new JButton("Custom Maze");
+
+		// Custom Maze Button
+		JButton btnNewButton = new JButton("Create Custom Maze");
 		Window parent = this;
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -103,6 +113,27 @@ public class Window {
 		});
 		btnNewButton.setBounds(21, 104, 252, 23);
 		frame.getContentPane().add(btnNewButton);
+
+		// CustomMaze Checkbox
+		JCheckBox chckbxUseCustomMaze = new JCheckBox("Use Custom Maze");
+		chckbxUseCustomMaze.setBackground(Color.LIGHT_GRAY);
+		chckbxUseCustomMaze.setBounds(21, 126, 247, 23);
+		frame.getContentPane().add(chckbxUseCustomMaze);
+		chckbxUseCustomMaze.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+				if (chckbxUseCustomMaze.isSelected()) {
+					customMaze = true;
+					MazeDimension.setEditable(false);
+				}
+
+				else {
+					customMaze = false;
+					MazeDimension.setEditable(true);
+				}
+
+			}
+		});
 
 		// Dimension Maze Label
 		JLabel lblDimension = new JLabel("Dimension");
@@ -144,7 +175,7 @@ public class Window {
 		lblState.setBounds(387, 10, 48, 23);
 		lblState.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		frame.getContentPane().add(lblState);
-		
+
 		// Game progress bar
 		GameState = new JProgressBar();
 		GameState.setBounds(445, 11, 164, 20);
@@ -164,8 +195,9 @@ public class Window {
 			public void actionPerformed(ActionEvent arg0) {
 				move('l');
 				gpanel.requestFocus();
-			}});
-		//Right
+			}
+		});
+		// Right
 		btnRight = new JButton("Right");
 		btnRight.setBounds(164, 320, 109, 44);
 		btnRight.setEnabled(false);
@@ -174,8 +206,9 @@ public class Window {
 			public void actionPerformed(ActionEvent arg0) {
 				move('r');
 				gpanel.requestFocus();
-			}});
-		//Up
+			}
+		});
+		// Up
 		btnUp = new JButton("Up");
 		btnUp.setBounds(107, 265, 109, 44);
 		btnUp.setEnabled(false);
@@ -184,8 +217,9 @@ public class Window {
 			public void actionPerformed(ActionEvent arg0) {
 				move('u');
 				gpanel.requestFocus();
-			}});
-		//Down
+			}
+		});
+		// Down
 		btnDown = new JButton("Down");
 		btnDown.setBounds(107, 375, 109, 44);
 		btnDown.setEnabled(false);
@@ -194,39 +228,61 @@ public class Window {
 			public void actionPerformed(ActionEvent arg0) {
 				move('d');
 				gpanel.requestFocus();
-			}});
+			}
+			
+		});
 		
-		//Authors
+		//Image shown when the player loses
+		JLabel loseImage = new JLabel("");
+		loseImage.setIcon(new ImageIcon("res\\LoseImage.png"));
+		loseImage.setBounds(327, 219, 500, 200);
+		frame.getContentPane().add(loseImage);
+		loseImage.setVisible(false);
+		
+		//Image shown when the player wins
+		JLabel winImage = new JLabel("");
+		winImage.setIcon(new ImageIcon("res\\WinImage.png"));
+		winImage.setBounds(327, 219, 500, 200);
+		frame.getContentPane().add(winImage);
+		winImage.setVisible(false);
+		
+	
+
+		// Authors
 		JLabel lblAntnioMelo = new JLabel("Ant\u00F3nio Melo & Edgar Passos");
 		lblAntnioMelo.setBounds(92, 531, 195, 14);
 		frame.getContentPane().add(lblAntnioMelo);
 
-		
 		// Start button
 		JButton btnGenerateMaze = new JButton("Start");
 		btnGenerateMaze.setBounds(39, 156, 234, 44);
 		btnGenerateMaze.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnGenerateMaze.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				winImage.setVisible(false);
+				loseImage.setVisible(false);
+				
 				// Default numbers
 				int ndragons = 1;
 				String dragonType;
-				
-				// Size of Maze
-				try {
-					size = Integer.parseInt(MazeDimension.getText());
-				} catch (NumberFormatException e) {
-					JOptionPane.showMessageDialog(MazeDimension,
-							"Invalid maze dimension!\nInsert a valid integer or 10 will be used as default.");
-				}
 
-				if (size > 17) {
+				// Size of Maze
+				if (MazeDimension.isEditable())
+					try {
+						size = Integer.parseInt(MazeDimension.getText());
+					} catch (NumberFormatException e) {
+						JOptionPane.showMessageDialog(MazeDimension,
+								"Invalid maze dimension!\nInsert a valid integer or 10 will be used as default.");
+					}
+
+				if (size > 17 && !customMaze) {
 					JOptionPane.showMessageDialog(MazeDimension,
 							"Invalid maze dimension!\nThe maximum size is 17. Size 17 will be used.");
 					size = 17;
 				}
-				
-				else if(size < 4){
+
+				else if (size < 4 && !customMaze) {
 					JOptionPane.showMessageDialog(MazeDimension,
 							"Invalid maze dimension!\nThe minimum size is 4. Size 4 will be used, with 1 dragon");
 					size = 4;
@@ -267,46 +323,50 @@ public class Window {
 
 				// Starting game
 
-				if(gpanel != null)
+				if (gpanel != null)
 					frame.remove(gpanel);
-				
+
 				frame.repaint();
-				
-				if(!customMaze){
+
+				if (!customMaze) {
 					MazeBuilder m = new MazeBuilder();
 					gameGrid = m.buildMaze(size);
-					g = new Game(dragonType.toCharArray()[0],gameGrid, ndragons);
+					g = new Game(dragonType.toCharArray()[0], gameGrid, ndragons);
 				}
-				
-				else{
-					g = new Game(dragonType.toCharArray()[0],gameGrid, ndragons);
+
+				else {
+					for(int i = 0; i<gameGrid.length; i++)
+						for(int j = 0; j<gameGrid.length; j++)
+							if(gameGrid[i][j] != 'X' && gameGrid[i][j] != 'S' && gameGrid[i][j] != ' ' )
+								gameGrid[i][j] = ' ';
+					
+					g = new Game(dragonType.toCharArray()[0], gameGrid, ndragons);
 				}
-				
+
 				GameState.setBackground(Color.GREEN);
-				perc = 100/(g.getDragons().size());	
-				GameState.setValue(100-(perc*g.getDragons().size()));
-				
-				
+				perc = 100 / (g.getDragons().size());
+				GameState.setValue(100 - (perc * g.getDragons().size()));
+
 				gpanel = new MazeGraphicsPanel(g);
-				gpanel.setBounds(385, 40, 40*size,40*size);
+				gpanel.setBounds(385, 40, 40 * size, 40 * size);
 				frame.getContentPane().add(gpanel);
-				
-				//graf
+
+				// graf
 				gpanel.repaint();
-				//keys
+				// keys
 				gpanel.requestFocus();
 			}
 		});
 		frame.getContentPane().add(btnGenerateMaze);
-		
-
 	}
+		
+	
 
 	public void move(char d) {
 		g.play(d);
-		GameState.setValue(100-(perc*g.getDragons().size()));
-		
-		if(g.getMyHero().hasEscaped() || g.getMyHero().isDead()){
+		GameState.setValue(100 - (perc * g.getDragons().size()));
+
+		if (g.getMyHero().hasEscaped() ){
 			gpanel.repaint();
 			btnLeft.setEnabled(false);
 			btnRight.setEnabled(false);
@@ -315,8 +375,31 @@ public class Window {
 			GameState.setValue(100);
 			frame.remove(gpanel);
 			frame.repaint();
+			setGrid(null);
+			frame.getContentPane().getComponent(16).setVisible(true);
 		}
 		
+		if (g.getMyHero().isDead() ){
+			gpanel.repaint();
+			btnLeft.setEnabled(false);
+			btnRight.setEnabled(false);
+			btnUp.setEnabled(false);
+			btnDown.setEnabled(false);
+			GameState.setValue(100);
+			frame.remove(gpanel);
+			frame.repaint();
+			setGrid(null);
+			frame.getContentPane().getComponent(15).setVisible(true);
+		}
+
 		gpanel.repaint();
+	}
+
+	public void setGrid(char[][] grid) {
+		this.gameGrid = grid;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
 	}
 }
