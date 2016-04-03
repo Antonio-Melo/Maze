@@ -39,7 +39,6 @@ public class Window {
 	private JFrame frame;
 	private JTextField MazeDimension;
 	private JTextField MazeNumberOfDragons;
-	private JTextArea MazeArea;
 	private JButton btnLeft;
 	private JButton btnRight;
 	private JButton btnUp;
@@ -294,6 +293,12 @@ public class Window {
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(MazeDimension,
 							"Invalid number of enemies!\nInsert a valid integer or 1 will be used as default.");
+				}
+				
+				if(ndragons <=0 || ndragons > size ){
+					JOptionPane.showMessageDialog(MazeDimension,
+							"Invalid number of enemies!\nInsert a valid integer or 1 will be used as default.");
+					ndragons = 1;
 				}
 
 				// type of Dragons
