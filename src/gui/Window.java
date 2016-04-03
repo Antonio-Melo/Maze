@@ -45,7 +45,7 @@ public class Window {
 	private JButton btnUp;
 	private JButton btnDown;
 	private JProgressBar GameState;
-	private JTextArea Instructions;
+	private static JTextArea Instructions;
 	private Game g;
 	private int perc;
 	public static Window window;
@@ -198,6 +198,7 @@ public class Window {
 			public void actionPerformed(ActionEvent arg0) {
 				move('l');
 				gpanel.requestFocus();
+				setInstructionText("You moved to the Left!");
 			}
 		});
 		// Right
@@ -209,6 +210,7 @@ public class Window {
 			public void actionPerformed(ActionEvent arg0) {
 				move('r');
 				gpanel.requestFocus();
+				setInstructionText("You moved to the Right!");
 			}
 		});
 		// Up
@@ -220,6 +222,7 @@ public class Window {
 			public void actionPerformed(ActionEvent arg0) {
 				move('u');
 				gpanel.requestFocus();
+				setInstructionText("You moved Up!");
 			}
 		});
 		// Down
@@ -231,6 +234,7 @@ public class Window {
 			public void actionPerformed(ActionEvent arg0) {
 				move('d');
 				gpanel.requestFocus();
+				setInstructionText("You moved Down!");
 			}
 			
 		});
@@ -287,12 +291,12 @@ public class Window {
 						JOptionPane.showMessageDialog(MazeDimension,
 								"Invalid maze dimension!\nInsert a valid integer or 10 will be used as default.");
 					}
-/*
-				if (size > 17 && !customMaze) {
+
+				if (size > 50 && !customMaze) {
 					JOptionPane.showMessageDialog(MazeDimension,
-							"Invalid maze dimension!\nThe maximum size is 17. Size 17 will be used.");
-					size = 17;
-				}*/
+							"Invalid maze dimension!\nThe maximum size is 50. Size 50 will be used.");
+					size = 50;
+				}
 
 				else if (size < 4 && !customMaze) {
 					JOptionPane.showMessageDialog(MazeDimension,
@@ -364,6 +368,7 @@ public class Window {
 				GameState.setBackground(Color.GREEN);
 				perc = 100 / (g.getDragons().size());
 				GameState.setValue(100 - (perc * g.getDragons().size()));
+				setInstructionText("Move to start playing!");
 
 				gpanel = new MazeGraphicsPanel(g);
 				gpanel.setBackground(Color.LIGHT_GRAY);
@@ -391,6 +396,7 @@ public class Window {
 			btnRight.setEnabled(false);
 			btnUp.setEnabled(false);
 			btnDown.setEnabled(false);
+			setInstructionText("You Won!");
 			GameState.setValue(100);
 			frame.remove(gpanel);
 			frame.repaint();
@@ -404,6 +410,7 @@ public class Window {
 			btnRight.setEnabled(false);
 			btnUp.setEnabled(false);
 			btnDown.setEnabled(false);
+			setInstructionText("You lost!");
 			GameState.setValue(100);
 			frame.remove(gpanel);
 			frame.repaint();
@@ -420,5 +427,9 @@ public class Window {
 
 	public void setSize(int size) {
 		this.size = size;
+	}
+	
+	public void setInstructionText(String s){
+		Instructions.setText(s);
 	}
 }

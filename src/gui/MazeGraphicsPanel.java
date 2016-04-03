@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import logic.*;
 
@@ -111,20 +112,24 @@ public class MazeGraphicsPanel extends JPanel implements KeyListener {
 		case KeyEvent.VK_LEFT:
 		case KeyEvent.VK_A:
 			Window.window.move('l');
+			Window.window.setInstructionText("You moved to the Left!");
 			break;
 		case KeyEvent.VK_D:
 		case KeyEvent.VK_RIGHT:
 			Window.window.move('r');
+			Window.window.setInstructionText("You moved to the Right!");
 			break;
 
 		case KeyEvent.VK_UP:
 		case KeyEvent.VK_W:
 			Window.window.move('u');
+			Window.window.setInstructionText("You moved Up!");
 			break;
 
 		case KeyEvent.VK_DOWN:
 		case KeyEvent.VK_S:
 			Window.window.move('d');
+			Window.window.setInstructionText("You moved Down!");
 			break;
 		}
 	}
