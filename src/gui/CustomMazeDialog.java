@@ -2,23 +2,32 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Point;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 
-public class CustomMazeDialog extends JDialog {
-	
-	Window parentWindow;
+public class CustomMazeDialog extends JDialog implements MouseListener{
 
-	public void setParent(Window w1){
+	private Window parentWindow;
+	private char[][] grid;
+	private JPanel customPanel;
+	private int size = 4;
+
+	public void setParent(Window w1) {
 		this.parentWindow = w1;
 	}
+
 	private final JPanel contentPanel = new JPanel();
 
 	/**
@@ -45,19 +54,46 @@ public class CustomMazeDialog extends JDialog {
 		getContentPane().add(contentPanel);
 		contentPanel.setLayout(null);
 		{
-			JLabel lblMazeDimension = new JLabel("Maze Dimension");
-			lblMazeDimension.setBounds(10, 11, 139, 14);
-			contentPanel.add(lblMazeDimension);
-		}
-		{
-			JLabel label = new JLabel();
-			label.setBounds(103, 11, 46, 14);
-			contentPanel.add(label);
-		}
-		{
 			JButton minusBtn = new JButton("-");
 			minusBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+					if(size == 4){
+						JOptionPane.showMessageDialog(minusBtn,"Size cannot be lower than 4");
+						return;
+					}
+					
+					size--;
+					grid = new char[size][size];
+
+					for (int i = 0; i < size; i++) {
+						for (int j = 0; j < size; j++) {
+							grid[i][j] = ' ';
+						}
+					}
+					for (int i = 0; i < size; i++)
+						grid[i][0] = 'X';
+
+					for (int i = 0; i < size; i++)
+						grid[i][size - 1] = 'X';
+
+					for (int i = 0; i < size; i++)
+						grid[size - 1][i] = 'X';
+
+					for (int i = 0; i < size; i++)
+						grid[0][i] = 'X';
+
+					if (customPanel != null){
+						contentPanel.remove(customPanel);
+					}
+					
+					contentPanel.repaint();
+
+					customPanel = new CustomMazePanel(grid);
+					customPanel.setBounds(385, 40, 40 * size, 40 * size);
+					contentPanel.add(customPanel);
+					customPanel.repaint();
+
 				}
 			});
 			minusBtn.setBounds(10, 36, 64, 23);
@@ -67,6 +103,40 @@ public class CustomMazeDialog extends JDialog {
 			JButton plusBtn = new JButton("+");
 			plusBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					if(size == 17){
+						JOptionPane.showMessageDialog(plusBtn,"Size cannot be greater than 17");
+						return;
+					}
+					size++;
+					grid = new char[size][size];
+
+					for (int i = 0; i < size; i++) {
+						for (int j = 0; j < size; j++) {
+							grid[i][j] = ' ';
+						}
+					}
+					for (int i = 0; i < size; i++)
+						grid[i][0] = 'X';
+
+					for (int i = 0; i < size; i++)
+						grid[i][size - 1] = 'X';
+
+					for (int i = 0; i < size; i++)
+						grid[size - 1][i] = 'X';
+
+					for (int i = 0; i < size; i++)
+						grid[0][i] = 'X';
+
+					if (customPanel != null){
+						contentPanel.remove(customPanel);
+					}
+					
+					contentPanel.repaint();
+
+					customPanel = new CustomMazePanel(grid);
+					customPanel.setBounds(385, 40, 500,800);//40 * size, 40 * size);
+					contentPanel.add(customPanel);
+					customPanel.repaint();
 				}
 			});
 			plusBtn.setBounds(85, 36, 64, 23);
@@ -78,13 +148,13 @@ public class CustomMazeDialog extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 				}
 			});
-			boxBtn.setIcon(new ImageIcon("Z:\\LPOO\\Maze\\res\\box.png"));
+			boxBtn.setIcon(new ImageIcon("res\\box.png"));
 			boxBtn.setBounds(10, 184, 64, 69);
 			contentPanel.add(boxBtn);
 		}
 		{
 			JButton doorBtn = new JButton();
-			doorBtn.setIcon(new ImageIcon("Z:\\LPOO\\Maze\\res\\door.png"));
+			doorBtn.setIcon(new ImageIcon("res\\door.png"));
 			doorBtn.setBounds(85, 184, 64, 69);
 			contentPanel.add(doorBtn);
 		}
@@ -110,6 +180,41 @@ public class CustomMazeDialog extends JDialog {
 		}
 		{
 			JButton buttonNew = new JButton("New");
+			CustomMazeDialog dialog = this;
+			buttonNew.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+
+					grid = new char[size][size];
+
+					for (int i = 0; i < size; i++) {
+						for (int j = 0; j < size; j++) {
+							grid[i][j] = ' ';
+						}
+					}
+					for (int i = 0; i < size; i++)
+						grid[i][0] = 'X';
+
+					for (int i = 0; i < size; i++)
+						grid[i][size - 1] = 'X';
+
+					for (int i = 0; i < size; i++)
+						grid[size - 1][i] = 'X';
+
+					for (int i = 0; i < size; i++)
+						grid[0][i] = 'X';
+
+					if (customPanel != null){
+						getContentPane().remove(customPanel);
+					}
+					
+					contentPanel.repaint();
+					
+					customPanel = new CustomMazePanel(grid);
+					customPanel.setBounds(385, 40, 40 * size, 40 * size);
+					contentPanel.add(customPanel);
+					customPanel.repaint();
+				}
+			});
 			buttonNew.setBounds(10, 70, 139, 23);
 			contentPanel.add(buttonNew);
 		}
@@ -118,6 +223,47 @@ public class CustomMazeDialog extends JDialog {
 			label.setBounds(10, 537, 195, 14);
 			getContentPane().add(label);
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		double x, y;
+		Point mousePos = getMousePosition();
+		x = mousePos.getX();
+		y = mousePos.getY();
+		
+		//check if it is in the panel area
+		
+		if(x <385 || x > 385 + 40 * size || y < 40 || y > 40 * size)
+			return;
+		
+		else
+			System.out.println("oi");
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

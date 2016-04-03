@@ -76,7 +76,7 @@ public class MazeGraphicsPanel extends JPanel implements KeyListener {
 			e.printStackTrace();
 		}
 
-		// Stormtropper sleeping
+		// Door
 		try {
 			door = ImageIO.read(new File("res\\door.png"));
 		} catch (IOException e) {

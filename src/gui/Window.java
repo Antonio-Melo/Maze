@@ -220,10 +220,10 @@ public class Window {
 							"Invalid maze dimension!\nInsert a valid integer or 10 will be used as default.");
 				}
 
-				if (size > 23) {
+				if (size > 17) {
 					JOptionPane.showMessageDialog(MazeDimension,
-							"Invalid maze dimension!\nThe maximum size is 23. Size 23 will be used.");
-					size = 23;
+							"Invalid maze dimension!\nThe maximum size is 17. Size 17 will be used.");
+					size = 17;
 				}
 				
 				else if(size < 4){
