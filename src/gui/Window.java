@@ -105,7 +105,7 @@ public class Window {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Border b = new LineBorder(Color.DARK_GRAY,2);
+		Border b = new LineBorder(Color.BLACK,2);
 
 		frmStarWars = new JFrame();
 		frmStarWars.setTitle("Star Wars - LPOO 2016");
