@@ -89,7 +89,7 @@ public class Window {
 		frame.setResizable(false);
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		frame.setBackground(Color.WHITE);
-		frame.setBounds(100, 100, 1200, 700);
+		frame.setBounds(0, 0, 1200, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Exit Button
@@ -409,6 +409,7 @@ public class Window {
 			btnRight.setEnabled(false);
 			btnUp.setEnabled(false);
 			btnDown.setEnabled(false);
+			GameState.setBackground(Color.RED);
 			frame.remove(gpanel);
 			frame.repaint();
 			setGrid(null);

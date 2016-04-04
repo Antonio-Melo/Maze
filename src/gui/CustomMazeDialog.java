@@ -94,7 +94,7 @@ public class CustomMazeDialog extends JDialog {
 					contentPanel.repaint();
 
 					customPanel = new CustomMazePanel(grid);
-					customPanel.setBounds(385, 40, 40 * size, 40 * size);
+					customPanel.setBounds(170, 40, 40 * size, 40 * size);
 					contentPanel.add(customPanel);
 					customPanel.repaint();
 
@@ -138,7 +138,7 @@ public class CustomMazeDialog extends JDialog {
 					contentPanel.repaint();
 
 					customPanel = new CustomMazePanel(grid);
-					customPanel.setBounds(385, 40, 500,800);//40 * size, 40 * size);
+					customPanel.setBounds(170, 40, 500,800);//40 * size, 40 * size);
 					contentPanel.add(customPanel);
 					customPanel.repaint();
 				}
@@ -282,7 +282,7 @@ public class CustomMazeDialog extends JDialog {
 					contentPanel.repaint();
 					
 					customPanel = new CustomMazePanel(grid);
-					customPanel.setBounds(385, 40, 40 * size, 40 * size);
+					customPanel.setBounds(170, 40, 40 * size, 40 * size);
 					contentPanel.add(customPanel);
 					customPanel.repaint();
 				}
