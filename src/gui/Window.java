@@ -27,6 +27,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 import javafx.scene.shape.Rectangle;
 import logic.*;
@@ -102,19 +104,23 @@ public class Window {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		Border b = new LineBorder(Color.DARK_GRAY,2);
 
 		frmStarWars = new JFrame();
 		frmStarWars.setTitle("Star Wars - LPOO 2016");
 		frmStarWars.setIconImage(windowicon);
 		frmStarWars.setResizable(false);
-		frmStarWars.getContentPane().setBackground(Color.LIGHT_GRAY);
+		frmStarWars.getContentPane().setBackground(Color.DARK_GRAY);
 		frmStarWars.setBackground(Color.WHITE);
 		frmStarWars.setBounds(0, 0, 1200, 700);
 		frmStarWars.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Exit Button
 		JButton btnEndGame = new JButton("Exit");
+		btnEndGame.setForeground(new Color(255, 255, 255));
+		btnEndGame.setBackground(Color.RED);
 		btnEndGame.setBounds(39, 526, 234, 44);
+		btnEndGame.setBorder(b);
 		btnEndGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
@@ -126,6 +132,10 @@ public class Window {
 
 		// Custom Maze Button
 		JButton btnNewButton = new JButton("Create Custom Maze");
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnNewButton.setBackground(new Color(25, 25, 112));
+		btnNewButton.setBorder(b);
 		Window parent = this;
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -135,13 +145,15 @@ public class Window {
 				customDialog.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(21, 111, 252, 23);
+		btnNewButton.setBounds(21, 152, 252, 23);
 		frmStarWars.getContentPane().add(btnNewButton);
 
 		// CustomMaze Checkbox
 		JCheckBox chckbxUseCustomMaze = new JCheckBox("Use Custom Maze");
-		chckbxUseCustomMaze.setBackground(Color.LIGHT_GRAY);
-		chckbxUseCustomMaze.setBounds(21, 141, 247, 23);
+		chckbxUseCustomMaze.setFont(new Font("Arial", Font.PLAIN, 17));
+		chckbxUseCustomMaze.setForeground(Color.WHITE);
+		chckbxUseCustomMaze.setBackground(Color.DARK_GRAY);
+		chckbxUseCustomMaze.setBounds(21, 197, 247, 23);
 		frmStarWars.getContentPane().add(chckbxUseCustomMaze);
 		chckbxUseCustomMaze.addActionListener(new ActionListener() {
 
@@ -163,59 +175,77 @@ public class Window {
 
 		// Dimension Maze Label
 		JLabel lblDimension = new JLabel("Dimension");
-		lblDimension.setBounds(21, 11, 116, 23);
-		lblDimension.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblDimension.setForeground(Color.WHITE);
+		lblDimension.setBounds(10, 8, 116, 23);
+		lblDimension.setFont(new Font("Arial", Font.PLAIN, 17));
 		frmStarWars.getContentPane().add(lblDimension);
 		// Dimension Maze TextField
 		MazeDimension = new JTextField();
 		MazeDimension.setBounds(164, 11, 104, 20);
+		MazeDimension.setBorder(b);
 		frmStarWars.getContentPane().add(MazeDimension);
 		MazeDimension.setColumns(10);
 
 		// Number of Dragons Label
 		JLabel lblNumberOfDragons = new JLabel("Number of Enemies");
-		lblNumberOfDragons.setBounds(21, 39, 127, 24);
-		lblNumberOfDragons.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblNumberOfDragons.setForeground(Color.WHITE);
+		lblNumberOfDragons.setBounds(10, 42, 164, 24);
+		lblNumberOfDragons.setFont(new Font("Arial", Font.PLAIN, 17));
 		frmStarWars.getContentPane().add(lblNumberOfDragons);
 		// Number of Dragons TextField
 		MazeNumberOfDragons = new JTextField();
 		MazeNumberOfDragons.setBounds(164, 42, 104, 20);
+		MazeNumberOfDragons.setBorder(b);
 		frmStarWars.getContentPane().add(MazeNumberOfDragons);
 		MazeNumberOfDragons.setColumns(10);
 
 		// Type of Dragons Label
 		JLabel lblTypeOfDragons = new JLabel("Type of Enemies");
-		lblTypeOfDragons.setBounds(21, 74, 127, 23);
-		lblTypeOfDragons.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblTypeOfDragons.setForeground(Color.WHITE);
+		lblTypeOfDragons.setBounds(10, 71, 127, 23);
+		lblTypeOfDragons.setFont(new Font("Arial", Font.PLAIN, 17));
 		frmStarWars.getContentPane().add(lblTypeOfDragons);
 
 		// Type of Dragon ComboBox
 		JComboBox<String> comboBoxTypeDragons = new JComboBox<String>();
-		comboBoxTypeDragons.setBounds(164, 73, 104, 20);
+		comboBoxTypeDragons.setBounds(164, 73, 104, 23);
 		comboBoxTypeDragons
-				.setModel(new DefaultComboBoxModel<String>(new String[] { "", "Static", "Moving", "Moving/Sleeping" }));
+				.setModel(new DefaultComboBoxModel(new String[] {"Static", "Moving", "Moving/Sleeping"}));
+		comboBoxTypeDragons.setBorder(b);
 		frmStarWars.getContentPane().add(comboBoxTypeDragons);
-
+		
+		//Type of Hero
+		JComboBox<String> chooseHero = new JComboBox<String>();
+		chooseHero.setModel(new DefaultComboBoxModel(new String[] {"Luke Skywalker", "Obi-Wan Kenobi", "Master Yoda"}));
+		chooseHero.setBounds(164, 104, 104, 23);
+		chooseHero.setBorder(b);
+		frmStarWars.getContentPane().add(chooseHero);
+		
 		// Game State label
 		JLabel lblState = new JLabel("State ");
+		lblState.setForeground(Color.WHITE);
 		lblState.setBounds(387, 10, 48, 23);
-		lblState.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblState.setFont(new Font("Arial", Font.PLAIN, 17));
 		frmStarWars.getContentPane().add(lblState);
 
 		// Game progress bar
 		GameState = new JProgressBar();
 		GameState.setBounds(445, 11, 164, 20);
 		GameState.setStringPainted(true);
-		GameState.setBackground(Color.RED);
+		GameState.setBackground(new Color(178, 34, 34));
 		GameState.setForeground(Color.WHITE);
+		GameState.setBorder(b);
 		frmStarWars.getContentPane().add(GameState);
 
 		// Buttons
 
 		// Left
 		btnLeft = new JButton("Left");
-		btnLeft.setBounds(45, 353, 109, 44);
+		btnLeft.setForeground(new Color(255, 255, 255));
+		btnLeft.setBackground(new Color(0, 0, 255));
+		btnLeft.setBounds(45, 389, 109, 44);
 		btnLeft.setEnabled(false);
+		btnLeft.setBorder(b);
 		frmStarWars.getContentPane().add(btnLeft);
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -226,8 +256,11 @@ public class Window {
 		});
 		// Right
 		btnRight = new JButton("Right");
-		btnRight.setBounds(164, 353, 109, 44);
+		btnRight.setForeground(new Color(255, 255, 255));
+		btnRight.setBackground(new Color(0, 0, 255));
+		btnRight.setBounds(164, 389, 109, 44);
 		btnRight.setEnabled(false);
+		btnRight.setBorder(b);
 		frmStarWars.getContentPane().add(btnRight);
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -238,8 +271,11 @@ public class Window {
 		});
 		// Up
 		btnUp = new JButton("Up");
-		btnUp.setBounds(107, 298, 109, 44);
+		btnUp.setForeground(new Color(255, 255, 255));
+		btnUp.setBackground(new Color(0, 0, 255));
+		btnUp.setBounds(107, 334, 109, 44);
 		btnUp.setEnabled(false);
+		btnUp.setBorder(b);
 		frmStarWars.getContentPane().add(btnUp);
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -250,8 +286,11 @@ public class Window {
 		});
 		// Down
 		btnDown = new JButton("Down");
-		btnDown.setBounds(107, 408, 109, 44);
+		btnDown.setForeground(new Color(255, 255, 255));
+		btnDown.setBackground(new Color(0, 0, 255));
+		btnDown.setBounds(107, 444, 109, 44);
 		btnDown.setEnabled(false);
+		btnDown.setBorder(b);
 		frmStarWars.getContentPane().add(btnDown);
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -264,8 +303,9 @@ public class Window {
 
 		// Instructions area
 		Instructions = new JTextArea();
-		Instructions.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Instructions.setBackground(Color.LIGHT_GRAY);
+		Instructions.setForeground(Color.WHITE);
+		Instructions.setFont(new Font("Arial", Font.PLAIN, 17));
+		Instructions.setBackground(Color.DARK_GRAY);
 		Instructions.setEditable(false);
 		Instructions.setBounds(632, 11, 298, 23);
 		Instructions.setText("Fill the boxes and click Start to play !!");
@@ -287,13 +327,16 @@ public class Window {
 
 		// Authors
 		JLabel lblAntnioMelo = new JLabel("Ant\u00F3nio Melo & Edgar Passos");
+		lblAntnioMelo.setForeground(Color.WHITE);
 		lblAntnioMelo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblAntnioMelo.setBounds(49, 581, 236, 14);
+		lblAntnioMelo.setBounds(49, 581, 236, 23);
 		frmStarWars.getContentPane().add(lblAntnioMelo);
 
 		// Start button
 		JButton btnGenerateMaze = new JButton("Start");
-		btnGenerateMaze.setBounds(39, 189, 234, 44);
+		btnGenerateMaze.setBackground(new Color(0, 128, 0));
+		btnGenerateMaze.setForeground(Color.WHITE);
+		btnGenerateMaze.setBounds(39, 250, 234, 44);
 		btnGenerateMaze.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnGenerateMaze.addActionListener(new ActionListener() {
 
@@ -305,6 +348,8 @@ public class Window {
 				// Default numbers
 				int ndragons = 1;
 				String dragonType;
+				String heroType;
+				String hero = "";
 
 				// Size of Maze
 				if (MazeDimension.isEditable())
@@ -346,9 +391,6 @@ public class Window {
 				// type of Dragons
 				dragonType = (String) comboBoxTypeDragons.getSelectedItem();
 				switch (dragonType) {
-				case "":
-					dragonType = "0";
-					break;
 				case "Static":
 					dragonType = "0";
 					break;
@@ -361,6 +403,22 @@ public class Window {
 					dragonType = "2";
 					break;
 				}
+				
+				//type of hero
+				heroType = (String) chooseHero.getSelectedItem();
+				switch(heroType){
+				case "Luke Skywalker":
+					hero = "luke";
+					break;
+				case "Obi-Wan Kenobi":
+					hero = "obiwan";
+					break;
+				case "Master Yoda":
+					hero = "yoda";
+					break;
+				}
+
+				
 
 				// Enable buttons
 				btnLeft.setEnabled(true);
@@ -393,7 +451,7 @@ public class Window {
 				GameState.setValue(100 - (perc * g.getDragons().size()));
 				setInstructionText("Move to start playing!");
 
-				gpanel = new MazeGraphicsPanel(g);
+				gpanel = new MazeGraphicsPanel(g,hero);
 				gpanel.setBackground(Color.LIGHT_GRAY);
 				gpanel.setBounds(385, 40, 600, 600);
 				frmStarWars.getContentPane().add(gpanel);
@@ -404,10 +462,12 @@ public class Window {
 				gpanel.requestFocus();
 			}
 		});
+		btnGenerateMaze.setBorder(b);
 		frmStarWars.getContentPane().add(btnGenerateMaze);
 
 		// Github icon
 		JButton github = new JButton();
+		github.setBackground(Color.DARK_GRAY);
 		github.setIcon(new ImageIcon("res\\githubicon.png"));
 		github.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -423,7 +483,15 @@ public class Window {
 			}
 		});
 		github.setBounds(120, 606, 67, 54);
+		github.setBorder(b);
 		frmStarWars.getContentPane().add(github);
+		
+		JLabel lblHero = new JLabel("Hero");
+		lblHero.setForeground(Color.WHITE);
+		lblHero.setFont(new Font("Arial", Font.PLAIN, 17));
+		lblHero.setBounds(10, 98, 127, 30);
+		frmStarWars.getContentPane().add(lblHero);
+		
 	}
 
 	public void move(char d) {
@@ -440,7 +508,7 @@ public class Window {
 			frmStarWars.remove(gpanel);
 			frmStarWars.repaint();
 			setGrid(null);
-			frmStarWars.getContentPane().getComponent(17).setVisible(true);
+			frmStarWars.getContentPane().getComponent(18).setVisible(true);
 		}
 
 		if (g.getMyHero().isDead()) {
@@ -453,7 +521,7 @@ public class Window {
 			frmStarWars.remove(gpanel);
 			frmStarWars.repaint();
 			setGrid(null);
-			frmStarWars.getContentPane().getComponent(16).setVisible(true);
+			frmStarWars.getContentPane().getComponent(17).setVisible(true);
 		}
 
 		gpanel.repaint();

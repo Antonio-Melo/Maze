@@ -53,7 +53,7 @@ public class CustomMazePanel extends JPanel implements MouseListener {
 
 		// Luke
 		try {
-			hero1 = ImageIO.read(new File("res\\luke_front.png"));
+			hero1 = ImageIO.read(new File("res\\luke.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

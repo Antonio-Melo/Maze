@@ -27,21 +27,21 @@ public class MazeGraphicsPanel extends JPanel implements KeyListener {
 	private int x = 0, y = 0, width, height;
 	private Game game;
 
-	public MazeGraphicsPanel(Game g) {
+	public MazeGraphicsPanel(Game g,String hero) {
 		// Luke
 		try {
-			hero1 = ImageIO.read(new File("res\\luke_front.png"));
+			hero1 = ImageIO.read(new File("res\\"+hero+".png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		// Luke with lightsaber
 		try {
-			hero1l = ImageIO.read(new File("res\\luke_front_sword.png"));
+			hero1l = ImageIO.read(new File("res\\"+ hero+"_lightsaber"+".png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		// Lightsaber
 		try {
 			lightsaber = ImageIO.read(new File("res\\lightsaber.png"));

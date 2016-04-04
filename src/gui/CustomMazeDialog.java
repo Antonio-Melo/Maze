@@ -188,7 +188,7 @@ public class CustomMazeDialog extends JDialog {
 				((CustomMazePanel) customPanel).setCurrentChar('H');
 			}
 		});
-		heroBtn.setIcon(new ImageIcon("res\\luke_front.png"));
+		heroBtn.setIcon(new ImageIcon("res\\luke.png"));
 		heroBtn.setBounds(85, 220, 64, 69);
 		contentPanel.add(heroBtn);
 
@@ -399,7 +399,6 @@ public class CustomMazeDialog extends JDialog {
 					nDragons = 0;
 					nHeroes = 0;
 					nSwords = 0;
-					customPanel.setBounds(170, 40, 40 * size, 40 * size);
 					contentPanel.add(customPanel);
 					customPanel.repaint();
 				}
