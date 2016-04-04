@@ -440,9 +440,19 @@ public class Window {
 				}
 
 				else {
-					
-					activeGrid = customGrid.clone();
-					g = new Game(dragonType.toCharArray()[0], activeGrid);
+					if (customGrid != null) {
+						activeGrid = new char[customGrid.length][customGrid[0].length];
+						for (int i = 0; i < activeGrid.length; i++) {
+							for (int j = 0; j < activeGrid[0].length; j++) {
+								activeGrid[i][j] = customGrid[i][j];
+							}
+						}
+						g = new Game(dragonType.toCharArray()[0], activeGrid);
+					}else{
+						JOptionPane.showMessageDialog(btnNewButton,
+								"No custom maze done!\n Click in 'Generate Custom Maze' !!");
+						return;
+					}
 				}
 
 				GameState.setBackground(Color.GREEN);
@@ -452,7 +462,7 @@ public class Window {
 				setInstructionText("Move to start playing!");
 
 				gpanel = new MazeGraphicsPanel(g,hero);
-				gpanel.setBackground(Color.LIGHT_GRAY);
+				gpanel.setBackground(Color.DARK_GRAY);
 				gpanel.setBounds(385, 40, 600, 600);
 				frmStarWars.getContentPane().add(gpanel);
 
