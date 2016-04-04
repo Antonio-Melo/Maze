@@ -25,7 +25,7 @@ public class CustomMazeDialog extends JDialog {
 	private JPanel customPanel;
 	private int size = 4;
 	private boolean doorPlaced = false;
-	
+	int nDoors, nDragons, nHeroes, nSwords;
 
 	public void setParent(Window w1) {
 		this.parentWindow = w1;
@@ -60,12 +60,12 @@ public class CustomMazeDialog extends JDialog {
 			JButton minusBtn = new JButton("-");
 			minusBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
-					if(size == 4){
-						JOptionPane.showMessageDialog(minusBtn,"Size cannot be lower than 4");
+
+					if (size == 4) {
+						JOptionPane.showMessageDialog(minusBtn, "Size cannot be lower than 4");
 						return;
 					}
-					
+
 					size--;
 					grid = new char[size][size];
 
@@ -74,7 +74,7 @@ public class CustomMazeDialog extends JDialog {
 							grid[i][j] = ' ';
 						}
 					}
-					
+
 					for (int i = 0; i < size; i++)
 						grid[i][0] = 'X';
 
@@ -86,12 +86,11 @@ public class CustomMazeDialog extends JDialog {
 
 					for (int i = 0; i < size; i++)
 						grid[0][i] = 'X';
-					
 
-					if (customPanel != null){
+					if (customPanel != null) {
 						contentPanel.remove(customPanel);
 					}
-					
+
 					contentPanel.repaint();
 
 					customPanel = new CustomMazePanel(grid);
@@ -108,8 +107,8 @@ public class CustomMazeDialog extends JDialog {
 			JButton plusBtn = new JButton("+");
 			plusBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(size == 25){
-						JOptionPane.showMessageDialog(plusBtn,"Size cannot be greater than 25");
+					if (size == 25) {
+						JOptionPane.showMessageDialog(plusBtn, "Size cannot be greater than 25");
 						return;
 					}
 					size++;
@@ -132,15 +131,16 @@ public class CustomMazeDialog extends JDialog {
 					for (int i = 0; i < size; i++)
 						grid[0][i] = 'X';
 
-					if (customPanel != null){
+					if (customPanel != null) {
 						contentPanel.remove(customPanel);
 					}
-					
+
 					contentPanel.repaint();
 
 					customPanel = new CustomMazePanel(grid);
 					customPanel.setBackground(Color.LIGHT_GRAY);
-					customPanel.setBounds(170, 40, 480,480);//40 * size, 40 * size);
+					customPanel.setBounds(170, 40, 480, 480);// 40 * size, 40 *
+																// size);
 					contentPanel.add(customPanel);
 					customPanel.repaint();
 				}
@@ -152,25 +152,70 @@ public class CustomMazeDialog extends JDialog {
 			JButton boxBtn = new JButton();
 			boxBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					((CustomMazePanel)customPanel).setCurrentChar('X');
+					((CustomMazePanel) customPanel).setCurrentChar('X');
 				}
 			});
 			boxBtn.setIcon(new ImageIcon("res\\box.png"));
-			boxBtn.setBounds(10, 184, 64, 69);
+			boxBtn.setBounds(10, 140, 64, 69);
 			contentPanel.add(boxBtn);
 		}
 		{
 			JButton doorBtn = new JButton();
 			doorBtn.setIcon(new ImageIcon("res\\door.png"));
-			doorBtn.setBounds(85, 184, 64, 69);
+			doorBtn.setBounds(85, 140, 64, 69);
 			doorBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					((CustomMazePanel)customPanel).setCurrentChar('S');
-					
+					((CustomMazePanel) customPanel).setCurrentChar('S');
+
 				}
 			});
 			contentPanel.add(doorBtn);
 		}
+
+		JButton floorBtn = new JButton();
+		floorBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				((CustomMazePanel) customPanel).setCurrentChar(' ');
+			}
+		});
+		floorBtn.setIcon(new ImageIcon("res\\floor_tex.png"));
+		floorBtn.setBounds(10, 220, 64, 69);
+		contentPanel.add(floorBtn);
+
+		JButton heroBtn = new JButton();
+		heroBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				((CustomMazePanel) customPanel).setCurrentChar('H');
+			}
+		});
+		heroBtn.setIcon(new ImageIcon("res\\luke_front.png"));
+		heroBtn.setBounds(85, 220, 64, 69);
+		contentPanel.add(heroBtn);
+
+		JButton strooperBtn = new JButton();
+
+		strooperBtn.setIcon(new ImageIcon("res\\stormtrooper_front.png"));
+		strooperBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				((CustomMazePanel) customPanel).setCurrentChar('D');
+			}
+		});
+		strooperBtn.setBounds(10, 300, 64, 69);
+		contentPanel.add(strooperBtn);
+
+		JButton swordButton = new JButton();
+		swordButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				((CustomMazePanel) customPanel).setCurrentChar('E');
+			}
+		});
+		swordButton.setIcon(new ImageIcon("res\\lightsaber.png"));
+		swordButton.setBounds(85, 300, 64, 69);
+		contentPanel.add(swordButton);
+
+		JLabel label = new JLabel("Ant\u00F3nio Melo & Edgar Passos");
+		label.setBounds(10, 537, 195, 14);
+		getContentPane().add(label);
 		{
 			JButton btnCancel = new JButton("Cancel");
 			btnCancel.addActionListener(new ActionListener() {
@@ -186,65 +231,121 @@ public class CustomMazeDialog extends JDialog {
 			button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					for(int i =0; i< grid.length; i++){
-						for(int j = 0; j<grid.length; j++){
-							
+					nHeroes = 0;
+					nDoors = 0;
+					nDragons = 0;
+					nSwords = 0;
+
+					for (int i = 0; i < grid.length; i++) {
+						for (int j = 0; j < grid.length; j++) {
+
 						}
-					}
-					
-					if(((CustomMazePanel)customPanel).getnDoors() != 1){
-						JOptionPane.showMessageDialog(button, "Invalid number of doors!");
-						return;
-					}
-					
-					for (int i = 0; i < size; i++){
-						if(grid[i][0] == 'S')
-							doorPlaced = true;
-						if(grid[i][0] != 'S' && grid[i][0] != 'X'){
-							JOptionPane.showMessageDialog(button, "Borders must contain walls or doors only!");
-							return;
-						}
-						
 					}
 
-					for (int i = 0; i < size; i++){
-						if(grid[i][size - 1] == 'S')
+					for (int i = 0; i < size; i++) {
+						if (grid[i][0] == 'S')
 							doorPlaced = true;
-					
-						if(grid[i][size - 1] != 'S' && grid[i][size - 1] != 'X'){
+						if (grid[i][0] != 'S' && grid[i][0] != 'X') {
 							JOptionPane.showMessageDialog(button, "Borders must contain walls or doors only!");
 							return;
 						}
-					}
-					
-					
 
-					for (int i = 0; i < size; i++){
-						if(grid[size - 1][i] == 'S')
-							doorPlaced = true;
-					
-						if(grid[size - 1][i] != 'S' && grid[size - 1][i] != 'X'){
-							JOptionPane.showMessageDialog(button, "Borders must contain walls or doors only!");
-							return;
-						}
 					}
-					
 
-					for (int i = 0; i < size; i++){
-						if(grid[0][i] == 'S')
+					for (int i = 0; i < size; i++) {
+						if (grid[i][size - 1] == 'S')
 							doorPlaced = true;
-					
-						if(grid[0][i] != 'S' && grid[0][i] != 'X'){
+
+						if (grid[i][size - 1] != 'S' && grid[i][size - 1] != 'X') {
 							JOptionPane.showMessageDialog(button, "Borders must contain walls or doors only!");
 							return;
 						}
 					}
-					
-					if(!doorPlaced){
+
+					for (int i = 0; i < size; i++) {
+						if (grid[size - 1][i] == 'S')
+							doorPlaced = true;
+
+						if (grid[size - 1][i] != 'S' && grid[size - 1][i] != 'X') {
+							JOptionPane.showMessageDialog(button, "Borders must contain walls or doors only!");
+							return;
+						}
+					}
+
+					for (int i = 0; i < size; i++) {
+						if (grid[0][i] == 'S')
+							doorPlaced = true;
+
+						if (grid[0][i] != 'S' && grid[0][i] != 'X') {
+							JOptionPane.showMessageDialog(button, "Borders must contain walls or doors only!");
+							return;
+						}
+
+					}
+
+					if (!doorPlaced) {
 						JOptionPane.showMessageDialog(button, "Door must be placed at border!");
 						return;
 					}
-					
+
+					for (int i = 0; i < size; i++) {
+						for (int j = 0; j < size; j++) {
+							if (grid[i][j] == 'S')
+								nDoors++;
+							else if (grid[i][j] == 'H')
+								nHeroes++;
+							else if (grid[i][j] == 'E')
+								nSwords++;
+							else if (grid[i][j] == 'D')
+								nDragons++;
+						}
+					}
+
+					if (nSwords != 1) {
+						JOptionPane.showMessageDialog(button, "You must (only) have one lightsaber! You have "
+								+ nSwords + " lightsabers");
+						return;
+					}
+
+					if (nHeroes != 1) {
+						JOptionPane.showMessageDialog(button, "You must (only) have one hero! You have "
+								+ nHeroes + " heroes");
+						return;
+					}
+
+					if (nDragons < 1) {
+						JOptionPane.showMessageDialog(button, "You must place enemies!");
+						return;
+					}
+
+					if (nDoors != 1) {
+						JOptionPane.showMessageDialog(button, "Invalid number of doors!");
+						return;
+					}
+
+					/*
+					 * 
+					 * 
+					 * if (((CustomMazePanel) customPanel).getnDoors() != 1) {
+					 * JOptionPane.showMessageDialog(button,
+					 * "Invalid number of doors!"); return; }
+					 * 
+					 * if(((CustomMazePanel)customPanel).getnSwords() != 1) {
+					 * JOptionPane.showMessageDialog(button,
+					 * "You must (only) have one lightsaber! You have " +
+					 * ((CustomMazePanel)customPanel).getnSwords() +
+					 * " lightsabers"); return; }
+					 * 
+					 * if(((CustomMazePanel)customPanel).getnHeroes() != 1) {
+					 * JOptionPane.showMessageDialog(button,
+					 * "You must (only) have one hero! You have " +
+					 * ((CustomMazePanel)customPanel).getnHeroes() + " heroes");
+					 * return; }
+					 * 
+					 * if(((CustomMazePanel)customPanel).getnDragons() < 1) {
+					 * JOptionPane.showMessageDialog(button,
+					 * "You must place enemies!"); return; }
+					 */
 					parentWindow.setSize(grid.length);
 					parentWindow.setGrid(grid);
 					dispose();
@@ -277,13 +378,27 @@ public class CustomMazeDialog extends JDialog {
 					for (int i = 0; i < size; i++)
 						grid[0][i] = 'X';
 
-					if (customPanel != null){
+					if (customPanel != null) {
 						getContentPane().remove(customPanel);
 					}
-					
+
 					contentPanel.repaint();
-					
+
 					customPanel = new CustomMazePanel(grid);
+					customPanel.setBounds(170, 40, 480,
+							480);/*
+									 * ((CustomMazePanel)customPanel).setnDoors(
+									 * 0);
+									 * ((CustomMazePanel)customPanel).setnSwords
+									 * (0);
+									 * ((CustomMazePanel)customPanel).setnHeroes
+									 * (0); ((CustomMazePanel)customPanel).
+									 * setnDragons(0);
+									 */
+					nDoors = 0;
+					nDragons = 0;
+					nHeroes = 0;
+					nSwords = 0;
 					customPanel.setBounds(170, 40, 40 * size, 40 * size);
 					contentPanel.add(customPanel);
 					customPanel.repaint();
@@ -292,20 +407,7 @@ public class CustomMazeDialog extends JDialog {
 			buttonNew.setBounds(10, 70, 139, 23);
 			contentPanel.add(buttonNew);
 		}
-		
-		JButton floorBtn = new JButton();
-		floorBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				((CustomMazePanel)customPanel).setCurrentChar(' ');
-			}
-		});
-		floorBtn.setIcon(new ImageIcon("res\\floor_tex.png"));
-		floorBtn.setBounds(50, 264, 64, 69);
-		contentPanel.add(floorBtn);
-		{
-			JLabel label = new JLabel("Ant\u00F3nio Melo & Edgar Passos");
-			label.setBounds(10, 537, 195, 14);
-			getContentPane().add(label);
-		}
+
 	}
+
 }
