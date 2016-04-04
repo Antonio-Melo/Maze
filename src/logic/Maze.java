@@ -50,7 +50,7 @@ public class Maze {
 	 * @param a Actor to place
 	 */
 	public void placeActor(Actor a) {
-		if (!a.isDead())
+		if (!a.isDead() || (a instanceof Hero))
 			grid[a.getX()][a.getY()] = a.getC();
 	}
 	/**

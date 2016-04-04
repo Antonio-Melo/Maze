@@ -504,29 +504,28 @@ public class Window {
 
 	public void move(char d) {
 		g.play(d);
+		System.out.print(g.getMyMaze().toString(g.getDragons(), g.getMySword()));
+		gpanel.repaint();
 		GameState.setValue(100 - (perc * g.getDragons().size()));
-		if (g.getMyHero().hasEscaped()) {
-			gpanel.repaint();
+		if (g.getMyHero().hasEscaped()) {;
 			disableBtn();
 			GameState.setValue(100);
 			frmStarWars.remove(gpanel);
 			frmStarWars.repaint();
-			setGrid(null);
 			frmStarWars.getContentPane().getComponent(18).setVisible(true);
 		}
 
 		if (g.getMyHero().isDead()) {
-			gpanel.repaint();
+			disableBtn();
+			GameState.setBackground(Color.RED);
 			try {
+				gpanel.repaint();
 			    Thread.sleep(1000);                
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
-			disableBtn();
-			GameState.setBackground(Color.RED);
 			frmStarWars.remove(gpanel);
 			frmStarWars.repaint();
-			setGrid(null);
 			frmStarWars.getContentPane().getComponent(17).setVisible(true);
 		}
 
