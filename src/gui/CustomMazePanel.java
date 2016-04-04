@@ -18,7 +18,7 @@ public class CustomMazePanel extends JPanel implements MouseListener {
 	private BufferedImage floor;
 	private BufferedImage box;
 	private char[][] grid;
-	private int x = 0, y = 0, width = 40, height = 40;
+	private int x = 0, y = 0, width, height;
 	private char currentChar;
 	private int nDoors;
 
@@ -46,6 +46,8 @@ public class CustomMazePanel extends JPanel implements MouseListener {
 			e.printStackTrace();
 
 		}
+		width = 480/grid.length;
+		height = 480/grid.length;
 
 		addMouseListener(this);
 		requestFocus();
@@ -58,14 +60,14 @@ public class CustomMazePanel extends JPanel implements MouseListener {
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid.length; j++) {
 				if (grid[i][j] == 'X') {
-					g.drawImage(box, j * 40, i * 40, x + width, y + height, null);
+					g.drawImage(box, j *width, i * width, x + width, y + height, null);
 				}
 				if (grid[i][j] == ' ') {
-					g.drawImage(floor, j * 40, i * 40, x + width, y + height, null);
+					g.drawImage(floor, j * width, i * width, x + width, y + height, null);
 				}
 
 				if (grid[i][j] == 'S') {
-					g.drawImage(door, j * 40, i * 40, x + width, y + height, null);
+					g.drawImage(door, j * width, i * width, x + width, y + height, null);
 				}
 
 			}

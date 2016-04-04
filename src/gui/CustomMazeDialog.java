@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Point;
 
@@ -94,7 +95,7 @@ public class CustomMazeDialog extends JDialog {
 					contentPanel.repaint();
 
 					customPanel = new CustomMazePanel(grid);
-					customPanel.setBounds(170, 40, 40 * size, 40 * size);
+					customPanel.setBounds(170, 40, 480, 480);
 					contentPanel.add(customPanel);
 					customPanel.repaint();
 
@@ -107,8 +108,8 @@ public class CustomMazeDialog extends JDialog {
 			JButton plusBtn = new JButton("+");
 			plusBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(size == 12){
-						JOptionPane.showMessageDialog(plusBtn,"Size cannot be greater than 12");
+					if(size == 25){
+						JOptionPane.showMessageDialog(plusBtn,"Size cannot be greater than 25");
 						return;
 					}
 					size++;
@@ -138,7 +139,8 @@ public class CustomMazeDialog extends JDialog {
 					contentPanel.repaint();
 
 					customPanel = new CustomMazePanel(grid);
-					customPanel.setBounds(170, 40, 500,800);//40 * size, 40 * size);
+					customPanel.setBackground(Color.LIGHT_GRAY);
+					customPanel.setBounds(170, 40, 480,480);//40 * size, 40 * size);
 					contentPanel.add(customPanel);
 					customPanel.repaint();
 				}
