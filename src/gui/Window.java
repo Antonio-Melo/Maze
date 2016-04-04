@@ -5,12 +5,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JTable;
@@ -95,7 +100,6 @@ public class Window {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		
 		
 		frmStarWars = new JFrame();
@@ -207,7 +211,7 @@ public class Window {
 
 		// Left
 		btnLeft = new JButton("Left");
-		btnLeft.setBounds(39, 320, 109, 44);
+		btnLeft.setBounds(45, 353, 109, 44);
 		btnLeft.setEnabled(false);
 		frmStarWars.getContentPane().add(btnLeft);
 		btnLeft.addActionListener(new ActionListener() {
@@ -219,7 +223,7 @@ public class Window {
 		});
 		// Right
 		btnRight = new JButton("Right");
-		btnRight.setBounds(164, 320, 109, 44);
+		btnRight.setBounds(164, 353, 109, 44);
 		btnRight.setEnabled(false);
 		frmStarWars.getContentPane().add(btnRight);
 		btnRight.addActionListener(new ActionListener() {
@@ -231,7 +235,7 @@ public class Window {
 		});
 		// Up
 		btnUp = new JButton("Up");
-		btnUp.setBounds(107, 265, 109, 44);
+		btnUp.setBounds(107, 298, 109, 44);
 		btnUp.setEnabled(false);
 		frmStarWars.getContentPane().add(btnUp);
 		btnUp.addActionListener(new ActionListener() {
@@ -243,7 +247,7 @@ public class Window {
 		});
 		// Down
 		btnDown = new JButton("Down");
-		btnDown.setBounds(107, 375, 109, 44);
+		btnDown.setBounds(107, 408, 109, 44);
 		btnDown.setEnabled(false);
 		frmStarWars.getContentPane().add(btnDown);
 		btnDown.addActionListener(new ActionListener() {
@@ -282,7 +286,8 @@ public class Window {
 
 		// Authors
 		JLabel lblAntnioMelo = new JLabel("Ant\u00F3nio Melo & Edgar Passos");
-		lblAntnioMelo.setBounds(90, 581, 195, 14);
+		lblAntnioMelo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblAntnioMelo.setBounds(49, 581, 236, 14);
 		frmStarWars.getContentPane().add(lblAntnioMelo);
 
 		// Start button
@@ -398,6 +403,25 @@ public class Window {
 			}
 		});
 		frmStarWars.getContentPane().add(btnGenerateMaze);
+		
+		//Git hubicon
+		JButton github = new JButton();
+		github.setIcon(new ImageIcon("res\\githubicon.png"));
+		github.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				URL u=null;
+				try {
+					u = new URL("https://github.com/Antonio-Melo/Maze");
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				openWebpage(u);
+			}
+		});
+		github.setBounds(120, 606, 67, 54);
+		frmStarWars.getContentPane().add(github);
 	}
 		
 	
@@ -454,5 +478,24 @@ public class Window {
 		}
 		
 		Instructions.setText(s);
+	}
+	
+	public static void openWebpage(URI uri) {
+	    Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+	    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+	        try {
+	            desktop.browse(uri);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+
+	public static void openWebpage(URL url) {
+	    try {
+	        openWebpage(url.toURI());
+	    } catch (URISyntaxException e) {
+	        e.printStackTrace();
+	    }
 	}
 }
