@@ -441,7 +441,12 @@ public class Window {
 
 				else {
 					
-					activeGrid = customGrid.clone();
+					activeGrid = new char[customGrid.length][];
+					for(int i = 0; i < customGrid.length; i++){
+						activeGrid[i] = customGrid[i].clone();
+					}
+
+					
 					g = new Game(dragonType.toCharArray()[0], activeGrid);
 				}
 
