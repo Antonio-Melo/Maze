@@ -52,12 +52,14 @@ public class CustomMazeDialog extends JDialog {
 	public CustomMazeDialog() {
 		setBounds(100, 100, 900, 600);
 		getContentPane().setLayout(null);
+		contentPanel.setBackground(Color.BLACK);
 		contentPanel.setBounds(0, 0, 884, 529);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel);
 		contentPanel.setLayout(null);
 		{
 			JButton minusBtn = new JButton("-");
+			minusBtn.setBackground(Color.ORANGE);
 			minusBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
@@ -105,6 +107,7 @@ public class CustomMazeDialog extends JDialog {
 		}
 		{
 			JButton plusBtn = new JButton("+");
+			plusBtn.setBackground(Color.ORANGE);
 			plusBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if (size == 25) {
@@ -150,6 +153,7 @@ public class CustomMazeDialog extends JDialog {
 		}
 		{
 			JButton boxBtn = new JButton();
+			boxBtn.setBackground(Color.ORANGE);
 			boxBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					((CustomMazePanel) customPanel).setCurrentChar('X');
@@ -161,6 +165,7 @@ public class CustomMazeDialog extends JDialog {
 		}
 		{
 			JButton doorBtn = new JButton();
+			doorBtn.setBackground(Color.ORANGE);
 			doorBtn.setIcon(new ImageIcon("res\\door.png"));
 			doorBtn.setBounds(85, 140, 64, 69);
 			doorBtn.addActionListener(new ActionListener() {
@@ -173,6 +178,7 @@ public class CustomMazeDialog extends JDialog {
 		}
 
 		JButton floorBtn = new JButton();
+		floorBtn.setBackground(Color.ORANGE);
 		floorBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				((CustomMazePanel) customPanel).setCurrentChar(' ');
@@ -183,6 +189,7 @@ public class CustomMazeDialog extends JDialog {
 		contentPanel.add(floorBtn);
 
 		JButton heroBtn = new JButton();
+		heroBtn.setBackground(Color.ORANGE);
 		heroBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				((CustomMazePanel) customPanel).setCurrentChar('H');
@@ -193,6 +200,7 @@ public class CustomMazeDialog extends JDialog {
 		contentPanel.add(heroBtn);
 
 		JButton strooperBtn = new JButton();
+		strooperBtn.setBackground(Color.ORANGE);
 
 		strooperBtn.setIcon(new ImageIcon("res\\stormtrooper_front.png"));
 		strooperBtn.addActionListener(new ActionListener() {
@@ -204,6 +212,7 @@ public class CustomMazeDialog extends JDialog {
 		contentPanel.add(strooperBtn);
 
 		JButton swordButton = new JButton();
+		swordButton.setBackground(Color.ORANGE);
 		swordButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				((CustomMazePanel) customPanel).setCurrentChar('E');
@@ -218,6 +227,7 @@ public class CustomMazeDialog extends JDialog {
 		getContentPane().add(label);
 		{
 			JButton btnCancel = new JButton("Cancel");
+			btnCancel.setBackground(Color.ORANGE);
 			btnCancel.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					dispose();
@@ -228,6 +238,7 @@ public class CustomMazeDialog extends JDialog {
 		}
 		{
 			JButton button = new JButton("OK");
+			button.setBackground(Color.ORANGE);
 			button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
@@ -356,6 +367,7 @@ public class CustomMazeDialog extends JDialog {
 		}
 		{
 			JButton buttonNew = new JButton("New");
+			buttonNew.setBackground(Color.ORANGE);
 			buttonNew.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 

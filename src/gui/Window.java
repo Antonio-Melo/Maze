@@ -111,15 +111,15 @@ public class Window {
 		frmStarWars.setTitle("Star Wars - LPOO 2016");
 		frmStarWars.setIconImage(windowicon);
 		frmStarWars.setResizable(false);
-		frmStarWars.getContentPane().setBackground(Color.DARK_GRAY);
+		frmStarWars.getContentPane().setBackground(Color.BLACK);
 		frmStarWars.setBackground(Color.WHITE);
 		frmStarWars.setBounds(0, 0, 1200, 700);
 		frmStarWars.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Exit Button
 		JButton btnEndGame = new JButton("Exit");
-		btnEndGame.setForeground(new Color(255, 255, 255));
-		btnEndGame.setBackground(Color.RED);
+		btnEndGame.setForeground(Color.BLACK);
+		btnEndGame.setBackground(Color.ORANGE);
 		btnEndGame.setBounds(39, 526, 234, 44);
 		btnEndGame.setBorder(b);
 		btnEndGame.addActionListener(new ActionListener() {
@@ -133,9 +133,9 @@ public class Window {
 
 		// Custom Maze Button
 		JButton btnNewButton = new JButton("Create Custom Maze");
-		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setForeground(Color.BLACK);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnNewButton.setBackground(new Color(25, 25, 112));
+		btnNewButton.setBackground(Color.ORANGE);
 		btnNewButton.setBorder(b);
 		Window parent = this;
 		btnNewButton.addActionListener(new ActionListener() {
@@ -153,7 +153,7 @@ public class Window {
 		JCheckBox chckbxUseCustomMaze = new JCheckBox("Use Custom Maze");
 		chckbxUseCustomMaze.setFont(new Font("Arial", Font.PLAIN, 17));
 		chckbxUseCustomMaze.setForeground(Color.WHITE);
-		chckbxUseCustomMaze.setBackground(Color.DARK_GRAY);
+		chckbxUseCustomMaze.setBackground(Color.BLACK);
 		chckbxUseCustomMaze.setBounds(21, 197, 247, 23);
 		frmStarWars.getContentPane().add(chckbxUseCustomMaze);
 		chckbxUseCustomMaze.addActionListener(new ActionListener() {
@@ -242,8 +242,8 @@ public class Window {
 
 		// Left
 		btnLeft = new JButton("Left");
-		btnLeft.setForeground(new Color(255, 255, 255));
-		btnLeft.setBackground(new Color(0, 0, 255));
+		btnLeft.setForeground(Color.BLACK);
+		btnLeft.setBackground(Color.ORANGE);
 		btnLeft.setBounds(45, 389, 109, 44);
 		btnLeft.setEnabled(false);
 		btnLeft.setBorder(b);
@@ -257,8 +257,8 @@ public class Window {
 		});
 		// Right
 		btnRight = new JButton("Right");
-		btnRight.setForeground(new Color(255, 255, 255));
-		btnRight.setBackground(new Color(0, 0, 255));
+		btnRight.setForeground(Color.BLACK);
+		btnRight.setBackground(Color.ORANGE);
 		btnRight.setBounds(164, 389, 109, 44);
 		btnRight.setEnabled(false);
 		btnRight.setBorder(b);
@@ -272,8 +272,8 @@ public class Window {
 		});
 		// Up
 		btnUp = new JButton("Up");
-		btnUp.setForeground(new Color(255, 255, 255));
-		btnUp.setBackground(new Color(0, 0, 255));
+		btnUp.setForeground(Color.BLACK);
+		btnUp.setBackground(Color.ORANGE);
 		btnUp.setBounds(107, 334, 109, 44);
 		btnUp.setEnabled(false);
 		btnUp.setBorder(b);
@@ -287,8 +287,8 @@ public class Window {
 		});
 		// Down
 		btnDown = new JButton("Down");
-		btnDown.setForeground(new Color(255, 255, 255));
-		btnDown.setBackground(new Color(0, 0, 255));
+		btnDown.setForeground(Color.BLACK);
+		btnDown.setBackground(Color.ORANGE);
 		btnDown.setBounds(107, 444, 109, 44);
 		btnDown.setEnabled(false);
 		btnDown.setBorder(b);
@@ -306,7 +306,7 @@ public class Window {
 		Instructions = new JTextArea();
 		Instructions.setForeground(Color.WHITE);
 		Instructions.setFont(new Font("Arial", Font.PLAIN, 17));
-		Instructions.setBackground(Color.DARK_GRAY);
+		Instructions.setBackground(Color.BLACK);
 		Instructions.setEditable(false);
 		Instructions.setBounds(632, 11, 298, 23);
 		Instructions.setText("Fill the boxes and click Start to play !!");
@@ -335,8 +335,8 @@ public class Window {
 
 		// Start button
 		JButton btnGenerateMaze = new JButton("Start");
-		btnGenerateMaze.setBackground(new Color(0, 128, 0));
-		btnGenerateMaze.setForeground(Color.WHITE);
+		btnGenerateMaze.setBackground(Color.ORANGE);
+		btnGenerateMaze.setForeground(Color.BLACK);
 		btnGenerateMaze.setBounds(39, 250, 234, 44);
 		btnGenerateMaze.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnGenerateMaze.addActionListener(new ActionListener() {
@@ -475,7 +475,7 @@ public class Window {
 
 		// Github icon
 		JButton github = new JButton();
-		github.setBackground(Color.DARK_GRAY);
+		github.setBackground(Color.BLACK);
 		github.setIcon(new ImageIcon("res\\githubicon.png"));
 		github.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
