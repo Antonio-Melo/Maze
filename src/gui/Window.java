@@ -440,19 +440,16 @@ public class Window {
 				}
 
 				else {
-					if (customGrid != null) {
-						activeGrid = new char[customGrid.length][customGrid[0].length];
-						for (int i = 0; i < activeGrid.length; i++) {
-							for (int j = 0; j < activeGrid[0].length; j++) {
-								activeGrid[i][j] = customGrid[i][j];
-							}
-						}
-						g = new Game(dragonType.toCharArray()[0], activeGrid);
-					}else{
-						JOptionPane.showMessageDialog(btnNewButton,
-								"No custom maze done!\n Click in 'Generate Custom Maze' !!");
-						return;
+
+					
+					activeGrid = new char[customGrid.length][];
+					for(int i = 0; i < customGrid.length; i++){
+						activeGrid[i] = customGrid[i].clone();
 					}
+
+					
+					g = new Game(dragonType.toCharArray()[0], activeGrid);
+
 				}
 
 				GameState.setBackground(Color.GREEN);
