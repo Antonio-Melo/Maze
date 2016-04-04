@@ -510,10 +510,7 @@ public class Window {
 		setInstructionText("You won!");
 		if (g.getMyHero().hasEscaped()) {
 			gpanel.repaint();
-			btnLeft.setEnabled(false);
-			btnRight.setEnabled(false);
-			btnUp.setEnabled(false);
-			btnDown.setEnabled(false);
+			disableBtn();
 			GameState.setValue(100);
 			frmStarWars.remove(gpanel);
 			frmStarWars.repaint();
@@ -523,10 +520,7 @@ public class Window {
 
 		if (g.getMyHero().isDead()) {
 			gpanel.repaint();
-			btnLeft.setEnabled(false);
-			btnRight.setEnabled(false);
-			btnUp.setEnabled(false);
-			btnDown.setEnabled(false);
+			disableBtn();
 			GameState.setBackground(Color.RED);
 			frmStarWars.remove(gpanel);
 			frmStarWars.repaint();
@@ -543,6 +537,13 @@ public class Window {
 
 	public void setSize(int size) {
 		this.size = size;
+	}
+	
+	public void disableBtn(){
+		btnLeft.setEnabled(false);
+		btnRight.setEnabled(false);
+		btnUp.setEnabled(false);
+		btnDown.setEnabled(false);
 	}
 
 	public void setInstructionText(String s) {
