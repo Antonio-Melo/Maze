@@ -505,7 +505,6 @@ public class Window {
 	public void move(char d) {
 		g.play(d);
 		GameState.setValue(100 - (perc * g.getDragons().size()));
-		setInstructionText("You won!");
 		if (g.getMyHero().hasEscaped()) {
 			gpanel.repaint();
 			disableBtn();
