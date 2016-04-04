@@ -504,7 +504,6 @@ public class Window {
 
 	public void move(char d) {
 		g.play(d);
-		System.out.print(g.getMyMaze().toString(g.getDragons(), g.getMySword()));
 		gpanel.repaint();
 		GameState.setValue(100 - (perc * g.getDragons().size()));
 		if (g.getMyHero().hasEscaped()) {;
