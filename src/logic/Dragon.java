@@ -124,12 +124,12 @@ public class Dragon extends Actor {
 				|| ((getX() + x) == myHero.getX() && (getY() + y - 1) == myHero.getY())) {
 			
 			if(myHero.hasSword()){
+				cmoveDragon(getX() + x, getY() + y);
 				this.isKilled();
 				return;
 			}else{
-				myHero.isKilled();
-
 				cmoveDragon(getX() + x, getY() + y);
+				myHero.isKilled();
 				return;
 			}
 		}

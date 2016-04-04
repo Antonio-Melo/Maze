@@ -36,6 +36,7 @@ import logic.*;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.imageio.ImageIO;
+import javax.net.ssl.SSLException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JProgressBar;
 import javax.swing.JCheckBox;
@@ -517,6 +518,11 @@ public class Window {
 
 		if (g.getMyHero().isDead()) {
 			gpanel.repaint();
+			try {
+			    Thread.sleep(1000);                
+			} catch(InterruptedException ex) {
+			    Thread.currentThread().interrupt();
+			}
 			disableBtn();
 			GameState.setBackground(Color.RED);
 			frmStarWars.remove(gpanel);

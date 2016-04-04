@@ -131,6 +131,7 @@ public class Hero extends Actor {
 					if(dragons.get(i).isAsleep()){
 						cmoveHero(getX() + x, getY() + y);	
 					}else{
+						cmoveHero(getX() + x, getY() + y);
 						isKilled();
 					}
 					return;
