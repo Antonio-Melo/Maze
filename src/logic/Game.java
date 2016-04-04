@@ -198,7 +198,32 @@ public class Game {
 	}
 
 	
-	
+	/**
+	 * Constructor used for custom games, it scans the maze adding the elements found
+	 * 
+	 * 
+	 * @param type2 type of game
+	 * @param gameGrid
+	 */
+	public Game(char type2, char[][] gameGrid) {
+		myMaze = new Maze(gameGrid);
+		dragons = new ArrayList<Dragon>();
+		
+		Random rng = new Random(System.currentTimeMillis());
+		this.type = type2;
+		
+		for(int i = 0; i<gameGrid.length; i++){
+			for(int j = 0; j < gameGrid.length; j++){
+				if (gameGrid[i][j] == 'D')
+					dragons.add(new Dragon(i,j,'D'));
+				else if (gameGrid[i][j] == 'H')
+					myHero = new Hero(i,j,'H');
+				else if (gameGrid[i][j] == 'E')
+					mySword = new Sword(i,j,'E');
+			}
+		}
+	}
+
 	/**
 	 * Plays a turn based on a char
 	 * @param m character

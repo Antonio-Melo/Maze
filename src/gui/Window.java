@@ -94,14 +94,13 @@ public class Window {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		try {
 			settings = ImageIO.read(new File("res\\settings.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		frmStarWars = new JFrame();
 		frmStarWars.setTitle("Star Wars - LPOO 2016");
 		frmStarWars.setIconImage(windowicon);
@@ -148,11 +147,13 @@ public class Window {
 				if (chckbxUseCustomMaze.isSelected()) {
 					customMaze = true;
 					MazeDimension.setEditable(false);
+					MazeNumberOfDragons.setEditable(false);
 				}
 
 				else {
 					customMaze = false;
 					MazeDimension.setEditable(true);
+					MazeNumberOfDragons.setEditable(true);
 				}
 
 			}
@@ -256,10 +257,10 @@ public class Window {
 				gpanel.requestFocus();
 				setInstructionText("You moved Down!");
 			}
-			
+
 		});
-		
-		//Instructions area
+
+		// Instructions area
 		Instructions = new JTextArea();
 		Instructions.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Instructions.setBackground(Color.LIGHT_GRAY);
@@ -267,22 +268,20 @@ public class Window {
 		Instructions.setBounds(632, 11, 298, 23);
 		Instructions.setText("Fill the boxes and click Start to play !!");
 		frmStarWars.getContentPane().add(Instructions);
-		
-		//Image shown when the player loses
+
+		// Image shown when the player loses
 		JLabel loseImage = new JLabel("");
 		loseImage.setIcon(new ImageIcon("res\\LoseImage.png"));
 		loseImage.setBounds(327, 250, 860, 300);
 		frmStarWars.getContentPane().add(loseImage);
 		loseImage.setVisible(false);
-		
-		//Image shown when the player wins
+
+		// Image shown when the player wins
 		JLabel winImage = new JLabel("");
 		winImage.setIcon(new ImageIcon("res\\WinImage.jpeg"));
 		winImage.setBounds(327, 250, 860, 300);
 		frmStarWars.getContentPane().add(winImage);
 		winImage.setVisible(false);
-		
-	
 
 		// Authors
 		JLabel lblAntnioMelo = new JLabel("Ant\u00F3nio Melo & Edgar Passos");
@@ -295,11 +294,13 @@ public class Window {
 		btnGenerateMaze.setBounds(39, 189, 234, 44);
 		btnGenerateMaze.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnGenerateMaze.addActionListener(new ActionListener() {
+			private char[][] customGrid;
+
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				winImage.setVisible(false);
 				loseImage.setVisible(false);
-				
+
 				// Default numbers
 				int ndragons = 1;
 				String dragonType;
@@ -326,17 +327,19 @@ public class Window {
 					ndragons = 1;
 				}
 				// Number of Dragons
-				try {
-					ndragons = Integer.parseInt(MazeNumberOfDragons.getText());
-				} catch (NumberFormatException e) {
-					JOptionPane.showMessageDialog(MazeDimension,
-							"Invalid number of enemies!\nInsert a valid integer or 1 will be used as default.");
-				}
-				
-				if(ndragons <=0 || ndragons > size ){
-					JOptionPane.showMessageDialog(MazeDimension,
-							"Invalid number of enemies!\nInsert a valid integer or 1 will be used as default.");
-					ndragons = 1;
+				if (MazeNumberOfDragons.isEditable()) {
+					try {
+						ndragons = Integer.parseInt(MazeNumberOfDragons.getText());
+					} catch (NumberFormatException e) {
+						JOptionPane.showMessageDialog(MazeDimension,
+								"Invalid number of enemies!\nInsert a valid integer or 1 will be used as default.");
+					}
+
+					if (ndragons <= 0 || ndragons > size) {
+						JOptionPane.showMessageDialog(MazeDimension,
+								"Invalid number of enemies!\nInsert a valid integer or 1 will be used as default.");
+						ndragons = 1;
+					}
 				}
 
 				// type of Dragons
@@ -378,16 +381,13 @@ public class Window {
 				}
 
 				else {
-					for(int i = 0; i<gameGrid.length; i++)
-						for(int j = 0; j<gameGrid.length; j++)
-							if(gameGrid[i][j] != 'X' && gameGrid[i][j] != 'S' && gameGrid[i][j] != ' ' )
-								gameGrid[i][j] = ' ';
-					
-					g = new Game(dragonType.toCharArray()[0], gameGrid, ndragons);
+					customGrid = gameGrid.clone();
+					g = new Game(dragonType.toCharArray()[0], customGrid);
 				}
 
 				GameState.setBackground(Color.GREEN);
 				perc = 100 / (g.getDragons().size());
+
 				GameState.setValue(100 - (perc * g.getDragons().size()));
 				setInstructionText("Move to start playing!");
 
@@ -403,34 +403,32 @@ public class Window {
 			}
 		});
 		frmStarWars.getContentPane().add(btnGenerateMaze);
-		
-		//Git hubicon
+
+		// Github icon
 		JButton github = new JButton();
 		github.setIcon(new ImageIcon("res\\githubicon.png"));
 		github.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				URL u=null;
+				URL u = null;
 				try {
 					u = new URL("https://github.com/Antonio-Melo/Maze");
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 				openWebpage(u);
 			}
 		});
 		github.setBounds(120, 606, 67, 54);
 		frmStarWars.getContentPane().add(github);
 	}
-		
-	
 
 	public void move(char d) {
 		g.play(d);
 		GameState.setValue(100 - (perc * g.getDragons().size()));
 		setInstructionText("You won!");
-		if (g.getMyHero().hasEscaped() ){
+		if (g.getMyHero().hasEscaped()) {
 			gpanel.repaint();
 			btnLeft.setEnabled(false);
 			btnRight.setEnabled(false);
@@ -442,8 +440,8 @@ public class Window {
 			setGrid(null);
 			frmStarWars.getContentPane().getComponent(17).setVisible(true);
 		}
-		
-		if (g.getMyHero().isDead() ){
+
+		if (g.getMyHero().isDead()) {
 			gpanel.repaint();
 			btnLeft.setEnabled(false);
 			btnRight.setEnabled(false);
@@ -466,36 +464,36 @@ public class Window {
 	public void setSize(int size) {
 		this.size = size;
 	}
-	
-	public void setInstructionText(String s){
-		if (g.getMyHero().isDead() ){
+
+	public void setInstructionText(String s) {
+		if (g.getMyHero().isDead()) {
 			Instructions.setText("You lost!");
 			return;
 		}
-		if (g.getMyHero().hasEscaped() ){
+		if (g.getMyHero().hasEscaped()) {
 			Instructions.setText("You won!");
 			return;
 		}
-		
+
 		Instructions.setText(s);
 	}
-	
+
 	public static void openWebpage(URI uri) {
-	    Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-	    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-	        try {
-	            desktop.browse(uri);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-	    }
+		Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+		if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+			try {
+				desktop.browse(uri);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public static void openWebpage(URL url) {
-	    try {
-	        openWebpage(url.toURI());
-	    } catch (URISyntaxException e) {
-	        e.printStackTrace();
-	    }
+		try {
+			openWebpage(url.toURI());
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 	}
 }
