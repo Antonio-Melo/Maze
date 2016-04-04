@@ -37,7 +37,7 @@ import java.awt.Toolkit;
 
 public class Window {
 
-	private JFrame frame;
+	private JFrame frmStarWars;
 	private JTextField MazeDimension;
 	private JTextField MazeNumberOfDragons;
 	private JButton btnLeft;
@@ -54,8 +54,8 @@ public class Window {
 	private boolean customMaze = false;
 	private int size = 10;
 	private char[][] gameGrid;
-	private BufferedImage winImg;
-	private BufferedImage loseImg;
+	private BufferedImage windowicon;
+	private BufferedImage settings;
 
 	/**
 	 * Launch the application.
@@ -65,7 +65,7 @@ public class Window {
 			public void run() {
 				try {
 					window = new Window();
-					window.frame.setVisible(true);
+					window.frmStarWars.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -84,25 +84,40 @@ public class Window {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Window.class.getResource("/javax/swing/plaf/basic/icons/JavaCup16.png")));
-		frame.setResizable(false);
-		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
-		frame.setBackground(Color.WHITE);
-		frame.setBounds(0, 0, 1200, 700);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		try {
+			windowicon = ImageIO.read(new File("res\\windowicon.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			settings = ImageIO.read(new File("res\\settings.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		frmStarWars = new JFrame();
+		frmStarWars.setTitle("Star Wars - LPOO 2016");
+		frmStarWars.setIconImage(windowicon);
+		frmStarWars.setResizable(false);
+		frmStarWars.getContentPane().setBackground(Color.LIGHT_GRAY);
+		frmStarWars.setBackground(Color.WHITE);
+		frmStarWars.setBounds(0, 0, 1200, 700);
+		frmStarWars.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Exit Button
 		JButton btnEndGame = new JButton("Exit");
-		btnEndGame.setBounds(34, 476, 234, 44);
+		btnEndGame.setBounds(39, 526, 234, 44);
 		btnEndGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
 			}
 		});
-		frame.getContentPane().setLayout(null);
+		frmStarWars.getContentPane().setLayout(null);
 		btnEndGame.setFont(new Font("Arial", Font.PLAIN, 14));
-		frame.getContentPane().add(btnEndGame);
+		frmStarWars.getContentPane().add(btnEndGame);
 
 		// Custom Maze Button
 		JButton btnNewButton = new JButton("Create Custom Maze");
@@ -110,18 +125,19 @@ public class Window {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				customDialog = new CustomMazeDialog();
+				customDialog.setIconImage(settings);
 				customDialog.setParent(parent);
 				customDialog.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(21, 104, 252, 23);
-		frame.getContentPane().add(btnNewButton);
+		btnNewButton.setBounds(21, 111, 252, 23);
+		frmStarWars.getContentPane().add(btnNewButton);
 
 		// CustomMaze Checkbox
 		JCheckBox chckbxUseCustomMaze = new JCheckBox("Use Custom Maze");
 		chckbxUseCustomMaze.setBackground(Color.LIGHT_GRAY);
-		chckbxUseCustomMaze.setBounds(21, 126, 247, 23);
-		frame.getContentPane().add(chckbxUseCustomMaze);
+		chckbxUseCustomMaze.setBounds(21, 141, 247, 23);
+		frmStarWars.getContentPane().add(chckbxUseCustomMaze);
 		chckbxUseCustomMaze.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
@@ -142,42 +158,42 @@ public class Window {
 		JLabel lblDimension = new JLabel("Dimension");
 		lblDimension.setBounds(21, 11, 116, 23);
 		lblDimension.setFont(new Font("Arial", Font.PLAIN, 14));
-		frame.getContentPane().add(lblDimension);
+		frmStarWars.getContentPane().add(lblDimension);
 		// Dimension Maze TextField
 		MazeDimension = new JTextField();
 		MazeDimension.setBounds(164, 11, 104, 20);
-		frame.getContentPane().add(MazeDimension);
+		frmStarWars.getContentPane().add(MazeDimension);
 		MazeDimension.setColumns(10);
 
 		// Number of Dragons Label
 		JLabel lblNumberOfDragons = new JLabel("Number of Enemies");
 		lblNumberOfDragons.setBounds(21, 39, 127, 24);
 		lblNumberOfDragons.setFont(new Font("Arial", Font.PLAIN, 14));
-		frame.getContentPane().add(lblNumberOfDragons);
+		frmStarWars.getContentPane().add(lblNumberOfDragons);
 		// Number of Dragons TextField
 		MazeNumberOfDragons = new JTextField();
 		MazeNumberOfDragons.setBounds(164, 42, 104, 20);
-		frame.getContentPane().add(MazeNumberOfDragons);
+		frmStarWars.getContentPane().add(MazeNumberOfDragons);
 		MazeNumberOfDragons.setColumns(10);
 
 		// Type of Dragons Label
 		JLabel lblTypeOfDragons = new JLabel("Type of Enemies");
 		lblTypeOfDragons.setBounds(21, 74, 127, 23);
 		lblTypeOfDragons.setFont(new Font("Arial", Font.PLAIN, 14));
-		frame.getContentPane().add(lblTypeOfDragons);
+		frmStarWars.getContentPane().add(lblTypeOfDragons);
 
 		// Type of Dragon ComboBox
 		JComboBox<String> comboBoxTypeDragons = new JComboBox<String>();
 		comboBoxTypeDragons.setBounds(164, 73, 104, 20);
 		comboBoxTypeDragons
 				.setModel(new DefaultComboBoxModel<String>(new String[] { "", "Static", "Moving", "Moving/Sleeping" }));
-		frame.getContentPane().add(comboBoxTypeDragons);
+		frmStarWars.getContentPane().add(comboBoxTypeDragons);
 
 		// Game State label
 		JLabel lblState = new JLabel("State ");
 		lblState.setBounds(387, 10, 48, 23);
 		lblState.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		frame.getContentPane().add(lblState);
+		frmStarWars.getContentPane().add(lblState);
 
 		// Game progress bar
 		GameState = new JProgressBar();
@@ -185,7 +201,7 @@ public class Window {
 		GameState.setStringPainted(true);
 		GameState.setBackground(Color.RED);
 		GameState.setForeground(Color.WHITE);
-		frame.getContentPane().add(GameState);
+		frmStarWars.getContentPane().add(GameState);
 
 		// Buttons
 
@@ -193,7 +209,7 @@ public class Window {
 		btnLeft = new JButton("Left");
 		btnLeft.setBounds(39, 320, 109, 44);
 		btnLeft.setEnabled(false);
-		frame.getContentPane().add(btnLeft);
+		frmStarWars.getContentPane().add(btnLeft);
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				move('l');
@@ -205,7 +221,7 @@ public class Window {
 		btnRight = new JButton("Right");
 		btnRight.setBounds(164, 320, 109, 44);
 		btnRight.setEnabled(false);
-		frame.getContentPane().add(btnRight);
+		frmStarWars.getContentPane().add(btnRight);
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				move('r');
@@ -217,7 +233,7 @@ public class Window {
 		btnUp = new JButton("Up");
 		btnUp.setBounds(107, 265, 109, 44);
 		btnUp.setEnabled(false);
-		frame.getContentPane().add(btnUp);
+		frmStarWars.getContentPane().add(btnUp);
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				move('u');
@@ -229,7 +245,7 @@ public class Window {
 		btnDown = new JButton("Down");
 		btnDown.setBounds(107, 375, 109, 44);
 		btnDown.setEnabled(false);
-		frame.getContentPane().add(btnDown);
+		frmStarWars.getContentPane().add(btnDown);
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				move('d');
@@ -246,32 +262,32 @@ public class Window {
 		Instructions.setEditable(false);
 		Instructions.setBounds(632, 11, 298, 23);
 		Instructions.setText("Fill the boxes and click Start to play !!");
-		frame.getContentPane().add(Instructions);
+		frmStarWars.getContentPane().add(Instructions);
 		
 		//Image shown when the player loses
 		JLabel loseImage = new JLabel("");
 		loseImage.setIcon(new ImageIcon("res\\LoseImage.png"));
 		loseImage.setBounds(327, 250, 860, 300);
-		frame.getContentPane().add(loseImage);
+		frmStarWars.getContentPane().add(loseImage);
 		loseImage.setVisible(false);
 		
 		//Image shown when the player wins
 		JLabel winImage = new JLabel("");
 		winImage.setIcon(new ImageIcon("res\\WinImage.jpeg"));
 		winImage.setBounds(327, 250, 860, 300);
-		frame.getContentPane().add(winImage);
+		frmStarWars.getContentPane().add(winImage);
 		winImage.setVisible(false);
 		
 	
 
 		// Authors
 		JLabel lblAntnioMelo = new JLabel("Ant\u00F3nio Melo & Edgar Passos");
-		lblAntnioMelo.setBounds(92, 531, 195, 14);
-		frame.getContentPane().add(lblAntnioMelo);
+		lblAntnioMelo.setBounds(90, 581, 195, 14);
+		frmStarWars.getContentPane().add(lblAntnioMelo);
 
 		// Start button
 		JButton btnGenerateMaze = new JButton("Start");
-		btnGenerateMaze.setBounds(39, 156, 234, 44);
+		btnGenerateMaze.setBounds(39, 189, 234, 44);
 		btnGenerateMaze.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnGenerateMaze.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -346,9 +362,9 @@ public class Window {
 				// Starting game
 
 				if (gpanel != null)
-					frame.remove(gpanel);
+					frmStarWars.remove(gpanel);
 
-				frame.repaint();
+				frmStarWars.repaint();
 
 				if (!customMaze) {
 					MazeBuilder m = new MazeBuilder();
@@ -373,7 +389,7 @@ public class Window {
 				gpanel = new MazeGraphicsPanel(g);
 				gpanel.setBackground(Color.LIGHT_GRAY);
 				gpanel.setBounds(385, 40, 600, 600);
-				frame.getContentPane().add(gpanel);
+				frmStarWars.getContentPane().add(gpanel);
 
 				// graf
 				gpanel.repaint();
@@ -381,7 +397,7 @@ public class Window {
 				gpanel.requestFocus();
 			}
 		});
-		frame.getContentPane().add(btnGenerateMaze);
+		frmStarWars.getContentPane().add(btnGenerateMaze);
 	}
 		
 	
@@ -397,10 +413,10 @@ public class Window {
 			btnUp.setEnabled(false);
 			btnDown.setEnabled(false);
 			GameState.setValue(100);
-			frame.remove(gpanel);
-			frame.repaint();
+			frmStarWars.remove(gpanel);
+			frmStarWars.repaint();
 			setGrid(null);
-			frame.getContentPane().getComponent(17).setVisible(true);
+			frmStarWars.getContentPane().getComponent(17).setVisible(true);
 		}
 		
 		if (g.getMyHero().isDead() ){
@@ -410,10 +426,10 @@ public class Window {
 			btnUp.setEnabled(false);
 			btnDown.setEnabled(false);
 			GameState.setBackground(Color.RED);
-			frame.remove(gpanel);
-			frame.repaint();
+			frmStarWars.remove(gpanel);
+			frmStarWars.repaint();
 			setGrid(null);
-			frame.getContentPane().getComponent(16).setVisible(true);
+			frmStarWars.getContentPane().getComponent(16).setVisible(true);
 		}
 
 		gpanel.repaint();
