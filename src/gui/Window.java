@@ -61,6 +61,8 @@ public class Window {
 	private char[][] gameGrid;
 	private BufferedImage windowicon;
 	private BufferedImage settings;
+	private char[][] customGrid;
+	private char[][] activeGrid;
 
 	/**
 	 * Launch the application.
@@ -294,7 +296,6 @@ public class Window {
 		btnGenerateMaze.setBounds(39, 189, 234, 44);
 		btnGenerateMaze.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnGenerateMaze.addActionListener(new ActionListener() {
-			private char[][] customGrid;
 
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -381,8 +382,9 @@ public class Window {
 				}
 
 				else {
-					customGrid = gameGrid.clone();
-					g = new Game(dragonType.toCharArray()[0], customGrid);
+					
+					activeGrid = customGrid.clone();
+					g = new Game(dragonType.toCharArray()[0], activeGrid);
 				}
 
 				GameState.setBackground(Color.GREEN);
@@ -458,7 +460,7 @@ public class Window {
 	}
 
 	public void setGrid(char[][] grid) {
-		this.gameGrid = grid;
+		this.customGrid = grid;
 	}
 
 	public void setSize(int size) {
@@ -466,6 +468,11 @@ public class Window {
 	}
 
 	public void setInstructionText(String s) {
+		if(g.getMyHero() == null){
+			Instructions.setText("");
+			return;
+		}
+		
 		if (g.getMyHero().isDead()) {
 			Instructions.setText("You lost!");
 			return;
