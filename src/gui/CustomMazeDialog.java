@@ -334,30 +334,6 @@ public class CustomMazeDialog extends JDialog {
 						JOptionPane.showMessageDialog(button, "Invalid number of doors!");
 						return;
 					}
-
-					/*
-					 * 
-					 * 
-					 * if (((CustomMazePanel) customPanel).getnDoors() != 1) {
-					 * JOptionPane.showMessageDialog(button,
-					 * "Invalid number of doors!"); return; }
-					 * 
-					 * if(((CustomMazePanel)customPanel).getnSwords() != 1) {
-					 * JOptionPane.showMessageDialog(button,
-					 * "You must (only) have one lightsaber! You have " +
-					 * ((CustomMazePanel)customPanel).getnSwords() +
-					 * " lightsabers"); return; }
-					 * 
-					 * if(((CustomMazePanel)customPanel).getnHeroes() != 1) {
-					 * JOptionPane.showMessageDialog(button,
-					 * "You must (only) have one hero! You have " +
-					 * ((CustomMazePanel)customPanel).getnHeroes() + " heroes");
-					 * return; }
-					 * 
-					 * if(((CustomMazePanel)customPanel).getnDragons() < 1) {
-					 * JOptionPane.showMessageDialog(button,
-					 * "You must place enemies!"); return; }
-					 */
 					parentWindow.setSize(grid.length);
 					parentWindow.setGrid(grid);
 					dispose();
@@ -398,16 +374,7 @@ public class CustomMazeDialog extends JDialog {
 					contentPanel.repaint();
 
 					customPanel = new CustomMazePanel(grid);
-					customPanel.setBounds(170, 40, 480,
-							480);/*
-									 * ((CustomMazePanel)customPanel).setnDoors(
-									 * 0);
-									 * ((CustomMazePanel)customPanel).setnSwords
-									 * (0);
-									 * ((CustomMazePanel)customPanel).setnHeroes
-									 * (0); ((CustomMazePanel)customPanel).
-									 * setnDragons(0);
-									 */
+					customPanel.setBounds(170, 40, 480,480);
 					nDoors = 0;
 					nDragons = 0;
 					nHeroes = 0;

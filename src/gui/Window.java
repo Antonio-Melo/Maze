@@ -231,9 +231,10 @@ public class Window {
 
 		// Game progress bar
 		GameState = new JProgressBar();
+		GameState.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GameState.setBounds(445, 11, 164, 20);
 		GameState.setStringPainted(true);
-		GameState.setBackground(new Color(178, 34, 34));
+		GameState.setBackground(new Color(255, 0, 0));
 		GameState.setForeground(Color.WHITE);
 		GameState.setBorder(b);
 		frmStarWars.getContentPane().add(GameState);
@@ -512,17 +513,7 @@ public class Window {
 			disableBtn();
 			GameState.setBackground(Color.RED);
 			gpanel.repaint();
-			gpanel.setFocusable(false);
-			/*
-			try {
-			    Thread.sleep(1000);
-			} catch(InterruptedException ex) {
-			    Thread.currentThread().interrupt();
-			}*/
-			//frmStarWars.remove(gpanel);
-			//frmStarWars.repaint();
-			//frmStarWars.getContentPane().getComponent(17).setVisible(true);
-			
+			gpanel.setFocusable(false);		
 		}else
 			gpanel.repaint();
 	}
