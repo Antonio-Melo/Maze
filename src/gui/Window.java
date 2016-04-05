@@ -251,7 +251,6 @@ public class Window {
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				move('l');
-				gpanel.requestFocus();
 				setInstructionText("You moved to the Left!");
 			}
 		});
@@ -266,7 +265,6 @@ public class Window {
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				move('r');
-				gpanel.requestFocus();
 				setInstructionText("You moved to the Right!");
 			}
 		});
@@ -281,7 +279,6 @@ public class Window {
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				move('u');
-				gpanel.requestFocus();
 				setInstructionText("You moved Up!");
 			}
 		});
@@ -296,7 +293,6 @@ public class Window {
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				move('d');
-				gpanel.requestFocus();
 				setInstructionText("You moved Down!");
 			}
 
