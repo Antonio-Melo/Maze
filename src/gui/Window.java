@@ -307,14 +307,14 @@ public class Window {
 		Instructions.setBounds(632, 11, 298, 23);
 		Instructions.setText("Fill the boxes and click Start to play !!");
 		frmStarWars.getContentPane().add(Instructions);
-
+/*
 		// Image shown when the player loses
 		JLabel loseImage = new JLabel("");
 		loseImage.setIcon(new ImageIcon("res\\LoseImage.png"));
 		loseImage.setBounds(327, 250, 860, 300);
 		frmStarWars.getContentPane().add(loseImage);
 		loseImage.setVisible(false);
-
+*/
 		// Image shown when the player wins
 		JLabel winImage = new JLabel("");
 		winImage.setIcon(new ImageIcon("res\\WinImage.jpeg"));
@@ -340,7 +340,7 @@ public class Window {
 			public void actionPerformed(ActionEvent arg0) {
 
 				winImage.setVisible(false);
-				loseImage.setVisible(false);
+				//loseImage.setVisible(false);
 
 				// Default numbers
 				int ndragons = 1;
@@ -507,24 +507,24 @@ public class Window {
 			GameState.setValue(100);
 			frmStarWars.remove(gpanel);
 			frmStarWars.repaint();
-			frmStarWars.getContentPane().getComponent(18).setVisible(true);
-		}
-
-		if (g.getMyHero().isDead()) {
+			frmStarWars.getContentPane().getComponent(17).setVisible(true);
+		}else if (g.getMyHero().isDead()) {
 			disableBtn();
 			GameState.setBackground(Color.RED);
+			gpanel.repaint();
+			gpanel.setFocusable(false);
+			/*
 			try {
-				gpanel.repaint();
-			    Thread.sleep(1000);                
+			    Thread.sleep(1000);
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
-			}
-			frmStarWars.remove(gpanel);
-			frmStarWars.repaint();
-			frmStarWars.getContentPane().getComponent(17).setVisible(true);
-		}
-
-		gpanel.repaint();
+			}*/
+			//frmStarWars.remove(gpanel);
+			//frmStarWars.repaint();
+			//frmStarWars.getContentPane().getComponent(17).setVisible(true);
+			
+		}else
+			gpanel.repaint();
 	}
 
 	public void setGrid(char[][] grid) {
