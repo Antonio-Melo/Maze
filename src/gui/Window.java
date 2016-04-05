@@ -460,7 +460,7 @@ public class Window {
 				setInstructionText("Move to start playing!");
 
 				gpanel = new MazeGraphicsPanel(g,hero);
-				gpanel.setBackground(Color.DARK_GRAY);
+				gpanel.setBackground(Color.BLACK);
 				gpanel.setBounds(385, 40, 600, 600);
 				frmStarWars.getContentPane().add(gpanel);
 

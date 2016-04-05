@@ -39,6 +39,7 @@ public class CustomMazeDialog extends JDialog {
 	public static void main(String[] args) {
 		try {
 			CustomMazeDialog dialog = new CustomMazeDialog();
+			dialog.setBackground(Color.BLACK);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -52,7 +53,7 @@ public class CustomMazeDialog extends JDialog {
 	public CustomMazeDialog() {
 		setBounds(100, 100, 900, 600);
 		getContentPane().setLayout(null);
-		contentPanel.setBackground(Color.BLACK);
+		contentPanel.setBackground(Color.LIGHT_GRAY);
 		contentPanel.setBounds(0, 0, 884, 529);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel);

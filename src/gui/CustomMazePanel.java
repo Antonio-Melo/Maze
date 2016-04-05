@@ -130,68 +130,13 @@ public class CustomMazePanel extends JPanel implements MouseListener {
 				|| (xToEdit == grid.length - 1 && yToEdit == grid.length - 1))) {
 			JOptionPane.showMessageDialog(this, "Doors cannot be placed at corners");
 			return;
-		}/*
-
-		if (currentChar == 'S')
-			nDoors++;
-
-		if (currentChar != 'S' && grid[xToEdit][yToEdit] == 'S')
-			nDoors--;
-		
-		if (currentChar == 'E')
-			nSwords++;
-
-		if (currentChar != 'E' && grid[xToEdit][yToEdit] == 'E')
-			nSwords--;
-		
-		if (currentChar == 'H')
-			nHeroes++;
-
-		if (currentChar != 'H' && grid[xToEdit][yToEdit] == 'H')
-			nHeroes--;
-		
-		if (currentChar == 'D')
-			nDragons++;
-
-		if (currentChar != 'D' && grid[xToEdit][yToEdit] == 'D')
-			nDragons--;*/
+		}
 
 		grid[xToEdit][yToEdit] = currentChar;
 		repaint();
 
 	}
-/*
-	public void setnDoors(int n) {
-		this.nDoors = n;
-	}
-	
-	public void setnSwords(int n) {
-		this.nSwords = n;
-	}
-	
-	public void setnHeroes(int n) {
-		this.nHeroes = n;
-	}	
-	
-	public void setnDragons(int n) {
-		this.nDragons = n;
-	}
-	
-	public int getnSwords(){
-		return nSwords;
-	}
-	
-	public int getnDoors(){
-		return nDoors;
-	}
 
-	public int getnHeroes(){
-		return nHeroes;
-	}
-	
-	public int getnDragons(){
-		return nDragons;
-	}*/
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
