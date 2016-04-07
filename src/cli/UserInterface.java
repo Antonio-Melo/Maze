@@ -8,18 +8,31 @@ public class UserInterface {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		char type = '*';
-
+		int size=0;
+		int nDragons =0;
+		char[][] grid;
+		
 		// MODE GAME
 		while (type != '0' && type != '1' && type != '2') {
 			System.out.println("Type of game:  0-Normal(Dragon still) 1-Move(Dragon moving) 2-Move + Sleep");
 			type = s.next().charAt(0);
 		}
-
-		// NEW GAME
-		System.out.println("Number of dragons?");
-		int nDragons = s.nextInt();
-		Game game = new Game(type, nDragons);
-
+		
+		//DIMENSION
+		while(size <4){
+			System.out.println("Maze Dimension?");
+			size = s.nextInt();
+		}
+		
+		//NUMBER OF DRAGONS 
+		while(nDragons <=0 || nDragons >size){
+			System.out.println("Number of dragons?");
+			nDragons = s.nextInt();
+		}
+		MazeBuilder mazeb = new MazeBuilder();
+		grid = mazeb.buildMaze(size);
+		
+		Game game = new Game(type,grid, nDragons);
 		for (int i = 0; i < game.getDragons().size(); i++)
 			if (!game.getDragons().get(i).isDead())
 				game.getMyMaze().placeActor(game.getDragons().get(i));
